@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import second from "../../assets/bgImages/bgLogin.png";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -10,6 +12,7 @@ const Login = () => {
   } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
+    navigate("/home");
   };
   return (
     <div
