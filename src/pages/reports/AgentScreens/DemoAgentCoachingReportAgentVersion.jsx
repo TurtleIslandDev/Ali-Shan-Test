@@ -1,12 +1,12 @@
 import React from "react";
-import PhoneSVG from "../../assets/SVGs/PhoneSVG";
-import PlayButtonSvg from "../../assets/SVGs/PlayButtonSvg";
-import ImprovePerformanceSvg from "../../assets/SVGs/ImprovePerformanceSvg";
-import PlusIconSvg from "./../../assets/SVGs/PlusIconSvg";
-import NotesSvg from "../../assets/SVGs/NotesSvg";
-import DateIconSvg from "../../assets/SVGs/DateIconSvg";
+import PhoneSVG from "../../../assets/SVGs/PhoneSVG";
+import PlayButtonSvg from "../../../assets/SVGs/PlayButtonSvg";
+import ImprovePerformanceSvg from "../../../assets/SVGs/ImprovePerformanceSvg";
+import PlusIconSvg from "../../../assets/SVGs/PlusIconSvg";
+import NotesSvg from "../../../assets/SVGs/NotesSvg";
+import DateIconSvg from "../../../assets/SVGs/DateIconSvg";
 
-const DemoAgentCoachingReport = () => {
+const DemoAgentCoachingReportAgentVersion = () => {
   let data = [1, 2, 3];
   return (
     <div className="bg-[#F6F7F9]">
@@ -89,57 +89,33 @@ const DemoAgentCoachingReport = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Highlighted Relevant Features
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  05
+                </p>
               </div>
               <div className="w-1/4 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Fully explained benefits targeted to clients need
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  07
+                </p>
               </div>
               <div className="w-1/4 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Provided correct responses
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  10
+                </p>
               </div>
               <div className="w-1/4 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Correctly identified questions
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  09
+                </p>
               </div>
             </div>{" "}
           </div>
@@ -153,57 +129,33 @@ const DemoAgentCoachingReport = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Knowledgeable about Product specifics
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  05
+                </p>
               </div>
               <div className="w-1/4 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Provided correct contact information
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  08
+                </p>
               </div>
               <div className="w-1/4 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Quoted accurate price
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  07
+                </p>
               </div>
               <div className="w-1/4 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Correct sales interaction process followed
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  02
+                </p>
               </div>
             </div>{" "}
           </div>
@@ -217,71 +169,41 @@ const DemoAgentCoachingReport = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Attention
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  06
+                </p>
               </div>
               <div className="w-1/5 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Tone
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  04
+                </p>
               </div>
               <div className="w-1/5 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Pitch
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  02
+                </p>
               </div>
               <div className="w-1/5 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Speed
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  01
+                </p>
               </div>
               <div className="w-1/5 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Transitioning
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  00
+                </p>
               </div>
             </div>{" "}
           </div>
@@ -295,43 +217,25 @@ const DemoAgentCoachingReport = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Provided correct responses 
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  07
+                </p>
               </div>
               <div className="w-1/3 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Correctly identifies questions
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  05
+                </p>
               </div>
               <div className="w-1/3 border-r-2 border-[#E3E3E3] ">
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Provides relevant information
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
-                    return (
-                      <option selected key={option}>
-                        {option}
-                      </option>
-                    );
-                  })}
-                </select>
+                <p className="text-[1E1E1E] font-medium text-2xl pl-5 pt-3">
+                  03
+                </p>
               </div>
             </div>{" "}
           </div>
@@ -354,7 +258,7 @@ const DemoAgentCoachingReport = () => {
                     <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
                       22:45
                     </td>
-                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7">
+                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7 text-start">
                       Conversion
                     </th>
                     <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
@@ -367,7 +271,7 @@ const DemoAgentCoachingReport = () => {
                     <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
                       11:25
                     </td>
-                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7">
+                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7 text-start">
                       Sales per hour
                     </th>
                     <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
@@ -380,20 +284,20 @@ const DemoAgentCoachingReport = () => {
                     <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
                       410
                     </td>
-                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7">
+                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7 text-start">
                       Earning per hour
                     </th>
                     <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
                   </tr>
                   {/* row 4 */}
                   <tr>
-                    <th className="w-1/4 text-start text-darkPara text-xl font-semibold border-r-2 px-7">
+                    <th className="w-1/4 text-start text-darkPara text-xl font-semibold border-r-2 px-7 ">
                       Conversion
                     </th>
                     <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
                       50%
                     </td>
-                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7"></th>
+                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7 text-start"></th>
                     <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
                   </tr>
                   {/* row 5 */}
@@ -402,7 +306,7 @@ const DemoAgentCoachingReport = () => {
                       Sales
                     </th>
                     <td className="w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
-                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7">
+                    <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7 text-start">
                       Total weekly earnings
                     </th>
                     <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
@@ -479,4 +383,4 @@ const DemoAgentCoachingReport = () => {
   );
 };
 
-export default DemoAgentCoachingReport;
+export default DemoAgentCoachingReportAgentVersion;
