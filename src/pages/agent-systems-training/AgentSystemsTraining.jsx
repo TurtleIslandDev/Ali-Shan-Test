@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import bg from "../../assets/bgImages/agent-systems-bg.png";
 import DonutChart from "../../components/charts/DonutChart";
 import Button from "../../components/Buttons/Button";
@@ -8,7 +8,17 @@ import NotificationSvg from "../../assets/SVGs/NotificationSvg";
 import QuickStartLogo from "./../../assets/SVGs/QuickStartLogo";
 import IconButton from "../../components/Buttons/IconButton";
 import Dropdown from "../../components/dropdowns/Dropdown";
+import MuteMicSvg from "../../assets/SVGs/MuteMicSvg";
+import OutBoundCall from "../../assets/SVGs/OutBoundCall";
 const AgentSystemsInterface = () => {
+  const [micOn, setMicOn] = useState(true);
+  const [inBound, setInBound] = useState(true);
+  const handleMic = () => {
+    setMicOn(!micOn);
+  };
+  const handleCall = () => {
+    setInBound(!inBound);
+  };
   return (
     <div
       className="w-full px-20"
@@ -35,66 +45,64 @@ const AgentSystemsInterface = () => {
           </div> */}
             </div>
 
-            <IconButton>
-              <CallSvg />
+            <IconButton onClick={handleCall}>
+              {inBound ? <CallSvg /> : <OutBoundCall />}
             </IconButton>
-            <IconButton>
-              <MicSvg />
+            <IconButton onClick={handleMic}>
+              {micOn ? <MicSvg /> : <MuteMicSvg />}
             </IconButton>
             <div className="flex flex-col gap-4 mx-4 mt-4">
-              <button
-                type="button"
-                className={`block font-poppins text-lg font-semibold leading-7 text-center decoration-solid underline-offset-4  bg-[#F5760E] px-10 py-[10px] rounded-[4px] text-white w-max`}
-              >
-                Customer Support
-              </button>
+              <Button bgColor={"#F5760E"}>Customer Care</Button>
               <Button bgColor={"#1E40AF"}>Prospect</Button>
               <Button bgColor={"#228512"}>Sales</Button>
             </div>
 
             <button type="button" className="relative ">
               <QuickStartLogo />
-              <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full top-1 end-7 dark:border-gray-900">
+              <div className="absolute inline-flex items-center justify-center text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full top-0 end-4 dark:border-gray-900">
                 <NotificationSvg />
               </div>
             </button>
           </div>
           <div className="w-full bg-transparent flex flex-col gap-5 ">
-            <div className="flex gap-5 mt-5 flex-wrap">
-              <div className="py-5 px-[10px] text-center w-max bg-white rounded-[4px] min-w-[145px]">
+            <div className="flex gap-5 mt-5 flex-wrap pr-5">
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
                 <p className="text-[#6F6F6F] text-[18px]">First Name</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">
-                  Alishan Masood
+                  Alishan
                 </p>
               </div>
-              <div className="py-5 px-[10px] text-center w-max bg-white rounded-[4px] min-w-[145px]">
-                <p className="text-[#6F6F6F] text-[18px]">Field</p>
-                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
-              </div>
-              <div className="py-5 px-[10px] text-center w-max bg-white rounded-[4px] min-w-[145px]">
-                <p className="text-[#6F6F6F] text-[18px]">Field</p>
-                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
-              </div>
-              <div className="py-5 px-[10px] text-center w-max bg-white rounded-[4px] min-w-[145px]">
-                <p className="text-[#6F6F6F] text-[18px]">Field</p>
-                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
-              </div>
-              <div className="py-5 px-[10px] text-center w-max bg-white rounded-[4px] min-w-[145px]">
-                <p className="text-[#6F6F6F] text-[18px]">Field</p>
-                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
-              </div>
-              <div className="py-5 px-[10px] text-center w-max bg-white rounded-[4px] min-w-[145px]">
-                <p className="text-[#6F6F6F] text-[18px]">Field</p>
-                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
-              </div>
-              <div className="py-5 px-[10px] text-center w-max bg-white rounded-[4px] min-w-[145px]">
-                <p className="text-[#6F6F6F] text-[18px]">First Name</p>
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+                <p className="text-[#6F6F6F] text-[18px]">Last Name</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">
-                  Alishan Masood
+                  Masood
                 </p>
               </div>
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+                <p className="text-[#6F6F6F] text-[18px]">Field</p>
+                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
+              </div>
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+                <p className="text-[#6F6F6F] text-[18px]">Field</p>
+                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
+              </div>
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+                <p className="text-[#6F6F6F] text-[18px]">Field</p>
+                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
+              </div>
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+                <p className="text-[#6F6F6F] text-[18px]">Field</p>
+                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
+              </div>
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+                <p className="text-[#6F6F6F] text-[18px]">Field</p>
+                <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
+              </div>
+
               <div className="bg-white flex items-center justify-center w-24 h-24 rounded-full pt-1 pr-2">
-                <CallSvg />
+                <div className="w-[50px] h-[50px] ">
+                  <CallSvg size={"small"} />
+                </div>
               </div>
             </div>
             <div className=" bg-white w-full flex h-[calc(100%-100px)]"></div>
@@ -102,8 +110,13 @@ const AgentSystemsInterface = () => {
         </div>
         <div>
           <div className="flex justify-end items-center h-[145px] pr-6 gap-20">
-            <div className="relative w-[707px] h-2 bg-gradient-to-r from-orange-500 via-green-500 to-orange-500 rounded-full">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center">
+            <div
+              className="relative w-[707px] h-4  rounded-full"
+              style={{
+                background: `linear-gradient(270deg, #FA6F05 0.78%, #FEC300 31.18%, #7EC73E 38.63%, #70C744 50%, #75C442 61.78%, #FEBD00 69.92%, #FF6C03 100%)`,
+              }}
+            >
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center">
                 <div className="bg-green-500 w-3 h-3 rounded-full"></div>
               </div>
               <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 w-1 h-10 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
