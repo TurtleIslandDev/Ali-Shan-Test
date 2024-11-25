@@ -1,7 +1,6 @@
 import React from "react";
 import ArrowDownSvg from "../../assets/SVGs/ArrowDownSvg";
-import SettingsSvg from "../../assets/SVGs/SettingsSvg";
-
+import settings from "../../assets/images/settings.png";
 const Dropdown = () => {
   return (
     <>
@@ -10,7 +9,7 @@ const Dropdown = () => {
           id="dropdownTopButton"
           data-dropdown-toggle="dropdownTop"
           data-dropdown-placement="top"
-          className="w-80 me-3 mb-3 md:mb-0 text-white bg-blue-700  font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between  "
+          className="w-96 h-[70px] me-3 mb-3 md:mb-0 text-white bg-[#1E40AF]  rounded-lg text-[22px] font-[400] px-5 py-2.5 text-center inline-flex items-center justify-between  "
           type="button"
         >
           Dispositions
@@ -20,65 +19,62 @@ const Dropdown = () => {
         {/* Dropdown menu */}
         <div
           id="dropdownTop"
-          className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700 border border-[#EBEDEF] px-14 py-11"
+          className="z-10 hidden bg-white  rounded-lg shadow w-80 border border-[#EBEDEF] px-14 py-11"
         >
           <div>
-            <div className="flex items-center gap-2">
-              <SettingsSvg /> Categories
+            <div className="flex items-center gap-2 text-[#1E40AF] font-[400] text-[22px]">
+              <img src={settings} alt="settings" /> Category 2
             </div>
             <ul
               className="py-2 pl-16 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownTopButton"
             >
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Disposition 1
-              </li>
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Disposition 2
-              </li>
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Disposition 3
-              </li>
-            </ul>
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <SettingsSvg /> Categories
-            </div>
-            <ul
-              className="py-2 pl-16 text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownTopButton"
-            >
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              <li className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]">
                 Disposition 4
               </li>
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Disposition 5
+              <li className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]">
+                Disposition 4
               </li>
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Disposition 7
-              </li>
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Disposition 8
+              <li className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]">
+                Disposition 4
               </li>
             </ul>
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <SettingsSvg /> Categories
+            <div className="flex items-center gap-2 text-[#1E40AF] font-[400] text-[22px]">
+              <img src={settings} alt="settings" /> Category 2
             </div>
             <ul
               className="py-2 pl-16 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownTopButton"
             >
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Disposition 9
+              <li className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]">
+                Disposition 4
               </li>
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Disposition 10
+              <li className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]">
+                Disposition 4
               </li>
-              <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Disposition 11
+              <li className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]">
+                Disposition 4
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div className="flex items-center gap-2 text-[#1E40AF] font-[400] text-[22px]">
+              <img src={settings} alt="settings" /> Category 2
+            </div>
+            <ul
+              className="py-2 pl-16 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownTopButton"
+            >
+              <li className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]">
+                Disposition 4
+              </li>
+              <li className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]">
+                Disposition 4
+              </li>
+              <li className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]">
+                Disposition 4
               </li>
             </ul>
           </div>
