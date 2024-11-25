@@ -5,6 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "node_modules/flowbite/**/*.{js,ts}", // Ensure Flowbite files are included
   ],
+  safelist: [
+    {
+      pattern: /^datatable-.*$/, // ensure it matches dynamic classes
+    },
+  ],
   theme: {
     extend: {
       backgroundImage: {
