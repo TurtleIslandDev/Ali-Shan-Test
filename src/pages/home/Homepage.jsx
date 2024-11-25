@@ -34,6 +34,7 @@ const HomePage = () => {
           className={`relative flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-[336px] h-[336px] bg-white  z-[100]`}
         >
           <div
+            onClick={() => navigate("/agent-system-interface")}
             onMouseOver={(e) => handleMouseOver(e, "agentGUI")}
             onMouseLeave={(e) => handleMouseOut(e, "agentGUI")}
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full w-[calc(100%-10px)] h-[calc(100%-10px)]  ${
