@@ -127,7 +127,7 @@ const Login = () => {
             <label className="cursor-pointer label flex items-center">
               <input
                 type="checkbox"
-                className="checkbox checked:bg-[#228512] bg-[#228512] border"
+                className="checkbox checked:bg-[#228512]  border-[2.6px] border-[#228512] rounded-sm w-5 h-5"
                 // {...register("remember")}
               />
               <span className="label-text ml-2">Remember me</span>
