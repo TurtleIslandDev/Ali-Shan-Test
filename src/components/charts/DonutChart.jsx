@@ -104,7 +104,6 @@ const DonutChart = () => {
       const newChart = new ApexCharts(chartRef.current, getChartOptions());
       newChart.render();
       setChart(newChart);
-      console.log(newChart);
     }
 
     return () => {
