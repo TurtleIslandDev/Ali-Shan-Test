@@ -42,7 +42,12 @@ const AgentSystemsInterface = () => {
               <MicSvg />
             </IconButton>
             <div className="flex flex-col gap-4 mx-4 mt-4">
-              <Button bgColor={"#F5760E"}>Customer Support</Button>
+              <button
+                type="button"
+                className={`block font-poppins text-lg font-semibold leading-7 text-center decoration-solid underline-offset-4  bg-[#F5760E] px-10 py-[10px] rounded-[4px] text-white w-max`}
+              >
+                Customer Support
+              </button>
               <Button bgColor={"#1E40AF"}>Prospect</Button>
               <Button bgColor={"#228512"}>Sales</Button>
             </div>
@@ -104,8 +109,6 @@ const AgentSystemsInterface = () => {
               <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 w-1 h-10 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
               <div className="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2 w-1 h-10 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
             </div>
-            {/* <p className="text-white">Alishan</p> */}
-
             <Dropdown />
           </div>
         </div>
