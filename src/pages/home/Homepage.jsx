@@ -31,13 +31,13 @@ const HomePage = () => {
       <div className="relative  rounded-full">
         {/* Agent gui */}
         <div
-          className={`relative flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-[336px] h-[336px] bg-white  z-[100]`}
+          className={`relative flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-[336px] h-[336px] bg-white  z-[100] `}
         >
           <div
             onClick={() => navigate("/agent-system-interface")}
             onMouseOver={(e) => handleMouseOver(e, "agentGUI")}
             onMouseLeave={(e) => handleMouseOut(e, "agentGUI")}
-            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full w-[calc(100%-10px)] h-[calc(100%-10px)]  ${
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-10px)] h-[calc(100%-10px)]  ${
               hoverStates.agentGUI ? "bg-[#333] " : "bg-[#D9D9D9] "
             }`}
           >
@@ -54,7 +54,7 @@ const HomePage = () => {
             hoverStates.payroll ? "z-[6]" : "z-[3]"
           }`}
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#fbc89f]  z-3 hover:z-5">
+          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#fbc89f]  z-3 hover:z-5">
             <PayrollSvg />
           </div>
         </div>
@@ -68,7 +68,7 @@ const HomePage = () => {
           }`}
         >
           <div
-            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full w-[calc(100%-39px)] h-[calc(100%-39px)] ] ${
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] ] ${
               hoverStates.agentReport
                 ? "bg-[#1E40AF] z-[6]"
                 : "z-[3] bg-[#D5DEFA]"
@@ -85,7 +85,7 @@ const HomePage = () => {
         </div>
         {/* learning */}
         <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#22851266] ">
+          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#22851266] ">
             {/* Dashed circle border */}
             {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
             {/* Star ribbon icon (replace with an actual SVG icon if available) */}
@@ -95,14 +95,14 @@ const HomePage = () => {
             </div>
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[125deg] -top-10 left-0 border-[1px] border-dashed border-[#D9D9D9]" />
-            <div className="absolute w-[1px] h-14 transform  rotate-[10deg] -bottom-14 right-10 border-[1px] border-dashed border-[#D9D9D9]" />
+            <div className="absolute w-[1px] h-14 transform  rotate-[0deg] -bottom-14 right-8 border-[1px] border-dashed border-[#D9D9D9]" />
             <div className="absolute w-[1px] h-4 transform  rotate-[60deg] bottom-10 -left-4 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
         </div>
 
         {/* BuzzWord */}
         <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute right-20 -bottom-52 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#F5760E4D] ">
+          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#F5760E4D] ">
             {/* Dashed circle border */}
             {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
             {/* Star ribbon icon (replace with an actual SVG icon if available) */}
@@ -122,13 +122,13 @@ const HomePage = () => {
             hoverStates.performanceManagement ? "z-[6]" : "z-[3]"
           }`}
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#22851266]  z-3 hover:z-5">
+          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#22851266]  z-3 hover:z-5">
             <PerformanceManagementSvg />
           </div>
         </div>
         {/* certification */}
         <div className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#1E40AF66]">
+          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#1E40AF66]">
             {/* Dashed circle border */}
             {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
             {/* Star ribbon icon (replace with an actual SVG icon if available) */}
