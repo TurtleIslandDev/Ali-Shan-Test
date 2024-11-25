@@ -6,7 +6,7 @@ const Button = ({ children, bgColor }) => {
   return (
     <button
       type="button"
-      className={`block font-poppins text-lg font-semibold leading-7 text-center decoration-solid underline-offset-4  bg-[${bgColor}] px-10 py-[10px] rounded-[4px] text-white w-max`}
+      className={`block font-poppins text-lg font-semibold leading-7 text-center decoration-solid underline-offset-4  bg-[${bgColor}] px-10 py-[10px] rounded-[4px] text-white`}
     >
       {children}
     </button>
