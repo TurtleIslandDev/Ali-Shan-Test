@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-const AgentSystemsTraining = lazy(() =>
-  import("./pages/agent-systems-training/AgentSystemsTraining")
-);
+// import HomePage from "./pages/home/Homepage";
+// import DemoAgentCoachingReportAgentVersion from "./pages/reports/AgentScreens/DemoAgentCoachingReportAgentVersion";
+// import Login from "./pages/auth/Login";
+import AgentSystemsTraining from "./pages/agent-systems-training/AgentSystemsTraining";
+
 const DemoAgentCoachingReportAgentVersion = lazy(() =>
   import("./pages/reports/AgentScreens/DemoAgentCoachingReportAgentVersion")
 );
@@ -13,7 +15,7 @@ function App() {
     <>
       {/* there is new react-router-version comming so if any issues faced for routing look at the new documentations */}
       <BrowserRouter>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div className="loading">Loading...</div>}>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Homepage />} />
