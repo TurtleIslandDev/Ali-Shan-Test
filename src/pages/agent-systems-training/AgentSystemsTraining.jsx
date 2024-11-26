@@ -65,36 +65,36 @@ const AgentSystemsInterface = () => {
             </button>
           </div>
           <div className="w-full bg-transparent flex flex-col gap-5 ">
-            <div className="flex gap-5 mt-5 flex-wrap pr-5">
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+            <div className="flex gap-5 mt-5 flex-1 justify-between pr-3">
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">First Name</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">
                   Alishan
                 </p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Last Name</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">
                   Masood
                 </p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] min-w-[145px]">
+              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
