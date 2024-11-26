@@ -6,7 +6,7 @@ const DonutChart = () => {
   const [chart, setChart] = useState(null);
 
   const getChartOptions = () => ({
-    series: [30, 25, 25, 25],
+    series: [25, 25, 25, 25],
     colors: ["#1D4ED8", "#2563EB", "#93C5FD", "#DBEAFE"],
     chart: {
       height: 150,
@@ -26,18 +26,15 @@ const DonutChart = () => {
               show: true,
               fontFamily: "Inter, sans-serif",
               offsetY: 20,
-              color: "#4486F6", // Change color for the name label
+              color: "#1E40AF", // Change color for the name label
             },
             total: {
               showAlways: true,
               show: true,
               label: "Sales",
               fontFamily: "Inter, sans-serif",
-              fontSize: "20px",
-              color: "#4486F6", // Change color for the total label
-              style: {
-                colors: "#4486F6", // Change color for x-axis labels
-              },
+              fontSize: "60px",
+              color: "red", // Change color for the total label
               formatter: function (w) {
                 const sum = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
                 return sum;
@@ -66,36 +63,34 @@ const DonutChart = () => {
     dataLabels: {
       enabled: false,
     },
-    // legend: {
-    //   position: "bottom",
-    //   fontFamily: "Inter, sans-serif",
-    // },
+    legend: {
+      position: "right",
+      fontFamily: "Inter, sans-serif",
+    },
     yaxis: {
       labels: {
+        color: "#4486F6", // Change color for y-axis labels
         formatter: function (value) {
-          return value + "%";
-        },
-        style: {
-          colors: "#4486F6", // Change color for y-axis labels
+          return value;
         },
       },
     },
-    xaxis: {
-      labels: {
-        formatter: function (value) {
-          return value + "%";
-        },
-        axisTicks: {
-          show: false,
-        },
-        axisBorder: {
-          show: false,
-        },
-        style: {
-          colors: "#4486F6", // Change color for x-axis labels
-        },
-      },
-    },
+    // xaxis: {
+    //   labels: {
+    //     formatter: function (value) {
+    //       return value + "%";
+    //     },
+    //     axisTicks: {
+    //       show: false,
+    //     },
+    //     axisBorder: {
+    //       show: false,
+    //     },
+    //     style: {
+    //       colors: "#4486F6", // Change color for x-axis labels
+    //     },
+    //   },
+    // },
   });
 
   useEffect(() => {
