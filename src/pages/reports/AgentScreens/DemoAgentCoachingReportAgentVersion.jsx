@@ -239,11 +239,12 @@ const DemoAgentCoachingReportAgentVersion = () => {
               </div>
             </div>{" "}
           </div>
-          {/* Program Requirements */}
+          {/* Performance  Results Week of
+           */}
           <div className="w-full">
             <div className="flex w-full items-center justify-between">
               <h2 className="bg-[#3B82F6] w-max text-white text-[26px] px-7 py-4 mb-5">
-                Program Requirements
+                Performance  Results Week of
               </h2>
               <p className="text-2xl font-medium text-[#3D4A57]">09/27/24</p>
             </div>
