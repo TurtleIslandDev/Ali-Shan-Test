@@ -256,12 +256,14 @@ const DemoAgentCoachingReportAgentVersion = () => {
                       Active Time
                     </th>
                     <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
-                      22:45
+                      [User_Active]
                     </td>
                     <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7 text-start">
                       Conversion
                     </th>
-                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
+                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7">
+                      [User_Conversion]
+                    </td>
                   </tr>
                   {/* row 2 */}
                   <tr>
@@ -269,12 +271,14 @@ const DemoAgentCoachingReportAgentVersion = () => {
                       Inactive Time
                     </th>
                     <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
-                      11:25
+                      [User_Active]
                     </td>
                     <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7 text-start">
                       Sales per hour
                     </th>
-                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
+                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7">
+                      [User_Sales per hour]
+                    </td>
                   </tr>
                   {/* row 3 */}
                   <tr className="bg-white">
@@ -282,12 +286,14 @@ const DemoAgentCoachingReportAgentVersion = () => {
                       Contacts
                     </th>
                     <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
-                      410
+                      [User_Active]
                     </td>
                     <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7 text-start">
                       Earning per hour
                     </th>
-                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
+                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7">
+                      [User_Earning per hour]
+                    </td>
                   </tr>
                   {/* row 4 */}
                   <tr>
@@ -295,7 +301,7 @@ const DemoAgentCoachingReportAgentVersion = () => {
                       Conversion
                     </th>
                     <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
-                      50%
+                      [User_Active]
                     </td>
                     <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7 text-start"></th>
                     <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
