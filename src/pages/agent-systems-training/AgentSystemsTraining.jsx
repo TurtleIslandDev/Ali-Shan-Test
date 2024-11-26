@@ -10,6 +10,7 @@ import IconButton from "../../components/Buttons/IconButton";
 import Dropdown from "../../components/dropdowns/Dropdown";
 import MuteMicSvg from "../../assets/SVGs/MuteMicSvg";
 import OutBoundCall from "../../assets/SVGs/OutBoundCall";
+import CustomDropdown from "../../components/dropdowns/CustomeDropdown";
 const AgentSystemsInterface = () => {
   const [micOn, setMicOn] = useState(true);
   const [inBound, setInBound] = useState(true);
@@ -122,7 +123,8 @@ const AgentSystemsInterface = () => {
               <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 w-1 h-10 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
               <div className="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2 w-1 h-10 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
             </div>
-            <Dropdown />
+            {/* <Dropdown /> */}
+            <CustomDropdown />
           </div>
         </div>
       </div>
