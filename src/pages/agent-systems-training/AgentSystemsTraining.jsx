@@ -7,19 +7,43 @@ import CallSvg from "../../assets/SVGs/CallSvg";
 import NotificationSvg from "../../assets/SVGs/NotificationSvg";
 import QuickStartLogo from "./../../assets/SVGs/QuickStartLogo";
 import IconButton from "../../components/Buttons/IconButton";
-import Dropdown from "../../components/dropdowns/Dropdown";
 import MuteMicSvg from "../../assets/SVGs/MuteMicSvg";
 import OutBoundCall from "../../assets/SVGs/OutBoundCall";
 import CustomDropdown from "../../components/dropdowns/CustomeDropdown";
 const AgentSystemsInterface = () => {
   const [micOn, setMicOn] = useState(true);
   const [inBound, setInBound] = useState(true);
+  const [selectedDisposition, setSelectedDisposition] = useState("");
   const handleMic = () => {
     setMicOn(!micOn);
   };
   const handleCall = () => {
     setInBound(!inBound);
   };
+  let dispositionData = [
+    {
+      id: "1",
+      category: "Category 1",
+      disposttions: ["Disposition 1", "Disposition 2", "Disposition 3"],
+    },
+    {
+      id: "2",
+      category: "Category 2",
+      disposttions: [
+        "Disposition 4",
+        "Disposition 5",
+        "Disposition 6",
+        "Disposition 4",
+        "Disposition 5",
+        "Disposition 6",
+      ],
+    },
+    {
+      id: "3",
+      category: "Category 3",
+      disposttions: ["Disposition 7", "Disposition 8", "Disposition 9"],
+    },
+  ];
   return (
     <div
       className="w-full px-20"
@@ -37,13 +61,6 @@ const AgentSystemsInterface = () => {
               <div>
                 <DonutChart />
               </div>
-              {/* <div>
-            <div className="flex gap-4 items-center px-4">
-              <div className="rounded-full w-[18px] h-[18px] bg-slate-900"></div>
-              <p>Label 1</p>
-              <p>25%</p>
-            </div>
-          </div> */}
             </div>
 
             <IconButton onClick={handleCall}>
@@ -124,7 +141,11 @@ const AgentSystemsInterface = () => {
               <div className="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2 w-1 h-10 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
             </div>
             {/* <Dropdown /> */}
-            <CustomDropdown />
+            <CustomDropdown
+              selectedDisposition={selectedDisposition}
+              setSelectedDisposition={setSelectedDisposition}
+              dispositionData={dispositionData}
+            />
           </div>
         </div>
       </div>
