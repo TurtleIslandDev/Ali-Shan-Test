@@ -5,13 +5,15 @@ import styled from "styled-components";
 
 const DropdownMenu = styled.div`
   position: absolute;
-  left: 53px;
+  left: 45px;
   background-color: white;
   border-radius: 8px;
   padding: 44px 60px;
   z-index: 1000;
   border: 2px solid #ebedef;
-  top: ${({ height }) => `-${height + 16}px`}; /* Add an extra 16px gap */
+  height: 560px;
+  top: -576px; /* Add an extra 16px gap */
+  overflow-y: auto;
 `;
 
 const DropdownContainer = styled.div`
@@ -75,7 +77,7 @@ const CustomDropdown = ({ setSelectedDisposition, dispositionData }) => {
         <DropdownMenu ref={dropdownRef} height={height}>
           {dispositionData.map((item, index) => (
             <div key={index}>
-              <div className="flex items-center gap-2 text-[#1E40AF] font-[400] text-[22px]">
+              <div className="flex items-center gap-2 text-[#1E40AF] font-[400] text-[22px] cursor-default">
                 <img src={settings} alt="settings" /> {item.category}
               </div>
               <ul
@@ -86,7 +88,7 @@ const CustomDropdown = ({ setSelectedDisposition, dispositionData }) => {
                   <li
                     key={index}
                     onClick={(e) => handleItemClick(e)}
-                    className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400]"
+                    className="block px-3.5 py-2 hover:bg-gray-100 text-xl w-max font-[400] cursor-pointer "
                   >
                     {disposition}
                   </li>

@@ -9,7 +9,7 @@ const DonutChart = () => {
     series: [25, 25, 25, 25],
     colors: ["#1D4ED8", "#2563EB", "#93C5FD", "#DBEAFE"],
     chart: {
-      height: 150,
+      height: 120,
       width: "100%",
       type: "donut",
     },
@@ -56,7 +56,7 @@ const DonutChart = () => {
     },
     grid: {
       padding: {
-        top: -2,
+        top: 0,
       },
     },
     labels: ["Direct", "Sponsor", "Affiliate", "Email marketing"],
