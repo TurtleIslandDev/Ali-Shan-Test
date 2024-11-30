@@ -12,7 +12,7 @@ const Login = () => {
   } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
-    navigate("/home");
+    navigate("/agent-navigation");
   };
   return (
     <div
