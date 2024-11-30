@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-// import HomePage from "./pages/home/Homepage";
-// import CoachingReportAccept from "./pages/reports/AgentScreens/CoachingReportAccept";
-// import Login from "./pages/auth/Login";
+
 import AgentSystemsTraining from "./pages/agent-systems-training/AgentSystemsTraining";
 const CoachingReportAccept = lazy(() =>
   import("./pages/reports/AgentScreens/CoachingReportAccept")
@@ -16,6 +14,9 @@ const AgentNavigation = lazy(() =>
 const ChannelManagerNavigation = lazy(() =>
   import("./pages/navigation/ChannelManagerNavigation")
 );
+const DataManagerNavigation = lazy(() =>
+  import("./pages/navigation/DataManagerNavigation")
+);
 const Login = lazy(() => import("./pages/auth/Login"));
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/agent-navigation" element={<AgentNavigation />} />
+            <Route
+              path="/data-manager-navigation"
+              element={<DataManagerNavigation />}
+            />
             <Route
               path="/channel-manager-navigation"
               element={<ChannelManagerNavigation />}
