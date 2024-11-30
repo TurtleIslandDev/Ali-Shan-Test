@@ -1,13 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PhoneSVG from "../../../assets/SVGs/PhoneSVG";
 import PlayButtonSvg from "../../../assets/SVGs/PlayButtonSvg";
 import ImprovePerformanceSvg from "../../../assets/SVGs/ImprovePerformanceSvg";
 import PlusIconSvg from "../../../assets/SVGs/PlusIconSvg";
 import NotesSvg from "../../../assets/SVGs/NotesSvg";
 import DateIconSvg from "../../../assets/SVGs/DateIconSvg";
+import DateInput from "../../../components/inputs/DateInput";
 
-const DemoAgentCoachingReportSupervisor = () => {
+const CoachingReportAccept = () => {
+  const [dates, setDates] = useState([]);
+  const [previousWeekMonday, setPreviousWeekMonday] = useState(null);
+  const handleDateChange = (index, newDate) => {
+    const updatedDates = [...dates];
+    updatedDates[index] = newDate;
+    setDates(updatedDates);
+  };
+  function getPreviousWeekMonday() {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
+
+    // Calculate the offset for Monday of the previous week
+    const daysSinceLastMonday = (dayOfWeek + 6) % 7; // Days since the last Monday
+    const daysToSubtract = daysSinceLastMonday + 7; // Go back to Monday of the previous week
+
+    // Subtract the calculated days
+    let previousMonday = new Date(today);
+    previousMonday.setDate(today.getDate() - daysToSubtract);
+    previousMonday = previousMonday.toDateString();
+    setPreviousWeekMonday(previousMonday);
+  }
   let data = [1, 2, 3];
+  let callTypeDropdown = [
+    { label: "Call Type" },
+    { label: "Outbound" },
+    { label: "Inbound" },
+    { label: "Intake" },
+    { label: "Return" },
+    { label: "Retention" },
+    { label: "Customer Service" },
+    { label: "Client Management" },
+    { label: "Sale" },
+    { label: "Sale Close" },
+  ];
+
+  useEffect(() => {
+    getPreviousWeekMonday();
+  }, []);
   return (
     <div className="bg-[#F6F7F9]">
       <div className="bg-[#1E40AF] flex items-center justify-center pb-[70px] pt-16">
@@ -24,49 +62,81 @@ const DemoAgentCoachingReportSupervisor = () => {
                     <>
                       <tr
                         key={index}
-                        className={`w-full py-5  ${
+                        className={`w-full py-5 ${
                           index === data.length - 1
                             ? ""
                             : "border-b-2 border-[#1414C9]"
                         }`}
                       >
                         <td>
-                          <div className="flex items-center  gap-3">
+                          <div className="flex items-center  gap-3 ">
                             <div className="bg-[#1414C9] p-3 rounded-full">
                               <PhoneSVG />
                             </div>
-                            <p className="text-whitePara text-xl">Call Type</p>
+
+                            <select className="select select-lg w-[80%] focus:outline-none bg-transparent text-white ">
+                              {callTypeDropdown?.map((option, index) => {
+                                return (
+                                  <>
+                                    <option
+                                      key={index}
+                                      selected={index === 0}
+                                      className="text-black"
+                                    >
+                                      {option.label}
+                                    </option>
+                                  </>
+                                );
+                              })}
+                            </select>
                           </div>
                         </td>
                         <td>
-                          <p className="text-whitePara text-xl">First Name</p>
+                          <input
+                            type="text"
+                            placeholder="First Name"
+                            className="placeholder:text-white text-white input input-bordered  w-full active:border-none focus:border-none border border-[#6b7280]  bg-transparent rounded-md"
+                          />
                         </td>
                         <td>
-                          <p className="text-whitePara text-xl">Last Name</p>
+                          <input
+                            type="text"
+                            placeholder="Last Name"
+                            className="placeholder:text-white text-white input input-bordered  w-full active:border-none focus:border-none border border-[#6b7280]  bg-transparent rounded-md"
+                          />
                         </td>
                         <td>
-                          {" "}
-                          <p className="text-whitePara text-xl mt-4 mb-5">
-                            Disposition
-                          </p>
+                          <input
+                            type="text"
+                            placeholder="Outcome"
+                            className="placeholder:text-white text-white input input-bordered  w-full active:border-none focus:border-none border border-[#6b7280]  bg-transparent rounded-md"
+                          />
                         </td>
                         <td>
-                          {" "}
-                          <p className="text-whitePara text-xl">Outcome</p>
+                          <input
+                            type="text"
+                            placeholder="Disposition"
+                            className="placeholder:text-white text-white input input-bordered  w-full active:border-none focus:border-none border border-[#6b7280]  bg-transparent rounded-md"
+                          />
                         </td>
                         <td>
-                          <div className="flex items-center gap-3">
-                            <div className="avatar">
-                              <DateIconSvg />
-                            </div>
-                            <p className="text-whitePara text-xl">09/25/24</p>
-                          </div>
+                          <DateInput
+                            startDate={dates[index] || new Date()} // Fallback to today's date
+                            setStartDate={(newDate) =>
+                              handleDateChange(index, newDate)
+                            }
+                          />
                         </td>
-                        <th>
-                          <button className="bg-[#1414C9] p-3 rounded-full w-11 h-11 flex items-center justify-center">
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="Insert the link here"
+                            className="placeholder:text-white text-white input input-bordered  w-full active:border-none focus:border-none border border-[#6b7280]  bg-transparent rounded-md"
+                          />
+                          {/* <button className="bg-[#1414C9] p-3 rounded-full w-11 h-11 flex items-center justify-center">
                             <PlayButtonSvg />
-                          </button>
-                        </th>
+                          </button> */}
+                        </td>
                       </tr>
                       {/* <div className="w-full py-4 bg"> </div> */}
                     </>
@@ -103,7 +173,7 @@ const DemoAgentCoachingReportSupervisor = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Fully explained benefits targeted to clients need
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -341,7 +411,9 @@ const DemoAgentCoachingReportSupervisor = () => {
               <h2 className="bg-[#3B82F6] w-max text-white text-[26px] px-7 py-4 mb-5">
                 Program Requirements
               </h2>
-              <p className="text-2xl font-medium text-[#3D4A57]">09/27/24</p>
+              <p className="text-2xl font-medium text-[#3D4A57]">
+                {previousWeekMonday}
+              </p>
             </div>
             <div className="overflow-x-auto w-full">
               <table className="table table-zebra w-full">
@@ -351,47 +423,81 @@ const DemoAgentCoachingReportSupervisor = () => {
                     <th className="w-1/4 text-start text-darkPara text-xl font-semibold border-r-2 px-7">
                       Active Time
                     </th>
-                    <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
-                      22:45
+                    <td className="w-1/4 text-darkPara text-xl border-r-2">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered  w-full active:border-none focus:border-none border-2 border-[#E3E3E3]  bg-white rounded-md"
+                      />
                     </td>
                     <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7">
                       Conversion
                     </th>
-                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
+                    <td className=" w-1/4 text-darkPara text-xl border-r-2">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered  w-full active:border-none focus:border-none border-2 border-[#E3E3E3]  bg-white rounded-md"
+                      />
+                    </td>
                   </tr>
                   {/* row 2 */}
                   <tr>
                     <th className="w-1/4 text-start text-darkPara text-xl font-semibold border-r-2 px-7">
                       Inactive Time
                     </th>
-                    <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
-                      11:25
+                    <td className=" w-1/4 text-darkPara text-xl border-r-2">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered  w-full active:border-none focus:border-none border-2 border-[#E3E3E3]  bg-white rounded-md"
+                      />
                     </td>
                     <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7">
                       Sales per hour
                     </th>
-                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
+                    <td className=" w-1/4 text-darkPara text-xl border-r-2">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered  w-full active:border-none focus:border-none border-2 border-[#E3E3E3]  bg-white rounded-md"
+                      />
+                    </td>
                   </tr>
                   {/* row 3 */}
                   <tr className="bg-white">
                     <th className="w-1/4 text-start text-darkPara text-xl font-semibold border-r-2 px-7">
                       Contacts
                     </th>
-                    <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
-                      410
+                    <td className=" w-1/4 text-darkPara text-xl border-r-2">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered  w-full active:border-none focus:border-none border-2 border-[#E3E3E3]  bg-white rounded-md"
+                      />
                     </td>
                     <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7">
                       Earning per hour
                     </th>
-                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
+                    <td className=" w-1/4 text-darkPara text-xl border-r-2">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered  w-full active:border-none focus:border-none border-2 border-[#E3E3E3]  bg-white rounded-md"
+                      />
+                    </td>
                   </tr>
                   {/* row 4 */}
                   <tr>
                     <th className="w-1/4 text-start text-darkPara text-xl font-semibold border-r-2 px-7">
                       Conversion
                     </th>
-                    <td className="w-1/4 text-darkPara text-xl border-r-2 px-7">
-                      50%
+                    <td className=" w-1/4 text-darkPara text-xl border-r-2">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered  w-full active:border-none focus:border-none border-2 border-[#E3E3E3]  bg-white rounded-md"
+                      />
                     </td>
                     <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7"></th>
                     <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
@@ -401,11 +507,23 @@ const DemoAgentCoachingReportSupervisor = () => {
                     <th className="w-1/4 text-start text-darkPara text-xl font-semibold border-r-2 px-7">
                       Sales
                     </th>
-                    <td className="w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
+                    <td className=" w-1/4 text-darkPara text-xl border-r-2">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered  w-full active:border-none focus:border-none border-2 border-[#E3E3E3]  bg-white rounded-md"
+                      />
+                    </td>
                     <th className="w-1/4 text-darkPara text-xl font-semibold border-r-2 px-7">
                       Total weekly earnings
                     </th>
-                    <td className="py-6 w-1/4 text-darkPara text-xl border-r-2 px-7"></td>
+                    <td className=" w-1/4 text-darkPara text-xl border-r-2">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered  w-full active:border-none focus:border-none border-2 border-[#E3E3E3]  bg-white rounded-md"
+                      />
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -454,12 +572,12 @@ const DemoAgentCoachingReportSupervisor = () => {
             <div className="flex items-center justify-between">
               <div className="flex gap-6 items-center ">
                 <div className="flex items-center w-72">
-                  <p className="text-2xl">Agent Signature</p>
+                  <p className="text-2xl">Supervisor Signature</p>
                 </div>
                 <input
                   type="text"
                   placeholder="Type here"
-                  className="input input-bordered w-[400px] h-20 px-6 focus:outline-none border-2 border-[#E3E3E3]  bg-transparent"
+                  className="input input-bordered w-[400px] h-20 px-6 focus:outline-none border-2 border-[#E3E3E3]  bg-white"
                 />
               </div>
               <label className="input input-bordered flex items-center gap-2 relative">
@@ -468,7 +586,7 @@ const DemoAgentCoachingReportSupervisor = () => {
                 </div> */}
                 <input
                   type="date"
-                  className="grow focus:outline-none w-[360px] h-16 border-2 border-[#E3E3E3] bg-transparent px-4 placeholder:text-[#6F6F6F]"
+                  className="grow focus:outline-none w-[360px] h-16 border-2 border-[#E3E3E3] bg-white px-4 placeholder:text-[#6F6F6F]"
                 />
               </label>
             </div>
@@ -479,4 +597,4 @@ const DemoAgentCoachingReportSupervisor = () => {
   );
 };
 
-export default DemoAgentCoachingReportSupervisor;
+export default CoachingReportAccept;
