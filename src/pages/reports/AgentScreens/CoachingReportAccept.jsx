@@ -1,12 +1,10 @@
 import React from "react";
 import PhoneSVG from "../../../assets/SVGs/PhoneSVG";
 import PlayButtonSvg from "../../../assets/SVGs/PlayButtonSvg";
-import ImprovePerformanceSvg from "../../../assets/SVGs/ImprovePerformanceSvg";
-import PlusIconSvg from "../../../assets/SVGs/PlusIconSvg";
 import NotesSvg from "../../../assets/SVGs/NotesSvg";
 import DateIconSvg from "../../../assets/SVGs/DateIconSvg";
 
-const DemoAgentCoachingReportAgentVersion = () => {
+const CoachingReportAccept = () => {
   let data = [1, 2, 3];
   return (
     <div className="bg-[#F6F7F9]">
@@ -323,7 +321,7 @@ const DemoAgentCoachingReportAgentVersion = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#FFFFFF] flex items-center justify-center pb-[70px] pt-16 w-full">
+        {/* <div className="bg-[#FFFFFF] flex items-center justify-center pb-[70px] pt-16 w-full">
           <div className="w-full max-w-layout flex justify-center flex-col gap-10">
             <div className="flex gap-6 items-center">
               <div className="flex gap-10 items-center w-72">
@@ -348,7 +346,7 @@ const DemoAgentCoachingReportAgentVersion = () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex items-center justify-center pb-[70px]  w-full">
           <div className="w-full max-w-layout flex justify-center flex-col gap-10">
             <div className="flex gap-6 items-center">
@@ -370,7 +368,7 @@ const DemoAgentCoachingReportAgentVersion = () => {
                 <input
                   type="text"
                   placeholder="Type here"
-                  className="input input-bordered w-[400px] h-20 px-6 focus:outline-none border-2 border-[#E3E3E3]  bg-transparent"
+                  className="input input-bordered w-[400px] h-20 px-6 focus:outline-none border-2 border-[#E3E3E3]  bg-white rounded-md"
                 />
               </div>
               <label className="input input-bordered flex items-center gap-2 relative">
@@ -379,7 +377,7 @@ const DemoAgentCoachingReportAgentVersion = () => {
                 </div> */}
                 <input
                   type="date"
-                  className="grow focus:outline-none w-[360px] h-16 border-2 border-[#E3E3E3] bg-transparent px-4 placeholder:text-[#6F6F6F]"
+                  className="rounded-md grow focus:outline-none w-[360px] h-16 border-2 border-[#E3E3E3] bg-white px-4 placeholder:text-[#6F6F6F]"
                 />
               </label>
             </div>
@@ -390,4 +388,4 @@ const DemoAgentCoachingReportAgentVersion = () => {
   );
 };
 
-export default DemoAgentCoachingReportAgentVersion;
+export default CoachingReportAccept;
