@@ -13,6 +13,9 @@ const CoachingReportSubmit = lazy(() =>
 const AgentNavigation = lazy(() =>
   import("./pages/navigation/AgentNavigation")
 );
+const ChannelManagerNavigation = lazy(() =>
+  import("./pages/navigation/ChannelManagerNavigation")
+);
 const Login = lazy(() => import("./pages/auth/Login"));
 function App() {
   return (
@@ -23,6 +26,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/agent-navigation" element={<AgentNavigation />} />
+            <Route
+              path="/channel-manager-navigation"
+              element={<ChannelManagerNavigation />}
+            />
             <Route
               path="/coaching-report-submit"
               element={<CoachingReportSubmit />}
