@@ -5,15 +5,20 @@ import PerformanceDashboard from "./../../assets/SVGs/dataManagerScreen/Performa
 import RevenueSvg from "./../../assets/SVGs/dataManagerScreen/RevenueSvg";
 import PeopleSvg from "../../assets/SVGs/dataManagerScreen/PeopleSvg";
 import SupervisorReport from "./../../assets/SVGs/dataManagerScreen/SupervisorReport";
+import ProgramManagement from "./../../assets/SVGs/salesManagerScreen/ProgramManagement";
+import SearchSvg from "./../../assets/SVGs/salesManagerScreen/SearchSvg";
+import ReportSvg from "./../../assets/SVGs/salesManagerScreen/ReportSvg";
+import PerformanceSvg from "./../../assets/SVGs/salesManagerScreen/PerformanceSvg";
+import OutsourcedSvg from "./../../assets/SVGs/salesManagerScreen/OutsourcedSvg";
 
-const DataManagerNavigation = () => {
+const SalesManagerNavigation = () => {
   const navigate = useNavigate();
   const [hoverStates, setHoverStates] = useState({
-    dataCollection: false,
-    performanceDashboard: false,
+    programManagement: false,
+    search: false,
     revenue: false,
-    people: false,
-    chat: false,
+    report: false,
+    performance: false,
     supervisorReport: false,
     web: false,
   });
@@ -27,51 +32,49 @@ const DataManagerNavigation = () => {
   return (
     <div className="w-full h-[calc(100vh+300px)]  flex items-center justify-center ">
       <div className="relative  rounded-full">
-        {/* Data Collection svg */}
+        {/*program management */}
         <div
           className={`relative flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-[336px] h-[336px] bg-white  z-[100] `}
         >
           <div
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-10px)] h-[calc(100%-10px)]  ${
-              hoverStates.dataCollection ? "bg-[#333] " : "bg-[#D9D9D9] "
+              hoverStates.programManagement ? "bg-[#333] " : "bg-[#D9D9D9] "
             }`}
           >
-            {hoverStates.dataCollection ? (
+            {hoverStates.programManagement ? (
               <p className="uppercase font-bold text-3xl text-center">
-                Omni Channel communication
+                Program Management
               </p>
             ) : (
-              <DataCollectionSvg />
+              <ProgramManagement />
             )}
           </div>
         </div>
-        {/* Performance Dashboard*/}
+        {/* search*/}
         <div
-          // onMouseOver={(e) => handleMouseOver(e, "performanceDashboard")}
-          // onMouseLeave={(e) => handleMouseOut(e, "performanceDashboard")}
+          // onMouseOver={(e) => handleMouseOver(e, "search")}
+          // onMouseLeave={(e) => handleMouseOut(e, "search")}
 
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute left-2 -top-64 ${
-            hoverStates.performanceDashboard ? "z-[6]" : "z-[3]"
+            hoverStates.search ? "z-[6]" : "z-[3]"
           }`}
         >
           <div
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] ] ${
-              hoverStates.performanceDashboard
-                ? " bg-[#D5DEFA] z-[6]"
-                : "z-[3]  bg-[#fbc89f]"
+              hoverStates.search ? " bg-[#D5DEFA] z-[6]" : "z-[3]  bg-[#fbc89f]"
             } `}
           >
-            {hoverStates.performanceDashboard ? (
+            {hoverStates.search ? (
               <p className="w-[9rem] text-center uppercase font-bold text-[28px]">
-                performanceDashboard
+                Search
               </p>
             ) : (
               // <img src="../../assets/react.svg" />
-              <PerformanceDashboard />
+              <SearchSvg />
             )}
           </div>
         </div>
-        {/* revenue */}
+        {/*  */}
         <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 ">
           <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  bg-[#22851266]">
             {/* Dashed circle border */}
@@ -80,7 +83,7 @@ const DataManagerNavigation = () => {
 
             <div className="relative text-black">
               {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-              <RevenueSvg />
+              {/* <RevenueSvg /> */}
             </div>
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[125deg] -top-10 left-0 border-[1px] border-dashed border-[#D9D9D9]" />
@@ -88,14 +91,14 @@ const DataManagerNavigation = () => {
             <div className="absolute w-[1px] h-4 transform  rotate-[60deg] bottom-10 -left-4 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
         </div>
-        {/* people*/}
+        {/* report*/}
         <div
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40  ${
-            hoverStates.people ? "z-[6]" : "z-[3]"
+            hoverStates.report ? "z-[6]" : "z-[3]"
           }`}
         >
           <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)]  bg-[#1E40AF30]  z-3 hover:z-5">
-            <PeopleSvg />
+            <ReportSvg />
           </div>
         </div>
         {/*  */}
@@ -115,17 +118,17 @@ const DataManagerNavigation = () => {
           </div>
         </div>
 
-        {/*supervisor report */}
+        {/*performance */}
         <div
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
-            hoverStates.chat ? "z-[6]" : "z-[3]"
+            hoverStates.performance ? "z-[6]" : "z-[3]"
           }`}
         >
           <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#22851266]   z-3 hover:z-5">
-            <SupervisorReport />
+            <PerformanceSvg />
           </div>
         </div>
-        {/*  */}
+        {/* outsourced */}
         <div className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  ">
           <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  bg-[#1E40AF66]">
             {/* Dashed circle border */}
@@ -133,7 +136,7 @@ const DataManagerNavigation = () => {
             {/* Star ribbon icon (replace with an actual SVG icon if available) */}
             <div className="relative text-black">
               {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-              {/* <WebSvg /> */}
+              <OutsourcedSvg />
             </div>
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[50deg] -top-10 right-0 border-[1px] border-dashed border-[#D9D9D9]" />
@@ -146,4 +149,4 @@ const DataManagerNavigation = () => {
   );
 };
 
-export default DataManagerNavigation;
+export default SalesManagerNavigation;
