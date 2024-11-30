@@ -1,14 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 // import HomePage from "./pages/home/Homepage";
-// import DemoAgentCoachingReportAgentVersion from "./pages/reports/AgentScreens/DemoAgentCoachingReportAgentVersion";
+// import CoachingReportAccept from "./pages/reports/AgentScreens/CoachingReportAccept";
 // import Login from "./pages/auth/Login";
 import AgentSystemsTraining from "./pages/agent-systems-training/AgentSystemsTraining";
-
-const DemoAgentCoachingReportAgentVersion = lazy(() =>
-  import("./pages/reports/AgentScreens/DemoAgentCoachingReportAgentVersion")
+const CoachingReportAccept = lazy(() =>
+  import("./pages/reports/AgentScreens/CoachingReportAccept")
 );
-const Homepage = lazy(() => import("./pages/home/Homepage"));
+const CoachingReportSubmit = lazy(() =>
+  import("./pages/reports/SupervisorScreens/CoachingReportSubmit")
+);
+const AgentNavigation = lazy(() =>
+  import("./pages/navigation/AgentNavigation")
+);
 const Login = lazy(() => import("./pages/auth/Login"));
 function App() {
   return (
@@ -18,10 +22,14 @@ function App() {
         <Suspense fallback={<div className="loading">Loading...</div>}>
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Homepage />} />
+            <Route path="/agent-navigation" element={<AgentNavigation />} />
             <Route
-              path="/demo-agent-coaching-report"
-              element={<DemoAgentCoachingReportAgentVersion />}
+              path="/coaching-report-submit"
+              element={<CoachingReportSubmit />}
+            />
+            <Route
+              path="/coaching-report-accept"
+              element={<CoachingReportAccept />}
             />
             <Route
               path="/agent-system-interface"
