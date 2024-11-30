@@ -20,6 +20,9 @@ const DataManagerNavigation = lazy(() =>
 const SalesManagerNavigation = lazy(() =>
   import("./pages/navigation/SalesManagerNavigation")
 );
+const PerformanceNavigation = lazy(() =>
+  import("./pages/navigation/PerformanceNavigation")
+);
 const Login = lazy(() => import("./pages/auth/Login"));
 function App() {
   return (
@@ -30,6 +33,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/agent-navigation" element={<AgentNavigation />} />
+            <Route
+              path="/performance-navigation"
+              element={<PerformanceNavigation />}
+            />
             <Route
               path="/sales-manager-navigation"
               element={<SalesManagerNavigation />}
