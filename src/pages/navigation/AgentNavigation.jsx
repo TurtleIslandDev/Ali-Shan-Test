@@ -7,8 +7,10 @@ import AgentGuiSvg from "../../assets/SVGs/AgentGuiSvg";
 import LearningSVG from "../../assets/SVGs/LearningSVG";
 import PayrollSvg from "../../assets/SVGs/PayrollSvg";
 import CeritficationsSvg from "../../assets/SVGs/CeritficationsSvg";
+import AgentLearningSvg from "../../assets/SVGs/agentScreen/AgentLearningSvg";
+import AgentPerformanceSvg from "../../assets/SVGs/agentScreen/AgentPerformanceSvg";
 
-const HomePage = () => {
+const AgentNavigation = () => {
   const navigate = useNavigate();
   const [hoverStates, setHoverStates] = useState({
     payroll: false,
@@ -42,28 +44,19 @@ const HomePage = () => {
             }`}
           >
             {hoverStates.agentGUI ? (
-              <p className="uppercase font-bold text-3xl">Agent gui</p>
+              <p className="uppercase font-bold text-3xl">Work</p>
             ) : (
               <AgentGuiSvg />
             )}
           </div>
         </div>
-        {/* payroll*/}
-        <div
-          className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute left-2 -top-64 ${
-            hoverStates.payroll ? "z-[6]" : "z-[3]"
-          }`}
-        >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#fbc89f]  z-3 hover:z-5">
-            <PayrollSvg />
-          </div>
-        </div>
-        {/* agent report*/}
+
+        {/* Learning*/}
         <div
           onMouseOver={(e) => handleMouseOver(e, "agentReport")}
           onMouseLeave={(e) => handleMouseOut(e, "agentReport")}
-          onClick={() => navigate("/demo-agent-coaching-report")}
-          className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40 ${
+          onClick={() => navigate("/coaching-report-accept")}
+          className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute left-2 -top-64 ${
             hoverStates.agentReport ? "z-[6]" : "z-[3]"
           }`}
         >
@@ -76,22 +69,24 @@ const HomePage = () => {
           >
             {hoverStates.agentReport ? (
               <p className="w-[9rem] text-center uppercase font-bold text-[28px]">
-                Coaching Report
+                Learning
               </p>
             ) : (
-              <AgentReportSvg />
+              // <img src="../../assets/react.svg" />
+              <AgentLearningSvg />
             )}
           </div>
         </div>
-        {/* learning */}
+        {/* certification */}
         <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#22851266] ">
+          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  bg-[#1E40AF66]">
             {/* Dashed circle border */}
             {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
             {/* Star ribbon icon (replace with an actual SVG icon if available) */}
+
             <div className="relative text-black">
               {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-              <LearningSVG />
+              <CeritficationsSvg />
             </div>
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[125deg] -top-10 left-0 border-[1px] border-dashed border-[#D9D9D9]" />
@@ -99,7 +94,16 @@ const HomePage = () => {
             <div className="absolute w-[1px] h-4 transform  rotate-[60deg] bottom-10 -left-4 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
         </div>
-
+        {/* Performance*/}
+        <div
+          className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40  ${
+            hoverStates.performanceManagement ? "z-[6]" : "z-[3]"
+          }`}
+        >
+          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#22851266]  z-3 hover:z-5">
+            <AgentPerformanceSvg />
+          </div>
+        </div>
         {/* BuzzWord */}
         <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute right-20 -bottom-52 ">
           <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#F5760E4D] ">
@@ -116,25 +120,26 @@ const HomePage = () => {
             <div className="absolute w-[1px] h-4 transform  -top-6 right-17 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
         </div>
-        {/* Performance Management*/}
+
+        {/* payroll*/}
         <div
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
-            hoverStates.performanceManagement ? "z-[6]" : "z-[3]"
+            hoverStates.payroll ? "z-[6]" : "z-[3]"
           }`}
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#22851266]  z-3 hover:z-5">
-            <PerformanceManagementSvg />
+          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#fbc89f]  z-3 hover:z-5">
+            <PayrollSvg />
           </div>
         </div>
-        {/* certification */}
-        <div className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#1E40AF66]">
+        {/* Compensations */}
+        <div className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  ">
+          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#22851266]">
             {/* Dashed circle border */}
             {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
             {/* Star ribbon icon (replace with an actual SVG icon if available) */}
             <div className="relative text-black">
               {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-              <CeritficationsSvg />
+              <LearningSVG />
             </div>
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[50deg] -top-10 right-0 border-[1px] border-dashed border-[#D9D9D9]" />
@@ -147,4 +152,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default AgentNavigation;
