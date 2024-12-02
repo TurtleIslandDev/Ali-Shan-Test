@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import EmailSvg from "../../assets/SVGs/ChannelManagerScreen/EmailSvg";
 import SmsSVG from "../../assets/SVGs/ChannelManagerScreen/SmsSVG";
 import BpoSvg from "../../assets/SVGs/ChannelManagerScreen/BpoSvg";
