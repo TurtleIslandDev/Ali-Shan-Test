@@ -20,6 +20,15 @@ const AddUserNavigation = lazy(() =>
 const QcAndSupervisorNavigation = lazy(() =>
   import("./pages/navigation/QcAndSupervisorNavigation")
 );
+const ProgramManagerNavigation = lazy(() =>
+  import("./pages/navigation/ProgramManagerNavigation")
+);
+const TeamLeadNavigation = lazy(() =>
+  import("./pages/navigation/TeamLeadNavigation")
+);
+const ThreeCircleLayout = lazy(() =>
+  import("./pages/navigation/ThreeCircleLayout")
+);
 const ChannelManagerNavigation = lazy(() =>
   import("./pages/navigation/ChannelManagerNavigation")
 );
@@ -50,8 +59,18 @@ data-manager-navigation
 channel-manager-navigation
 add-user-navigation
 qc-and-supervisor-navigation
+program-manager-navigation
             */}
             <Route path="/" element={<Login />} />
+            <Route path="/three-circles" element={<ThreeCircleLayout />} />
+            <Route
+              path="/team-lead-navigation"
+              element={<TeamLeadNavigation />}
+            />
+            <Route
+              path="/program-manager-navigation"
+              element={<ProgramManagerNavigation />}
+            />
             <Route
               path="/qc-and-supervisor-navigation"
               element={<QcAndSupervisorNavigation />}

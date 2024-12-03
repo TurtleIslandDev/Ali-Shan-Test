@@ -1,10 +1,10 @@
 import React from "react";
 
-const DataCollectionSvg = () => {
+const DataCollectionSvg = ({ size }) => {
   return (
     <svg
-      width={204}
-      height={204}
+      width={size === "small" ? 104 : 204}
+      height={size === "small" ? 104 : 204}
       viewBox="0 0 204 204"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
