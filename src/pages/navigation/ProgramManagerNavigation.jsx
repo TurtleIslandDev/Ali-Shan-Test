@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProgramManagement from "./../../assets/SVGs/salesManagerScreen/ProgramManagement";
 import ReportSvg from "./../../assets/SVGs/salesManagerScreen/ReportSvg";
-import PerformanceSvg from "./../../assets/SVGs/salesManagerScreen/PerformanceSvg";
-import OutsourcedSvg from "./../../assets/SVGs/salesManagerScreen/OutsourcedSvg";
 import AgentManagementSvg from "./../../assets/SVGs/programManagerScreen/AgentManagementSvg";
 import CostSvg from "./../../assets/SVGs/programManagerScreen/CostSvg";
 import AddUserSvg from "./../../assets/SVGs/programManagerScreen/AddUserSvg";
