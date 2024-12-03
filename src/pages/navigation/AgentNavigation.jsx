@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import BuzzWord from "../../assets/SVGs/BuzzWordSvg";
 import { useNavigate, Link } from "react-router-dom";
-import AgentReportSvg from "../../assets/SVGs/AgentReportSvg";
-import PerformanceManagementSvg from "../../assets/SVGs/PerformanceManagementSvg";
 import AgentGuiSvg from "../../assets/SVGs/AgentGuiSvg";
 import LearningSVG from "../../assets/SVGs/LearningSVG";
 import PayrollSvg from "../../assets/SVGs/PayrollSvg";

@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DataCollectionSvg from "./../../assets/SVGs/dataManagerScreen/DataCollectionSvg";
-import PerformanceDashboard from "./../../assets/SVGs/dataManagerScreen/PerformanceDashboard";
-import RevenueSvg from "./../../assets/SVGs/dataManagerScreen/RevenueSvg";
-import PeopleSvg from "../../assets/SVGs/dataManagerScreen/PeopleSvg";
-import SupervisorReport from "./../../assets/SVGs/dataManagerScreen/SupervisorReport";
 import ProgramManagement from "./../../assets/SVGs/salesManagerScreen/ProgramManagement";
 import SearchSvg from "./../../assets/SVGs/salesManagerScreen/SearchSvg";
 import ReportSvg from "./../../assets/SVGs/salesManagerScreen/ReportSvg";
