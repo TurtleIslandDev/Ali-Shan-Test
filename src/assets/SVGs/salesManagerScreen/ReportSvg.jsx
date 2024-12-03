@@ -3,8 +3,8 @@ import React from "react";
 const ReportSvg = () => {
   return (
     <svg
-      width={74}
-      height={99}
+      width={65}
+      height={80}
       viewBox="0 0 74 99"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
