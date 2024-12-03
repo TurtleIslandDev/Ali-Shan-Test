@@ -159,7 +159,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Highlighted Relevant Features
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -173,7 +173,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Fully explained benefits targeted to clients need
                 </p>
-                <select className="select select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -187,7 +187,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Provided correct responses
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -201,7 +201,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Correctly identified questions
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -223,7 +223,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Knowledgeable about Product specifics
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -237,7 +237,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Provided correct contact information
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -251,7 +251,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Quoted accurate price
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -265,7 +265,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Correct sales interaction process followed
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -287,7 +287,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Attention
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -301,7 +301,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Tone
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -315,7 +315,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Pitch
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -329,7 +329,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Speed
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -343,7 +343,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Transitioning
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -365,7 +365,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Provided correct responses 
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -379,7 +379,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Correctly identifies questions
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>
@@ -393,7 +393,7 @@ const CoachingReportAccept = () => {
                 <p className="h-[120px] bg-white py-3 px-5 text-xl text-darkPara">
                   Provides relevant information
                 </p>
-                <select className="select select-bordered select-lg w-full focus:outline-none bg-transparent h-16">
+                <select className="select outline-none border-none select-lg w-full focus:outline-none bg-transparent h-16">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => {
                     return (
                       <option selected key={option}>

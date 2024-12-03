@@ -8,8 +8,17 @@ const CoachingReportAccept = lazy(() =>
 const CoachingReportSubmit = lazy(() =>
   import("./pages/reports/SupervisorScreens/CoachingReportSubmit")
 );
+const PerformanceNavigation = lazy(() =>
+  import("./pages/navigation/PerformanceNavigation")
+);
 const AgentNavigation = lazy(() =>
   import("./pages/navigation/AgentNavigation")
+);
+const AddUserNavigation = lazy(() =>
+  import("./pages/navigation/AddUserNavigation")
+);
+const QcAndSupervisorNavigation = lazy(() =>
+  import("./pages/navigation/QcAndSupervisorNavigation")
 );
 const ChannelManagerNavigation = lazy(() =>
   import("./pages/navigation/ChannelManagerNavigation")
@@ -31,7 +40,26 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<div className="loading">Loading...</div>}>
           <Routes>
+            {/* 
+            Navigation pages completed
+            agent-navigation
+broadcast-customer-navigation
+performance-navigation
+sales-manager-navigation
+data-manager-navigation
+channel-manager-navigation
+add-user-navigation
+qc-and-supervisor-navigation
+            */}
             <Route path="/" element={<Login />} />
+            <Route
+              path="/qc-and-supervisor-navigation"
+              element={<QcAndSupervisorNavigation />}
+            />
+            <Route
+              path="/add-user-navigation"
+              element={<AddUserNavigation />}
+            />
             <Route path="/agent-navigation" element={<AgentNavigation />} />
             <Route
               path="/broadcast-customer-navigation"
