@@ -1,4 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+
+import flobitePlugin from "flowbite/plugin";
+
+
 export default {
   content: [
     "./index.html",
@@ -28,9 +32,7 @@ export default {
     },
   },
   plugins: [
-    require("flowbite/plugin")({
-      charts: true,
-    }),
+    flobitePlugin,
     // ... other plugins
   ],
 };

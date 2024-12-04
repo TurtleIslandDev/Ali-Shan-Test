@@ -1,19 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import second from "../../assets/bgImages/bgLogin.png";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
+import Cookies from 'universal-cookie';
+
+import API from "../../utils/api";
+
 const Login = () => {
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [remember, setRemember] = useState(false);
+  
+  const cookies = new Cookies(null, null, { path: "/" });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
-    navigate("/agent-navigation");
+    const response = await API.login(data.email, data.password, remember);
+    try {
+      const res_json = await response.json();
+
+      if (response.status === 200) {
+        cookies.set('token', res_json.access_token, { path: '/' });
+        cookies.set('role', res_json.role, { path: '/' });
+      }    
+
+      // navigate to the correct page based on the role
+      // Implement the pages as appropriate
+
+      if (res_json.role === 'agent') {
+        navigate("/agent-navigation");
+      }
+      else if (res_json.role === 'program owner') {
+        navigate("/admin-navigation");
+      }
+      else if (res_json.role === 'team lead') {
+        navigate("/admin-navigation");
+      }
+      else if (res_json.role === 'admin') {
+        navigate("/admin-navigation");
+      }      
+
+    } catch (error) {
+      // add error handling here
+    }
+
+    
   };
+
   return (
     <div
       className="h-[1000px] w-full  flex items-center justify-center"
@@ -129,6 +167,7 @@ const Login = () => {
                 type="checkbox"
                 className="checkbox checked:bg-[#228512]  border-[2.6px] border-[#228512] rounded-sm w-5 h-5"
                 // {...register("remember")}
+                onChange={(e) => setRemember(e.target.checked)}
               />
               <span className="label-text ml-2">Remember me</span>
             </label>
