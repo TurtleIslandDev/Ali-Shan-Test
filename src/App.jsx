@@ -26,6 +26,12 @@ const ProgramManagerNavigation = lazy(() =>
 const TeamLeadNavigation = lazy(() =>
   import("./pages/navigation/TeamLeadNavigation")
 );
+const ProgramOwnerNavigation = lazy(() =>
+  import("./pages/navigation/ProgramOwnerNavigation")
+);
+const AdminNavigation = lazy(() =>
+  import("./pages/navigation/AdminNavigation")
+);
 const ThreeCircleLayout = lazy(() =>
   import("./pages/navigation/ThreeCircleLayout")
 );
@@ -63,6 +69,14 @@ program-manager-navigation
             */}
             <Route path="/" element={<Login />} />
             <Route path="/three-circles" element={<ThreeCircleLayout />} />
+            <Route
+              path="/admin-navigation"
+              element={<AdminNavigation />}
+            />
+            <Route
+              path="/program-owner-navigation"
+              element={<ProgramOwnerNavigation />}
+            />
             <Route
               path="/team-lead-navigation"
               element={<TeamLeadNavigation />}

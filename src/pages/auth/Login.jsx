@@ -36,10 +36,10 @@ const Login = () => {
         navigate("/agent-navigation");
       }
       else if (res_json.role === 'program owner') {
-        navigate("/admin-navigation");
+        navigate("/program-owner-navigation");
       }
       else if (res_json.role === 'team lead') {
-        navigate("/admin-navigation");
+        navigate("/team-lead-navigation");
       }
       else if (res_json.role === 'admin') {
         navigate("/admin-navigation");
