@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import PhoneSVG from "../../../assets/SVGs/PhoneSVG";
 import PlayButtonSvg from "../../../assets/SVGs/PlayButtonSvg";
 import NotesSvg from "../../../assets/SVGs/NotesSvg";
 import DateIconSvg from "../../../assets/SVGs/DateIconSvg";
+import { NoCoachingReportMessage } from "../../../components/modals/NoCoachingReportMessage";
+import DummyCoachingReportAccept from "../../../components/dummyComponents/DummyCoachingReportAccept";
 
 const CoachingReportAccept = () => {
+  const [coachingReports, setCoachingReports]=useState(null)
+  const [open, setOpen] = useState(coachingReports === null ? true : false)
+  const [showDummyReport, setShowDummyReport] = useState(false)
   let data = [1, 2, 3];
   return (
     <div className="bg-[#F6F7F9]">
+      <NoCoachingReportMessage open={open} setOpen={setOpen} setShowDummyReport={setShowDummyReport}/>
+      {coachingReports === null ? <>
+        {showDummyReport?
+        <DummyCoachingReportAccept />:null}</> :
+        <>
       <div className="bg-[#1E40AF] flex items-center justify-center pb-[70px] pt-16">
         <div className="w-full max-w-layout flex items-center justify-center flex-col gap-3">
           <h1 className="text-whitePara font-medium text-[32px]">
@@ -384,6 +394,7 @@ const CoachingReportAccept = () => {
           </div>
         </div>
       </div>
+      </>}
     </div>
   );
 };
