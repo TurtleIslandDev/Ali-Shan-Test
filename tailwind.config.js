@@ -29,9 +29,7 @@ module.exports = withMT({
     },
   },
   plugins: [
-    require("flowbite/plugin")({
-      charts: true,
-    }),
+    flobitePlugin,
     // ... other plugins
   ],
 });

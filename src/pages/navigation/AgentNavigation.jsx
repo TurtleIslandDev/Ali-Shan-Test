@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BuzzWord from "../../assets/SVGs/BuzzWordSvg";
 import { useNavigate, Link } from "react-router-dom";
 import AgentGuiSvg from "../../assets/SVGs/AgentGuiSvg";
@@ -8,8 +8,11 @@ import CeritficationsSvg from "../../assets/SVGs/CeritficationsSvg";
 import AgentLearningSvg from "../../assets/SVGs/agentScreen/AgentLearningSvg";
 import AgentPerformanceSvg from "../../assets/SVGs/agentScreen/AgentPerformanceSvg";
 
+import Cookies from 'universal-cookie';
+
 const AgentNavigation = () => {
   const navigate = useNavigate();
+  const cookies = new Cookies(null, null, { path: "/" });
   const [hoverStates, setHoverStates] = useState({
     payroll: false,
     agentGUI: false,
@@ -26,6 +29,14 @@ const AgentNavigation = () => {
   const handleMouseOut = (e, name) => {
     setHoverStates((prev) => ({ ...prev, [name]: false }));
   };
+
+  useEffect(() => {
+    const token = cookies.get("token");
+    if (!token) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div className="w-full h-[calc(100vh+300px)]  flex items-center justify-center ">
       <div className="relative  rounded-full">
