@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 const withMT = require("@material-tailwind/react/utils/withMT");
 module.exports = withMT({
   content: [
@@ -29,7 +28,9 @@ module.exports = withMT({
     },
   },
   plugins: [
-    flobitePlugin,
+    require("flowbite/plugin")({
+      charts: true,
+    }),
     // ... other plugins
   ],
 });
