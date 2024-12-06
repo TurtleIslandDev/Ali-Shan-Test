@@ -14,7 +14,11 @@ module.exports = withMT({
     extend: {
       backgroundImage: {
         login: "url('/assets/bgImages/bgLogin.png')",
+        customGradient: "linear-gradient(180deg, #FFFFFF 57.5%, #575656 97.5%)",
+        "custom-green-gradient":
+          "linear-gradient(360deg, #228512 27%, #24A652 58.5%)",
       },
+
       maxWidth: {
         layout: "1226px",
       },
@@ -24,6 +28,9 @@ module.exports = withMT({
       colors: {
         whitePara: "#E3E3E3",
         darkPara: "#3F3F3F",
+      },
+      fontFamily: {
+        nunitoSans: "Nunito Sans",
       },
     },
   },
