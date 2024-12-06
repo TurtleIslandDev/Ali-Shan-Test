@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const DropdownMenu = styled.div`
   position: absolute;
-  left: 45px;
+  left: -16px;
   background-color: white;
   border-radius: 8px;
   padding: 44px 60px;
@@ -63,7 +63,7 @@ const CustomDropdown = ({ setSelectedDisposition, dispositionData }) => {
     <DropdownContainer>
       <button
         ref={buttonRef}
-        className="w-96 h-[70px] me-3 mb-3 md:mb-0 text-white bg-[#1E40AF]  rounded-lg text-[22px] font-[400] px-5 py-2.5 text-center inline-flex items-center justify-between"
+        className="w-80 h-[55px] me-3 mb-3 md:mb-0 text-white bg-[#1E40AF]  rounded-lg text-[22px] font-[400] px-5 py-2.5 text-center inline-flex items-center justify-between"
         type="button"
         onClick={(event) => {
           event.stopPropagation(); // Prevent event propagation to handleClickOutside
