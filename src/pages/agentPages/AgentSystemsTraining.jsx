@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import bg from "../../assets/bgImages/agent-systems-bg.png";
+import bg from "../../assets/bgImages/bgInteractionGuide.png";
 import DonutChart from "../../components/charts/DonutChart";
 import Button from "../../components/Buttons/Button";
-import MicSvg from "./../../assets/SVGs/MicSvg";
+import MicSvg from "../../assets/SVGs/MicSvg";
 import CallSvg from "../../assets/SVGs/CallSvg";
 import NotificationSvg from "../../assets/SVGs/NotificationSvg";
-import QuickStartLogo from "./../../assets/SVGs/QuickStartLogo";
+import QuickStartLogo from "../../assets/SVGs/QuickStartLogo";
 import IconButton from "../../components/Buttons/IconButton";
 import MuteMicSvg from "../../assets/SVGs/MuteMicSvg";
 import OutBoundCall from "../../assets/SVGs/OutBoundCall";
 import CustomDropdown from "../../components/dropdowns/CustomeDropdown";
+import IgLayout from "../../components/IG/IgLayout";
 const AgentSystemsInterface = () => {
   const [micOn, setMicOn] = useState(true);
   const [inBound, setInBound] = useState(true);
@@ -59,7 +60,7 @@ const AgentSystemsInterface = () => {
       }}
     >
       <div className="bg-[#121729] h-screen">
-        <div className="flex gap-5 h-[86vh]">
+        <div className="flex gap-5 h-[88vh]">
           <div className=" w-full max-w-[425px] bg-white flex flex-col items-center justify-between px-4 pb-4 ">
             <div className="flex shadow-md rounded-xl w-full ">
               <div>
@@ -87,51 +88,88 @@ const AgentSystemsInterface = () => {
             </button>
           </div>
           <div className="w-full bg-transparent flex flex-col gap-5 ">
-            <div className="flex gap-5 mt-5 flex-1 justify-between pr-3">
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
+            <div className="flex gap-5 mt-2 flex-1 justify-between pr-3">
+              <div className="py-3 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">First Name</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">
                   Alishan
                 </p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
+              <div className="py-3 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Last Name</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">
                   Masood
                 </p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
+              <div className="py-3 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
+              <div className="py-3 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
+              <div className="py-3 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
+              <div className="py-3 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
-              <div className="py-5 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
+              <div className="py-3 px-[10px] text-center  bg-white rounded-[4px] flex-grow">
                 <p className="text-[#6F6F6F] text-[18px]">Field</p>
                 <p className="text-[#3F3F3F] text-[20px] font-semibold">Data</p>
               </div>
 
-              <div className="bg-white flex items-center justify-center w-24 h-24 rounded-full pt-1 pr-2">
+              <div className="bg-white flex items-center justify-center w-20 h-20 rounded-full pt-1 pr-2">
                 <div className="w-[50px] h-[50px] ">
                   <CallSvg size={"small"} />
                 </div>
               </div>
             </div>
-            <div className=" bg-white w-full flex h-[calc(100%-100px)]"></div>
+            <IgLayout />
+            {/* <div className=" bg-red-400 flex h-[calc(100%-100px)] w-full justify-center">
+              <div className="bg-[#00000060] w-[90%] flex flex-col gap-3">
+                <div className="bg-white w-full flex justify-between items-center px-10 py-4 rounded-b-md">
+                  <QuickStartLogo size={"small"} />
+                  <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
+                    Introduction
+                  </p>
+                  <div>
+                    <IntroductionSvg />
+                  </div>
+                </div>
+                <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1 rounded-md">
+                  <p>
+                    Hi is (Mr/Mrs) [Prospect Last] my name is [agents name],
+                    This is not a Sales Call but I want to let you know Our team
+                    at Ti Solutions helps businesses like yours identify
+                    cost-saving and profit opportunities by designing,
+                    developing, implementing, and managing efficient software
+                    and business systems that can simplify customer interaction
+                    management operations and create a stable foundation for
+                    growth at an increased profit margin. Does that sound like
+                    something that could be of interest to you?
+                  </p>
+                  <div>
+                    <p>Warning</p>
+                  </div>
+                </div>
+                <div className="bg-transparent w-full flex justify-between items-center px-10 py-4">
+                  <Button bgColor={"#1414C9"}>Back</Button>
+                  <ObjectionsDropdown ObjectionsData={["alishan", "masood"]} />
+                  <IconButton>
+                    <QuestionSvg />
+                  </IconButton>
+                  <Button bgColor={"#228512"}>Next</Button>
+                </div>
+              </div>
+            </div> */}
           </div>
         </div>
 
-        <div className="flex justify-end items-center h-[14vh] gap-4">
+        <div className="flex justify-end items-center h-[12vh] gap-4">
           <div
             className="relative w-[707px] h-4  rounded-full"
             style={{
