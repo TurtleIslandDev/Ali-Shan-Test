@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
-import AgentSystemsTraining from "./pages/agent-systems-training/AgentSystemsTraining";
+import AgentSystemsTraining from "./pages/agentPages/AgentSystemsTraining";
 const CoachingReportAccept = lazy(() =>
-  import("./pages/reports/AgentScreens/CoachingReportAccept")
+  import("./pages/agentPages/CoachingReportAccept")
 );
 const CoachingReportSubmit = lazy(() =>
-  import("./pages/reports/SupervisorScreens/CoachingReportSubmit")
+  import("./pages/supervisorPages/CoachingReportSubmit")
 );
 const PerformanceNavigation = lazy(() =>
   import("./pages/navigation/PerformanceNavigation")
@@ -69,10 +69,7 @@ program-manager-navigation
             */}
             <Route path="/" element={<Login />} />
             <Route path="/three-circles" element={<ThreeCircleLayout />} />
-            <Route
-              path="/admin-navigation"
-              element={<AdminNavigation />}
-            />
+            <Route path="/admin-navigation" element={<AdminNavigation />} />
             <Route
               path="/program-owner-navigation"
               element={<ProgramOwnerNavigation />}
