@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import bg from "../../assets/bgImages/bgInteractionGuide.png";
 import DonutChart from "../../components/charts/DonutChart";
 import Button from "../../components/Buttons/Button";
@@ -11,10 +11,13 @@ import MuteMicSvg from "../../assets/SVGs/MuteMicSvg";
 import OutBoundCall from "../../assets/SVGs/OutBoundCall";
 import CustomDropdown from "../../components/dropdowns/CustomeDropdown";
 import IgLayout from "../../components/IG/IgLayout";
+import InteractionGuide from "../../components/IG/InteractionGuide";
 const AgentSystemsInterface = () => {
   const [micOn, setMicOn] = useState(true);
   const [inBound, setInBound] = useState(true);
   const [selectedDisposition, setSelectedDisposition] = useState("");
+  const divRef = useRef(null); // Create a ref for the div
+  const [divWidth, setDivWidth] = useState(0); // State to store the width
   //this sound result is the value which will automatically increase and decrease the value of green in the bottom voice bar
   //max value is 40 and 0 is optimal
   let soundResult = 0;
@@ -24,7 +27,25 @@ const AgentSystemsInterface = () => {
   const handleCall = () => {
     setInBound(!inBound);
   };
+  useEffect(() => {
+    // Function to update the div width
+    const updateDivWidth = () => {
+      if (divRef.current) {
+        setDivWidth(divRef.current.getBoundingClientRect().width);
+      }
+    };
 
+    // Update width on component mount
+    updateDivWidth();
+
+    // Optionally, update width on window resize
+    window.addEventListener("resize", updateDivWidth);
+
+    // Cleanup listener on unmount
+    return () => {
+      window.removeEventListener("resize", updateDivWidth);
+    };
+  }, []);
   let dispositionData = [
     {
       id: "1",
@@ -51,7 +72,7 @@ const AgentSystemsInterface = () => {
   ];
   return (
     <div
-      className="w-full px-20 h-screen"
+      className="w-full px-12 h-screen"
       style={{
         backgroundImage: `url(${bg})`,
         backgroundRepeat: "no-repeat",
@@ -128,50 +149,20 @@ const AgentSystemsInterface = () => {
                 </div>
               </div>
             </div>
-            <IgLayout />
-            {/* <div className=" bg-red-400 flex h-[calc(100%-100px)] w-full justify-center">
-              <div className="bg-[#00000060] w-[90%] flex flex-col gap-3">
-                <div className="bg-white w-full flex justify-between items-center px-10 py-4 rounded-b-md">
-                  <QuickStartLogo size={"small"} />
-                  <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
-                    Introduction
-                  </p>
-                  <div>
-                    <IntroductionSvg />
-                  </div>
-                </div>
-                <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1 rounded-md">
-                  <p>
-                    Hi is (Mr/Mrs) [Prospect Last] my name is [agents name],
-                    This is not a Sales Call but I want to let you know Our team
-                    at Ti Solutions helps businesses like yours identify
-                    cost-saving and profit opportunities by designing,
-                    developing, implementing, and managing efficient software
-                    and business systems that can simplify customer interaction
-                    management operations and create a stable foundation for
-                    growth at an increased profit margin. Does that sound like
-                    something that could be of interest to you?
-                  </p>
-                  <div>
-                    <p>Warning</p>
-                  </div>
-                </div>
-                <div className="bg-transparent w-full flex justify-between items-center px-10 py-4">
-                  <Button bgColor={"#1414C9"}>Back</Button>
-                  <ObjectionsDropdown ObjectionsData={["alishan", "masood"]} />
-                  <IconButton>
-                    <QuestionSvg />
-                  </IconButton>
-                  <Button bgColor={"#228512"}>Next</Button>
-                </div>
-              </div>
-            </div> */}
+            <div ref={divRef} className=" h-full w-full">
+            {/* <IgLayout /> */}
+             <InteractionGuide/>
+            </div>
           </div>
         </div>
 
-        <div className="flex justify-end items-center h-[12vh] gap-4">
+        <div className={`flex justify-end items-center h-[12vh] `}>
+          <div className={`flex items-center gap-16 justify-end`} style={{
+            width: "100%",
+            maxWidth:`${divWidth}px`
+          }}>
           <div
-            className="relative w-[707px] h-4  rounded-full"
+            className="relative w-full h-3  rounded-full"
             style={{
               background: `linear-gradient(
                 270deg,
@@ -184,11 +175,11 @@ const AgentSystemsInterface = () => {
               )`,
             }}
           >
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-7 h-7 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center">
               <div className="bg-green-500 w-3 h-3 rounded-full"></div>
             </div>
-            <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 w-1 h-10 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
-            <div className="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2 w-1 h-10 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
+            <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-7 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
+            <div className="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-7 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
           </div>
           {/* <Dropdown /> */}
           <CustomDropdown
@@ -196,7 +187,8 @@ const AgentSystemsInterface = () => {
             setSelectedDisposition={setSelectedDisposition}
             dispositionData={dispositionData}
           />
-        </div>
+          </div>
+          </div>
       </div>
     </div>
   );

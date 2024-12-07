@@ -6,32 +6,34 @@ import QuickStartLogo from "../../assets/SVGs/QuickStartLogo";
 import QuestionsDropdown from "../dropdowns/QuestionsDropdown";
 import { ProgressIG } from "../Stepper/ProgressIG";
 import bg from "../../assets/bgImages/bgInteractionGuide.png";
+import BackSvg from "../../assets/SVGs/globalSvgs/BackSvg";
+import NextSvg from "../../assets/SVGs/globalSvgs/NextSvg";
 const IgLayout = () => {
   const ObjectionData = [
     {
       objection: "Objection 1",
       answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
+        "1 he customer wants to review their current bill, including charges, due date, and payment options",
     },
     {
       objection: "Objection 2",
       answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
+        "2 he customer wants to review their current bill, including charges, due date, and payment options",
     },
     {
       objection: "Objection 3",
       answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
+        "3 he customer wants to review their current bill, including charges, due date, and payment options",
     },
     {
       objection: "Objection 4",
       answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
+        "4 he customer wants to review their current bill, including charges, due date, and payment options",
     },
     {
       objection: "Objection 5",
       answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
+        "5 he customer wants to review their current bill, including charges, due date, and payment options",
     },
   ];
   const questionsData = [
@@ -61,10 +63,18 @@ const IgLayout = () => {
         "he customer wants to review their current bill, including charges, due date, and payment options",
     },
   ];
+  const handleButtonNext = () => {
+    const currentDate = new Date();
+    console.log("Next:", currentDate.toString());
+  };
+  const handleButtonBack = () => {
+    const currentDate = new Date();
+    console.log("Back:", currentDate.toString());
+  };
   return (
-    <div className=" flex h-[calc(100%-100px)] w-full justify-center">
+    <div className=" flex w-full justify-center h-full">
       <div
-        className="bg-[#00000060] w-[90%] flex flex-col gap-3"
+        className=" w-full h-full flex flex-col flex-1"
         style={{
           backgroundImage: `url(${bg})`,
           backgroundRepeat: "no-repeat",
@@ -81,8 +91,8 @@ const IgLayout = () => {
             <IntroductionSvg />
           </div>
         </div>
-        <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1 rounded-md">
-          <p className="font-nunitoSans text-[#2C2C2C]">
+        <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1 rounded-md mt-3">
+          <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
             Hi is (Mr/Mrs) [Prospect Last] my name is [agents name], This is not
             a Sales Call but I want to let you know Our team at Ti Solutions
             helps businesses like yours identify cost-saving and profit
@@ -99,12 +109,12 @@ const IgLayout = () => {
             </p>
           </div>
         </div>
-        <div className="bg-transparent w-full px-10 flex-col gap-4 justify-center items-center py-3">
+        <div className="bg-[#00000060] w-full px-10 flex-col gap-4 justify-center items-center py-3">
           <div className="bg-transparent w-full flex justify-between items-center mb-3">
-            <Button bgColor={"#1414C9"}>Back</Button>
+            <Button bgColor={"#1414C9"} onClick={handleButtonBack}><BackSvg/>Back</Button>
             <ObjectionsDropdown ObjectionsData={ObjectionData} />
             <QuestionsDropdown questionsData={questionsData} />
-            <Button bgColor={"#228512"}>Next</Button>
+            <Button bgColor={"#228512"} onClick={handleButtonNext}>Next <NextSvg/></Button>
           </div>
           <ProgressIG />
         </div>

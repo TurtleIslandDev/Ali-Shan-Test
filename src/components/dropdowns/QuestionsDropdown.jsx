@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import {
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-} from "@material-tailwind/react";
-import QuestionSvg from "../../assets/SVGs/interactionGuides/QuestionSvg";
+import InformationSvg from "../../assets/SVGs/interactionGuides/InformationSvg";
+import QuestionSvg from './../../assets/SVGs/interactionGuides/QuestionSvg';
+
 const DropdownMenu = styled.div`
   position: absolute;
   left: -110px;
@@ -14,55 +11,79 @@ const DropdownMenu = styled.div`
   z-index: 1000;
   border: 2px solid #ebedef;
   height: 284px;
-  top: -300px; /* Add an extra 16px gap */
+  top: -300px;
   overflow-y: auto;
+  width:220px
 `;
 
 const DropdownContainer = styled.div`
   position: relative;
   display: inline-block;
 `;
-function Icon({ id, open }) {
-  return (
-    <svg
-      width={12}
-      height={6}
-      viewBox="0 0 12 6"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={`${id === open ? "rotate-180" : ""} transition-transform`}
-    >
-      <path d="M6 6L12 0L0 0L6 6Z" fill="#D2D2D2" />
-    </svg>
-  );
-}
+
+const AnswerBox = styled.div`
+  position: absolute;
+  top: -300px;
+  right: 145px; /* Position it next to the dropdown */
+  background-color: #ffffff;
+  border: 2px solid #ebedef;
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 1000;
+  width: 200px;
+font-size: 12px;
+font-weight: 400;
+line-height: 18px;
+letter-spacing: 0.5px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+color:#6F6F6F;
+
+`;
+
+const ListItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 12px;
+  color: #228512;
+  font-weight:700;
+  &:hover {
+    background-color: #f7f7f7;
+  }
+`;
+
+const ArrowIcon = styled.svg`
+  width: 12px;
+  height: 6px;
+  transform: ${({ isOpen }) => (isOpen ? "rotate(-90deg)" : "rotate(0)")};
+  transition: transform 0.2s;
+`;
+
 const QuestionsDropdown = ({ questionsData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
-  const [height, setHeight] = useState(0);
-  const [open, setOpen] = React.useState(null);
+  const answerBoxRef = useRef(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null); // Track the selected index for arrow rotation
 
-  const handleOpen = (value) => setOpen(open === value ? null : value);
-
-  useEffect(() => {
-    if (isOpen && dropdownRef.current) {
-      const rect = dropdownRef.current.getBoundingClientRect();
-      setHeight(rect.height); // Calculate the dropdown height after rendering
-    }
-  }, [isOpen]);
-
-  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // If the click is outside both the button and the dropdown, close it
+      // Close the dropdown if the click is outside the dropdown and button, but not in the answer box
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target) &&
         buttonRef.current &&
-        !buttonRef.current.contains(event.target)
+        !buttonRef.current.contains(event.target) &&
+        !(answerBoxRef.current && answerBoxRef.current.contains(event.target))
       ) {
-        setIsOpen(false);
+        setIsOpen(false); // Close the dropdown
+        setSelectedAnswer(null)
+        setSelectedIndex(null)
       }
     };
 
@@ -72,41 +93,58 @@ const QuestionsDropdown = ({ questionsData }) => {
     };
   }, []);
 
+  const handleItemClick = (index, answer) => {
+    if (selectedIndex === index) {
+      // Close answer box if the same item is clicked again
+      setSelectedAnswer(null);
+      setSelectedIndex(null);
+    } else {
+      // Open answer box for the clicked item
+      setSelectedAnswer(answer);
+      setSelectedIndex(index);
+    }
+  };
+
   return (
     <DropdownContainer>
       <button
         ref={buttonRef}
         type="button"
         onClick={(event) => {
-          event.stopPropagation(); // Prevent event propagation to handleClickOutside
-          setIsOpen((prev) => !prev); // Toggle dropdown state
+          event.stopPropagation();
+          setIsOpen((prev) => !prev);
         }}
       >
         <QuestionSvg />
       </button>
       {isOpen && (
-        <DropdownMenu ref={dropdownRef} height={height}>
-          {questionsData?.map((item, index) => (
-            <Accordion
-              open={open === index}
-              icon={<Icon id={index} open={open} />}
-              className="w-56 border-none"
-            >
-              <AccordionHeader
-                onClick={() => handleOpen(index)}
-                className={`px-5 py-2.5 text-[#228512] text-sm hover:text-[#228512] ${
-                  open === index ? "border-none" : ""
-                }`}
-              >
-                {item.question}
-              </AccordionHeader>
-              <AccordionBody className="px-5 py-2.5 border-none">
-                <div className="w-full h-[1.5px] bg-[#228512] mb-2.5"></div>
-                <p>{item.answer}</p>
-              </AccordionBody>
-            </Accordion>
-          ))}
-        </DropdownMenu>
+        <>
+          <DropdownMenu ref={dropdownRef}>
+            <ul>
+              {questionsData?.map((item, index) => (
+                <ListItem
+                  key={index}
+                  onClick={() => handleItemClick(index, item)}
+                >
+                  <span>{item.question}</span>
+                  <ArrowIcon
+                    isOpen={selectedIndex === index} // Rotate if selected
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 12 6"
+                  >
+                    <path d="M6 6L12 0L0 0L6 6Z" fill="#D2D2D2" />
+                  </ArrowIcon>
+                </ListItem>
+              ))}
+            </ul>
+          </DropdownMenu>
+          {selectedAnswer && (
+            <AnswerBox ref={answerBoxRef}>
+              <div className="h-[1.5px] w-full bg-[#228512] mb-3"></div>
+              <p>{selectedAnswer.answer}</p>
+            </AnswerBox>
+          )}
+        </>
       )}
     </DropdownContainer>
   );
