@@ -32,7 +32,12 @@ const Login = () => {
       // navigate to the correct page based on the role
       // Implement the pages as appropriate
 
+      console.log(res_json, "res_json");
+      
       if (res_json.role === 'agent') {
+        window.location.href="https://vici.quikstartllc.com/agc/vicidial.php";
+      }
+      else if (res_json.role === 'trainee') {
         navigate("/agent-navigation");
       }
       else if (res_json.role === 'program owner') {
