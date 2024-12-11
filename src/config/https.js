@@ -1,9 +1,9 @@
 import axios from "axios";
 
-// const base_url =
-//   "https://end-point.75e8s1syn0vdw.us-east-1.cs.amazonlightsail.com";
+const base_url =
+  "https://end-point.75e8s1syn0vdw.us-east-1.cs.amazonlightsail.com";
 // const auth_url = "";
-const base_url = "http://localhost:8080";
+// const base_url = "http://localhost:8080";
 const axiosBaseClient = (type) => {
   return axios.create({
     // baseURL: type === "auth" ? auth_url : base_url,
