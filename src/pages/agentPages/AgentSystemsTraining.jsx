@@ -82,7 +82,7 @@ const AgentSystemsInterface = () => {
     >
       <div className="bg-[#121729] h-screen">
         <div className="flex gap-5 h-[88vh]">
-          <div className=" w-full max-w-[425px] bg-white flex flex-col items-center justify-between px-4 pb-4 ">
+          <div className=" w-full max-w-[425px] h-[100vh] bg-white flex flex-col items-center justify-between px-4 pb-4 ">
             <div className="flex shadow-md rounded-xl w-full ">
               <div>
                 <DonutChart />
@@ -150,21 +150,24 @@ const AgentSystemsInterface = () => {
               </div>
             </div>
             <div ref={divRef} className=" h-full w-full">
-            {/* <IgLayout /> */}
-             <InteractionGuide/>
+              {/* <IgLayout /> */}
+              <InteractionGuide />
             </div>
           </div>
         </div>
 
         <div className={`flex justify-end items-center h-[12vh] `}>
-          <div className={`flex items-center gap-16 justify-end`} style={{
-            width: "100%",
-            maxWidth:`${divWidth}px`
-          }}>
           <div
-            className="relative w-full h-3  rounded-full"
+            className={`flex items-center gap-16 justify-end`}
             style={{
-              background: `linear-gradient(
+              width: "100%",
+              maxWidth: `${divWidth}px`,
+            }}
+          >
+            <div
+              className="relative w-full h-3  rounded-full"
+              style={{
+                background: `linear-gradient(
                 270deg,
                 rgba(250, 111, 5, 1) 0%,
                 rgba(254, 195, 0, 1) ${30.63 - soundResult}%,
@@ -173,22 +176,22 @@ const AgentSystemsInterface = () => {
                 rgba(254, 189, 0, 1) ${69.68 + soundResult}%,
                 rgba(255, 108, 3, 1) 100%
               )`,
-            }}
-          >
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-7 h-7 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center">
-              <div className="bg-green-500 w-3 h-3 rounded-full"></div>
+              }}
+            >
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-7 h-7 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center">
+                <div className="bg-green-500 w-3 h-3 rounded-full"></div>
+              </div>
+              <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-7 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
+              <div className="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-7 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
             </div>
-            <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-7 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
-            <div className="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-7 bg-white rounded-full border-4 border-gray-300 cursor-pointer flex items-center justify-center"></div>
+            {/* <Dropdown /> */}
+            <CustomDropdown
+              selectedDisposition={selectedDisposition}
+              setSelectedDisposition={setSelectedDisposition}
+              dispositionData={dispositionData}
+            />
           </div>
-          {/* <Dropdown /> */}
-          <CustomDropdown
-            selectedDisposition={selectedDisposition}
-            setSelectedDisposition={setSelectedDisposition}
-            dispositionData={dispositionData}
-          />
-          </div>
-          </div>
+        </div>
       </div>
     </div>
   );

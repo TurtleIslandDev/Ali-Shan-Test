@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import second from "../../assets/bgImages/bgLogin.png";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
-import Cookies from 'universal-cookie';
-
-import API from "../../utils/api";
+// import Cookies from "universal-cookie";
+import useFetch from "./../../features/hooks/useFetch";
+import { setUserAuth } from "../../features/slice/userSlice";
 
 const Login = () => {
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(false);
-  
-  const cookies = new Cookies(null, null, { path: "/" });
+  const { postData } = useFetch();
+  // const cookies = new Cookies(null, null, { path: "/" });
 
   const {
     register,
@@ -20,41 +19,34 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    const response = await API.login(data.email, data.password, remember);
     try {
-      const res_json = await response.json();
+      postData(
+        "/guide_auth/login",
+        data,
+        undefined,
+        undefined,
+        undefined,
+        (res) => {
+          // dispatch(setSelectedChat({ selectedChat: null }));
+          // resetForm();
+          console.log(res);
+        }
+      );
 
-      if (response.status === 200) {
-        cookies.set('token', res_json.access_token, { path: '/' });
-        cookies.set('role', res_json.role, { path: '/' });
-      }    
-
-      // navigate to the correct page based on the role
-      // Implement the pages as appropriate
-
-      console.log(res_json, "res_json");
-      
-      if (res_json.role === 'agent') {
-        window.location.href="https://vici.quikstartllc.com/agc/vicidial.php";
-      }
-      else if (res_json.role === 'trainee') {
-        navigate("/agent-navigation");
-      }
-      else if (res_json.role === 'program owner') {
-        navigate("/program-owner-navigation");
-      }
-      else if (res_json.role === 'team lead') {
-        navigate("/team-lead-navigation");
-      }
-      else if (res_json.role === 'admin') {
-        navigate("/admin-navigation");
-      }      
-
+      // if (data.email === "agent") {
+      //   window.location.href = "https://vici.quikstartllc.com/agc/vicidial.php";
+      // } else if (data.email === "trainee") {
+      //   navigate("/agent-navigation");
+      // } else if (data.email === "program owner") {
+      //   navigate("/program-owner-navigation");
+      // } else if (data.email === "team lead") {
+      //   navigate("/team-lead-navigation");
+      // } else if (data.email === "admin") {
+      //   navigate("/admin-navigation");
+      // }
     } catch (error) {
       // add error handling here
     }
-
-    
   };
 
   return (

@@ -8,7 +8,7 @@ import CeritficationsSvg from "../../assets/SVGs/CeritficationsSvg";
 import AgentLearningSvg from "../../assets/SVGs/agentScreen/AgentLearningSvg";
 import AgentPerformanceSvg from "../../assets/SVGs/agentScreen/AgentPerformanceSvg";
 
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 const AgentNavigation = () => {
   const navigate = useNavigate();
@@ -32,9 +32,9 @@ const AgentNavigation = () => {
 
   useEffect(() => {
     const token = cookies.get("token");
-    if (!token) {
-      navigate("/");
-    }
+    // if (!token) {
+    //   navigate("/");
+    // }
   }, []);
 
   return (
