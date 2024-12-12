@@ -19,6 +19,8 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
+    console.log(data);
+
     try {
       postData(
         "/guide_auth/login",
@@ -29,21 +31,20 @@ const Login = () => {
         (res) => {
           // dispatch(setSelectedChat({ selectedChat: null }));
           // resetForm();
-          console.log(res);
+          if (res.role === "agent") {
+            window.location.href =
+              "https://vici.quikstartllc.com/agc/vicidial.php";
+          } else if (res.role === "trainee") {
+            navigate("/agent-navigation");
+          } else if (res.role === "program owner") {
+            navigate("/program-owner-navigation");
+          } else if (res.role === "team lead") {
+            navigate("/team-lead-navigation");
+          } else if (res.role === "admin") {
+            navigate("/admin-navigation");
+          }
         }
       );
-
-      // if (data.email === "agent") {
-      //   window.location.href = "https://vici.quikstartllc.com/agc/vicidial.php";
-      // } else if (data.email === "trainee") {
-      //   navigate("/agent-navigation");
-      // } else if (data.email === "program owner") {
-      //   navigate("/program-owner-navigation");
-      // } else if (data.email === "team lead") {
-      //   navigate("/team-lead-navigation");
-      // } else if (data.email === "admin") {
-      //   navigate("/admin-navigation");
-      // }
     } catch (error) {
       // add error handling here
     }
@@ -114,13 +115,13 @@ const Login = () => {
             <p className="text-2xl text-[#222] mb-2">User</p>
             <label className="input input-bordered flex items-center gap-2 ">
               <input
-                {...register("email", { required: true })}
+                {...register("username", { required: true })}
                 type="text"
                 className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
                 placeholder="agent@mail.com"
               />
             </label>
-            {errors.email && (
+            {errors.username && (
               <span className="text-right text-red-500 text-xs">
                 *This field is required
               </span>
