@@ -2,6 +2,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import AgentSystemsTraining from "./pages/agentPages/AgentSystemsTraining";
+const BuzzWordTrainee = lazy(() =>
+  import("./pages/traineePages/BuzzWordTrainee")
+);
 const CoachingReportAccept = lazy(() =>
   import("./pages/agentPages/CoachingReportAccept")
 );
@@ -29,12 +32,17 @@ const TeamLeadNavigation = lazy(() =>
 const ProgramOwnerNavigation = lazy(() =>
   import("./pages/navigation/ProgramOwnerNavigation")
 );
+const DataVendorNavigation = lazy(() =>
+  import("./pages/navigation/DataVendorNavigation")
+);
+const BpoNavigation = lazy(() => import("./pages/navigation/BpoNavigation"));
 const AdminNavigation = lazy(() =>
   import("./pages/navigation/AdminNavigation")
 );
 const ThreeCircleLayout = lazy(() =>
   import("./pages/navigation/ThreeCircleLayout")
 );
+const BuzzWord = lazy(() => import("./pages/supervisorPages/BuzzWord"));
 const ChannelManagerNavigation = lazy(() =>
   import("./pages/navigation/ChannelManagerNavigation")
 );
@@ -68,8 +76,15 @@ qc-and-supervisor-navigation
 program-manager-navigation
             */}
             <Route path="/" element={<Login />} />
+            <Route path="/buzzword-supervisor" element={<BuzzWord />} />
+            <Route path="/buzzword-trainee" element={<BuzzWordTrainee />} />
             <Route path="/three-circles" element={<ThreeCircleLayout />} />
             <Route path="/admin-navigation" element={<AdminNavigation />} />
+            <Route path="bpo-navigation" element={<BpoNavigation />} />
+            <Route
+              path="/data-vendor-navigation"
+              element={<DataVendorNavigation />}
+            />
             <Route
               path="/program-owner-navigation"
               element={<ProgramOwnerNavigation />}
