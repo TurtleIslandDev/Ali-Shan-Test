@@ -34,14 +34,32 @@ const Login = () => {
           if (res.role === "agent") {
             window.location.href =
               "https://vici.quikstartllc.com/agc/vicidial.php";
-          } else if (res.role === "trainee") {
-            navigate("/agent-navigation");
-          } else if (res.role === "program owner") {
-            navigate("/program-owner-navigation");
-          } else if (res.role === "team lead") {
+          } else if (res.role === "channelManager") {
+            navigate("/channel-manager-navigation");
+          } else if (res.role === "dataManager") {
+            navigate("/data-manager-navigation");
+          } else if (res.role === "salesManager") {
+            navigate("/sales-manager-navigation");
+          } else if (res.role === "programManager") {
+            navigate("/program-manager-navigation");
+          } else if (res.role === "teamLead") {
             navigate("/team-lead-navigation");
+          } else if (res.role === "supervisor") {
+            navigate("/qc-and-supervisor-navigation");
+          } else if (res.role === "performanceManager") {
+            navigate("/performance-navigation");
           } else if (res.role === "admin") {
             navigate("/admin-navigation");
+          } else if (res.role === "programOwner") {
+            navigate("/program-owner-navigation");
+          } else if (res.role === "bpo") {
+            navigate("/bpo-navigation");
+          } else if (res.role === "dataVendor") {
+            navigate("/data-vendor-navigation");
+          } else if (res.role === "broadcastCustomer") {
+            navigate("/broadcast-customer-navigation");
+          } else if (res.role === "trainee") {
+            navigate("/agent-navigation");
           }
         }
       );
