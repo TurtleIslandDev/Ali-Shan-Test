@@ -43,7 +43,7 @@ const Login = () => {
           // resetForm();
           if (res.role === "agent") {
             window.location.href =
-              "https://vici.quikstartllc.com/agc/vicidial.php";
+              "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
           } else if (res.role === "channelManager") {
             navigate("/channel-manager-navigation");
           } else if (res.role === "dataManager") {
