@@ -11,7 +11,8 @@ const Login = () => {
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(false);
-  const { postData } = useFetch();
+  const { postData} = useFetch();
+  const [ipAddress, setIpAddress] = useState("");
   // const cookies = new Cookies(null, null, { path: "/" });
 
   const {
@@ -21,6 +22,16 @@ const Login = () => {
   } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
+
+    try {
+      let response = await fetch("https://api.ipify.org?format=json");
+      let resData = await response.json();
+      if (resData.ip) {
+        data.ipAddress = resData.ip;
+      }      
+    } catch (error) {
+
+    }
 
     try {
       postData(
