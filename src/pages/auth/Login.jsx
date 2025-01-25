@@ -21,8 +21,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
-
     try {
       let response = await fetch("https://api.ipify.org?format=json");
       let resData = await response.json();
