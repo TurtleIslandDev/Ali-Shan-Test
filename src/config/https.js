@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const base_url =
-  "auth.itsbuzzmarketing.com";
+  "https://auth.itsbuzzmarketing.com";
 // const auth_url = "";
 // const base_url = "http://localhost:3000";
 const axiosBaseClient = (type) => {
