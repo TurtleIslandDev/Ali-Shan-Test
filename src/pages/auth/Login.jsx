@@ -42,8 +42,10 @@ const Login = () => {
           // dispatch(setSelectedChat({ selectedChat: null }));
           // resetForm();
           if (res.role === "agent") {
-            window.location.href =
-              "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+            setTimeout(() => {
+              window.location.href =
+                "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+            }, 30000);            
           } else if (res.role === "channelManager") {
             navigate("/channel-manager-navigation");
           } else if (res.role === "dataManager") {
