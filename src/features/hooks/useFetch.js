@@ -128,15 +128,15 @@ const useFetch = () => {
         setSuccess(true);
         cbFunction && dispatch(cbFunction(response.data));
         setLocalState && setLocalState(response.data);
-        if (response?.data.message) {
-        }
-        console.log(response);
-        //notify("success", response.data?.message);
+        // if (response?.data.message) {
+        //   console.log(response);
+        // notify("success", response.data?.message);
         // if (response.data?.message){
-        //   //notify("success", response.data?.message);
-        // } else {
-        //   //notify("error", response.data?.message);
-        // }
+        //     notify("success", response.data?.message);
+        //   } else {
+        //       notify("error", response.data?.message);
+        //     }
+        //     }
       } else {
         throw new Error("error internet");
       }
