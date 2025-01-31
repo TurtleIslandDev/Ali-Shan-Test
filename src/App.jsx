@@ -43,6 +43,9 @@ const ThreeCircleLayout = lazy(() =>
   import("./pages/navigation/ThreeCircleLayout")
 );
 const BuzzWord = lazy(() => import("./pages/supervisorPages/BuzzWord"));
+const UploadDataPage = lazy(() =>
+  import("./pages/supervisorPages/UploadDataPage")
+);
 const ChannelManagerNavigation = lazy(() =>
   import("./pages/navigation/ChannelManagerNavigation")
 );
@@ -56,26 +59,24 @@ const BroadcastCustomerNavigation = lazy(() =>
   import("./pages/navigation/BroadcastCustomerNavigation")
 );
 const Login = lazy(() => import("./pages/auth/Login"));
+const AddUser = lazy(() => import("./pages/auth/AddUser"));
 function App() {
   return (
     <>
       {/* there is new react-router-version comming so if any issues faced for routing look at the new documentations */}
       <BrowserRouter>
-        <Suspense fallback={<div className="loading">Loading...</div>}>
+        <Suspense
+          fallback={
+            <div class="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
+              <div class="flex justify-center items-center mt-[50vh]">
+                <div class="fas fa-circle-notch fa-spin fa-5x text-violet-600"></div>
+              </div>
+            </div>
+          }
+        >
           <Routes>
-            {/* 
-            Navigation pages completed
-            agent-navigation
-broadcast-customer-navigation
-performance-navigation
-sales-manager-navigation
-data-manager-navigation
-channel-manager-navigation
-add-user-navigation
-qc-and-supervisor-navigation
-program-manager-navigation
-            */}
             <Route path="/" element={<Login />} />
+            <Route path="/admin-navigation/add-user" element={<AddUser />} />
             <Route path="/buzzword-supervisor" element={<BuzzWord />} />
             <Route path="/buzzword-trainee" element={<BuzzWordTrainee />} />
             <Route path="/three-circles" element={<ThreeCircleLayout />} />
@@ -100,6 +101,10 @@ program-manager-navigation
             <Route
               path="/qc-and-supervisor-navigation"
               element={<QcAndSupervisorNavigation />}
+            />
+            <Route
+              path="/qc-and-supervisor-navigation/upload-data"
+              element={<UploadDataPage />}
             />
             <Route
               path="/add-user-navigation"
