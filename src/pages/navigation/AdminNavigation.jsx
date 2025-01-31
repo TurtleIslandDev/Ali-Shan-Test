@@ -30,17 +30,23 @@ const AdminNavigation = () => {
             // onClick={() => navigate("/agent-system-interface")}
             onMouseOver={(e) => handleMouseOver(e, "first")}
             onMouseLeave={(e) => handleMouseOut(e, "first")}
+            onClick={() => {
+              navigate("add-user");
+            }}
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-10px)] h-[calc(100%-10px)]  ${
               hoverStates.first ? "bg-[#333] " : "bg-[#D9D9D9] "
             }`}
           >
-            {/* {hoverStates.first ? (
+            {hoverStates.first ? (
               <p className="uppercase font-bold text-3xl text-center">
-                Omni Channel Communication
+                Add user
               </p>
             ) : (
-              <OmnichannelCommunicationSvg />
-            )} */}
+              <p className="uppercase font-bold text-3xl text-center">
+                Add user
+              </p>
+              // <OmnichannelCommunicationSvg />
+            )}
           </div>
         </div>
         {/* Second*/}
