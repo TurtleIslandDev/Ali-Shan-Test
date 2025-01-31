@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const base_url =
-  "https://auth.itsbuzzmarketing.com";
+const base_url = "https://auth.itsbuzzmarketing.com";
 // const auth_url = "";
 // const base_url = "http://localhost:3000";
 const axiosBaseClient = (type) => {
@@ -43,8 +42,10 @@ const responseHandler = async (response) => {
 
 const errorHandler = (error) => {
   const { response } = error;
+  // console.log(response, "error handler");
+
   if (response && response?.status) {
-    throw response;
+    return response;
   }
 };
 
