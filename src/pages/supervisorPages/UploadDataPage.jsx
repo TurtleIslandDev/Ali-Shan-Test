@@ -18,7 +18,7 @@ const UploadDataPage = () => {
   } = useForm();
 
   const getDataTemplates = async () => {    
-    try {
+    try {       
       const url = "https://endpoint.itsbuzzmarketing.com/guides/get_templates";
 
       const response = await fetch(url, {
@@ -49,7 +49,7 @@ const UploadDataPage = () => {
       });
 
       const data = await response.json();
-      console.log(data)
+      console.log(data);
 
       if (data.status === "success") {
         setUploadData(data.data);
@@ -82,7 +82,9 @@ const UploadDataPage = () => {
 
             // upload file
             const url = "https://endpoint.itsbuzzmarketing.com/guides/upload";
+
             setWait(true);
+
             const response = await fetch(url, {
               method: "POST",
               headers: {
@@ -92,7 +94,6 @@ const UploadDataPage = () => {
             });
 
             const data = await response.json();
-            console.log(data);
 
             setWait(false);
           } catch (error) {
@@ -155,14 +156,19 @@ const UploadDataPage = () => {
               <li key={index} className="mb-2">
                 <span className="font-bold">{data.file_name}</span> - {data.timestamp} -{" "}
                 {data.completed ? (
-                  <>                    
-                    {data.stopped? ( <span className="text-yellow-500"> Stopped</span>): <span className="text-green-500">Completed</span>}
-                  </>
-                ) : (                                    
-                  <span className="text-red-500">Not Completed</span>
+                  <span className="text-green-500"> Completed</span>
+                  
+                ) : (    
+                  data.stopped ? (
+                      <span className="text-blue-500">  Stopped </span>
+                    ) : (
+                      <span className="text-red-green"> Processing </span>
+                    )
+
+                  
                 )}
-                {data.upload_count > 0 && (
-                  <span className="text-blue-500"> - {data.upload_count} records uploaded</span>
+                {data.uploaded > 0 && (
+                  <span className="text-blue-500"> - {data.uploaded} records uploaded</span>
                 )}
               </li>
             ))}
