@@ -10,6 +10,9 @@ const UploadDataPage = () => {
   const [uploadData, setUploadData] = useState([]);
   const [wait, setWait] = useState(false);
 
+  const UPLOAD_URL = "https://endpoint.itsbuzzmarketing.com";
+  // const UPLOAD_URL = "http://127.0.0.1:3000";
+
   const { postData } = useFetch();
   const {
     register,
@@ -19,7 +22,8 @@ const UploadDataPage = () => {
 
   const getDataTemplates = async () => {    
     try {       
-      const url = "https://endpoint.itsbuzzmarketing.com/guides/get_templates";
+      const url = `${UPLOAD_URL}/guides/get_templates`;
+
 
       const response = await fetch(url, {
         method: "GET",
@@ -29,6 +33,7 @@ const UploadDataPage = () => {
       });
 
       const data = await response.json();
+      setResponseMessage(data);
 
       if (data.status === "success") {
         setDataTemplates(data.data);        
@@ -39,7 +44,8 @@ const UploadDataPage = () => {
 
   const getUploadData = async () => {
     try {
-      const url = "https://endpoint.itsbuzzmarketing.com/guides/get_upload_tasks";
+      const url = `${UPLOAD_URL}/guides/get_upload_tasks`;
+
 
       const response = await fetch(url, {
         method: "GET",
@@ -49,8 +55,7 @@ const UploadDataPage = () => {
       });
 
       const data = await response.json();
-      console.log(data);
-
+      setResponseMessage(data);
       if (data.status === "success") {
         setUploadData(data.data);
       }
@@ -81,7 +86,7 @@ const UploadDataPage = () => {
           try {
 
             // upload file
-            const url = "https://endpoint.itsbuzzmarketing.com/guides/upload";
+            const url = `${UPLOAD_URL}/guides/upload`;
 
             setWait(true);
 

@@ -58,6 +58,9 @@ const SalesManagerNavigation = lazy(() =>
 const BroadcastCustomerNavigation = lazy(() =>
   import("./pages/navigation/BroadcastCustomerNavigation")
 );
+const ExportDataPage = lazy(() =>
+  import("./pages/navigation/ExportDataNavigation")
+);
 const Login = lazy(() => import("./pages/auth/Login"));
 const AddUser = lazy(() => import("./pages/auth/AddUser"));
 function App() {
@@ -77,6 +80,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/admin-navigation/add-user" element={<AddUser />} />
+            <Route path="/admin-navigation/export-data" element={<ExportDataPage />} />
             <Route path="/buzzword-supervisor" element={<BuzzWord />} />
             <Route path="/buzzword-trainee" element={<BuzzWordTrainee />} />
             <Route path="/three-circles" element={<ThreeCircleLayout />} />
