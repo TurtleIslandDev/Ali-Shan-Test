@@ -134,11 +134,12 @@ const QcAndSupervisorNavigation = () => {
           onMouseLeave={(e) => handleMouseOut(e, "web")}
           className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  "
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  bg-[#1E40AF66]">
-            {/* Dashed circle border */}
-            {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
-            {/* Star ribbon icon (replace with an actual SVG icon if available) */}
-            <div className="relative text-black">
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] ${
+              hoverStates.web ? "z-[6] bg-[#1E40AF] " : "z-[3] bg-[#1E40AF66]"
+            }`}
+          >
+            <div className="relative text-white">
               {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
               {/* <WebSvg /> */}
               {hoverStates.web ? (
