@@ -1,5 +1,5 @@
 import React from "react";
-import s from "../images/itsBuzzMarketingLogo.png";
+import s from "../images/ItsBuzzMarketingLogo.png";
 import d from "../images/itsBuzz.png";
 const QuickStartLogo = ({ size }) => {
   return (
