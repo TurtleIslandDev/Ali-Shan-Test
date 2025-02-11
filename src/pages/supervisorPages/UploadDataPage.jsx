@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import useFetch from "./../../features/hooks/useFetch";
 import { useSelector } from "react-redux";
 const UploadDataPage = () => {
   const { token } = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
-  const [responseMessage, setResponseMessage] = useState("");
-  const [dataTemplates, setDataTemplates] = useState([]);
+  const [responseMessage, setResponseMessage] = useState("");  
+  const [dataTemplates, setDataTemplates] = useState({});
+  const [currTemplate, setCurrTemplate] = useState("");
   const [uploadData, setUploadData] = useState([]);
   const [wait, setWait] = useState(false);
 
@@ -33,10 +34,20 @@ const UploadDataPage = () => {
       });
 
       const data = await response.json();
+
+      
+
       setResponseMessage(data);
 
       if (data.status === "success") {
-        setDataTemplates(data.data);        
+        const keys = Object.keys(data.data);
+
+        setDataTemplates(data.data);
+
+        if (keys.length > 0){
+          setCurrTemplate(keys[0]);     
+        }        
+        
       }
     }
     catch (error) {}
@@ -82,6 +93,7 @@ const UploadDataPage = () => {
           const file = e.target.files[0];
           const formData = new FormData();
           formData.append("file", file);
+          formData.append("source", data.source);
           formData.append("template", data.template);
           try {
 
@@ -128,19 +140,32 @@ const UploadDataPage = () => {
               <p className="text-red-400">{responseMessage?.message}</p>
             ) : null)}          
           
-          <div className="w-full mb-8">
-            <p className="text-2xl text-[#222] mb-2">Select Template</p>
+          <div className="w-full mb-4">
+            <p className="text-2xl text-[#222] mb-2">Select Data Source</p>
+            <label className="input input-bordered flex bg-transparent items-center gap-2 relative">
+              <select
+                className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                placeholder="Select Data Template"
+                {...register("source", { required: true })}
+              >
+                {Object.keys(dataTemplates)?.map((template, index) => (
+                  <option key={index} value={template}> {template} </option>
+                ))}
+              </select>
+            </label>   
+
+            <p className="text-2xl text-[#222] mb-2">Select Data Template</p>
             <label className="input input-bordered flex bg-transparent items-center gap-2 relative">
               <select
                 className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
                 placeholder="Select Data Template"
                 {...register("template", { required: true })}
               >
-                {dataTemplates.map((template, index) => (
+                {dataTemplates[currTemplate]?.map((template, index) => (
                   <option key={index} value={template}> {template} </option>
                 ))}
               </select>
-            </label>            
+            </label>           
           </div>
 
           <button
@@ -173,7 +198,7 @@ const UploadDataPage = () => {
                   
                 )}
                 {data.uploaded > 0 && (
-                  <span className="text-blue-500"> - {data.uploaded} records uploaded</span>
+                  <span className="text-blue-500"> - {data.uploaded} out of {data.upload_count} records uploaded</span>
                 )}
               </li>
             ))}
