@@ -7,7 +7,7 @@ const UploadDataPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");  
   const [dataTemplates, setDataTemplates] = useState({});
-  const [currTemplate, setCurrTemplate] = useState("");
+  const [currTemplates, setCurrTemplates] = useState([]);
   const [uploadData, setUploadData] = useState([]);
   const [wait, setWait] = useState(false);
 
@@ -150,7 +150,9 @@ const UploadDataPage = () => {
                 placeholder="Select Data Template"
                 {...register("source", { required: true })}
                 onChange={(e) => {
-                  setCurrTemplate(e.target.value);
+                  setCurrTemplates(
+                    dataTemplates[e.target.value]
+                  );
                 }}
               >
                 {Object.keys(dataTemplates)?.map((template, index) => (
@@ -166,7 +168,7 @@ const UploadDataPage = () => {
                 placeholder="Select Data Template"
                 {...register("template", { required: true })}
               >
-                {dataTemplates[currTemplate]?.map((template, index) => (
+                {currTemplates?.map((template, index) => (
                   <option key={index} value={template}> {template} </option>
                 ))}
               </select>
