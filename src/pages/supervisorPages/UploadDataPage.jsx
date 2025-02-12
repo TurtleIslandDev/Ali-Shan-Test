@@ -40,7 +40,7 @@ const UploadDataPage = () => {
       setResponseMessage(data);
 
       if (data.status === "success") {
-        const keys = Object.keys(data.data);
+        const keys = Object.keys(data.data);        
 
         setDataTemplates(data.data);
 
@@ -68,6 +68,7 @@ const UploadDataPage = () => {
       const data = await response.json();
       setResponseMessage(data);
       if (data.status === "success") {
+        console.log(data.data)
         setUploadData(data.data);
       }
     }
@@ -111,6 +112,7 @@ const UploadDataPage = () => {
             });
 
             const data = await response.json();
+            setResponseMessage(data);
 
             setWait(false);
           } catch (error) {
@@ -147,6 +149,9 @@ const UploadDataPage = () => {
                 className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
                 placeholder="Select Data Template"
                 {...register("source", { required: true })}
+                onChange={(e) => {
+                  setCurrTemplate(e.target.value);
+                }}
               >
                 {Object.keys(dataTemplates)?.map((template, index) => (
                   <option key={index} value={template}> {template} </option>
@@ -197,8 +202,8 @@ const UploadDataPage = () => {
 
                   
                 )}
-                {data.uploaded > 0 && (
-                  <span className="text-blue-500"> - {data.uploaded} out of {data.upload_count} records uploaded</span>
+                {data.uploaded >= 0 && (
+                  <span className="text-blue-500"> - {data.upload_count} uploaded - {data.duplicates}  duplicates skipped </span>
                 )}
               </li>
             ))}
