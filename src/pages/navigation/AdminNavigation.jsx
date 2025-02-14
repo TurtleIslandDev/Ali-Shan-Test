@@ -166,6 +166,7 @@ const AdminNavigation = () => {
             <div className="absolute w-[1px] h-4 transform  -top-6 right-17 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
         </div>
+        
         {/* sixth*/}
         <div
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
@@ -176,15 +177,28 @@ const AdminNavigation = () => {
             {/* <ChatSvg /> */}
           </div>
         </div>
-        {/* seventh */}
-        <div className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  bg-[#1E40AF66]">
-            {/* Dashed circle border */}
-            {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
-            {/* Star ribbon icon (replace with an actual SVG icon if available) */}
-            <div className="relative text-black">
+        {/* TODO: Hurried implementation of upload button */}
+        <div
+          onClick={() => navigate("upload-data")}
+          onMouseOver={(e) => handleMouseOver(e, "web")}
+          onMouseLeave={(e) => handleMouseOut(e, "web")}
+          className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  "
+        >
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] ${
+              hoverStates.web ? "z-[6] bg-[#1E40AF] " : "z-[3] bg-[#1E40AF66]"
+            }`}
+          >
+            <div className="relative text-white">
               {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
               {/* <WebSvg /> */}
+              {hoverStates.web ? (
+                <p className="uppercase font-bold text-3xl text-center">
+                  Upload
+                </p>
+              ) : (
+                "Upload"
+              )}
             </div>
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[50deg] -top-10 right-0 border-[1px] border-dashed border-[#D9D9D9]" />
