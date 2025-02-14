@@ -37,42 +37,43 @@ const Login = () => {
         undefined,
         undefined,
         (res) => {
-          dispatch(setUserAuth({ data: res }));
+          dispatch(
+            setUserAuth({ data: res.data }));
           // resetForm();
-          console.log(res);
-
-          if (res.role === "agent") {
+          const resData = res.data;
+          
+          if (resData.role === "agent") {
             setWait(true);
             setTimeout(() => {
               setWait(false);
               window.location.href =
                 "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
             }, 3000);
-          } else if (res.role === "channelManager") {
+          } else if (resData.role === "channelManager") {
             navigate("/channel-manager-navigation");
-          } else if (res.role === "dataManager") {
+          } else if (resData.role === "dataManager") {
             navigate("/data-manager-navigation");
-          } else if (res.role === "salesManager") {
+          } else if (resData.role === "salesManager") {
             navigate("/sales-manager-navigation");
-          } else if (res.role === "programManager") {
+          } else if (resData.role === "programManager") {
             navigate("/program-manager-navigation");
-          } else if (res.role === "teamLead") {
+          } else if (resData.role === "teamLead") {
             navigate("/team-lead-navigation");
-          } else if (res.role === "supervisor") {
+          } else if (resData.role === "supervisor") {
             navigate("/qc-and-supervisor-navigation");
-          } else if (res.role === "performanceManager") {
+          } else if (resData.role === "performanceManager") {
             navigate("/performance-navigation");
-          } else if (res.role === "admin") {
+          } else if (resData.role === "admin") {
             navigate("/admin-navigation");
-          } else if (res.role === "programOwner") {
+          } else if (resData.role === "programOwner") {
             navigate("/program-owner-navigation");
-          } else if (res.role === "bpo") {
+          } else if (resData.role === "bpo") {
             navigate("/bpo-navigation");
-          } else if (res.role === "dataVendor") {
+          } else if (resData.role === "dataVendor") {
             navigate("/data-vendor-navigation");
-          } else if (res.role === "broadcastCustomer") {
+          } else if (resData.role === "broadcastCustomer") {
             navigate("/broadcast-customer-navigation");
-          } else if (res.role === "trainee") {
+          } else if (resData.role === "trainee") {
             navigate("/agent-navigation");
           }
         }

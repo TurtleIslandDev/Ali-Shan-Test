@@ -85,6 +85,7 @@ function App() {
             <Route path="/buzzword-trainee" element={<BuzzWordTrainee />} />
             <Route path="/three-circles" element={<ThreeCircleLayout />} />
             <Route path="/admin-navigation" element={<AdminNavigation />} />
+            <Route path="/admin-navigation/upload-data" element={<UploadDataPage />} />
             <Route path="bpo-navigation" element={<BpoNavigation />} />
             <Route
               path="/data-vendor-navigation"
