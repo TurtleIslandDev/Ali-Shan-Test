@@ -5,7 +5,7 @@ import Button from "../../components/Buttons/Button";
 import MicSvg from "../../assets/SVGs/MicSvg";
 import CallSvg from "../../assets/SVGs/CallSvg";
 import NotificationSvg from "../../assets/SVGs/NotificationSvg";
-import QuickStartLogo from "../../assets/SVGs/QuickStartLogo";
+import ItsBuzzMarketingLogo from "../../assets/SVGs/logos/ItsBuzzMarketingLogo";
 import IconButton from "../../components/Buttons/IconButton";
 import MuteMicSvg from "../../assets/SVGs/MuteMicSvg";
 import OutBoundCall from "../../assets/SVGs/OutBoundCall";
@@ -102,7 +102,7 @@ const AgentSystemsInterface = () => {
             </div>
 
             <button type="button" className="relative ">
-              <QuickStartLogo />
+              <ItsBuzzMarketingLogo />
               <div className="absolute inline-flex items-center justify-center text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full top-0 end-4 dark:border-gray-900">
                 <NotificationSvg />
               </div>
