@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../Buttons/Button";
 import ObjectionsDropdown from "../dropdowns/ObjectionsDropdown";
 import IntroductionSvg from "../../assets/SVGs/interactionGuides/IntroductionSvg";
-import QuickStartLogo from "../../assets/SVGs/QuickStartLogo";
+import ItsBuzzMarketingLogo from "../../assets/SVGs/logos/ItsBuzzMarketingLogo";
 import QuestionsDropdown from "../dropdowns/QuestionsDropdown";
 import { ProgressIG } from "../Stepper/ProgressIG";
 import bg from "../../assets/bgImages/bgInteractionGuide.png";
@@ -83,7 +83,7 @@ const IgLayout = () => {
         }}
       >
         <div className="bg-white w-full flex justify-between items-center px-10 py-4 rounded-b-md">
-          <QuickStartLogo size={"small"} />
+          <ItsBuzzMarketingLogo size={"small"} />
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
             Introduction
           </p>
