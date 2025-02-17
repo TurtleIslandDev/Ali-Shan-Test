@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import AgentSystemsTraining from "./pages/agentPages/AgentSystemsTraining";
+import InteractionGuidePage from "./pages/IG/InteractionGuidePage";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -80,12 +81,24 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/admin-navigation/add-user" element={<AddUser />} />
-            <Route path="/admin-navigation/export-data" element={<ExportDataPage />} />
-            <Route path="/buzzword-supervisor" element={<BuzzWord />} />
-            <Route path="/buzzword-trainee" element={<BuzzWordTrainee />} />
+            <Route
+              path="/admin-navigation/export-data"
+              element={<ExportDataPage />}
+            />
+            <Route
+              path="/qc-and-supervisor-navigation/buzzword-supervisor"
+              element={<BuzzWord />}
+            />
+            <Route
+              path="/agent-navigation/buzzword-trainee"
+              element={<BuzzWordTrainee />}
+            />
             <Route path="/three-circles" element={<ThreeCircleLayout />} />
             <Route path="/admin-navigation" element={<AdminNavigation />} />
-            <Route path="/admin-navigation/upload-data" element={<UploadDataPage />} />
+            <Route
+              path="/admin-navigation/upload-data"
+              element={<UploadDataPage />}
+            />
             <Route path="bpo-navigation" element={<BpoNavigation />} />
             <Route
               path="/data-vendor-navigation"
@@ -147,6 +160,10 @@ function App() {
             <Route
               path="/agent-system-interface"
               element={<AgentSystemsTraining />}
+            />
+            <Route
+              path="/interaction-guide"
+              element={<InteractionGuidePage />}
             />
             <Route path="/*" element={<div>Page not found</div>} />
           </Routes>
