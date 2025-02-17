@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import Button from "../../components/Buttons/Button";
 import { useForm } from "react-hook-form";
 import TiSolutionsLogoSvg from "../../assets/SVGs/logos/TiSolutionsLogoSvg";
+import ItsBuzzMarketingLogo from "../../assets/SVGs/logos/ItsBuzzMarketingLogo";
 
 const BuzzWord = () => {
   const {
@@ -53,8 +54,7 @@ const BuzzWord = () => {
 
   return (
     <div className="flex justify-center items-center flex-col h-screen bg-gray-100 gap-7">
-      <TiSolutionsLogoSvg />
-
+      <ItsBuzzMarketingLogo size={"small"} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-5 grid-rows-5 border-collapse">
           {gridItems.map((item) => (

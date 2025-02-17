@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import Button from "../../components/Buttons/Button";
 import { useForm } from "react-hook-form";
 import TiSolutionsLogoSvg from "../../assets/SVGs/logos/TiSolutionsLogoSvg";
+import ItsBuzzMarketingLogo from "../../assets/SVGs/logos/ItsBuzzMarketingLogo";
 const BuzzWordTrainee = () => {
   // Grid items with id and name
   const gridItems = Array.from({ length: 25 }, (_, index) => {
@@ -82,7 +83,7 @@ const BuzzWordTrainee = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-7 h-screen bg-gray-100">
-      <TiSolutionsLogoSvg />
+      <ItsBuzzMarketingLogo size={"small"} />
       {activeStep === 0 ? (
         <form
           className="w-full max-w-96 flex flex-col items-center"
