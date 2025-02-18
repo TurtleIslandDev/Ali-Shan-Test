@@ -11,8 +11,8 @@ const UploadDataPage = () => {
   const [uploadData, setUploadData] = useState([]);
   const [wait, setWait] = useState(false);
 
-  const UPLOAD_URL = "https://endpoint.itsbuzzmarketing.com";
-  // const UPLOAD_URL = "http://127.0.0.1:3000";
+  // const UPLOAD_URL = "https://endpoint.itsbuzzmarketing.com";
+  const UPLOAD_URL = "http://127.0.0.1:3000";
 
   const { postData } = useFetch();
   const {
@@ -45,7 +45,7 @@ const UploadDataPage = () => {
         setDataTemplates(data.data);
 
         if (keys.length > 0){
-          setCurrTemplate(keys[0]);     
+          setCurrTemplates(keys[0]);     
         }        
         
       }
@@ -68,7 +68,6 @@ const UploadDataPage = () => {
       const data = await response.json();
       setResponseMessage(data);
       if (data.status === "success") {
-        console.log(data.data)
         setUploadData(data.data);
       }
     }
@@ -116,14 +115,14 @@ const UploadDataPage = () => {
 
             setWait(false);
           } catch (error) {
-            // add error handling here
-            console.log(error);
+            // TODO: add error handling here
+            // console.log(error);
           }
         };
       }
     } catch (error) {
-      // add error handling here
-      console.log(error);
+      // TODO: add error handling here
+      // console.log(error);
     }
   };
   // useEffect(() => {}, [responseMessage]);
