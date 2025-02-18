@@ -45,7 +45,7 @@ const UploadDataPage = () => {
         setDataTemplates(data.data);
 
         if (keys.length > 0){
-          setCurrTemplates(keys[0]);     
+          setCurrTemplates(data.data[keys[0]]);     
         }        
         
       }
