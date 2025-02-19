@@ -116,6 +116,7 @@ const AddUser = () => {
                 <option value="dataVendor">Data Vendor</option>
                 <option value="broadcastCustomer">Broadcast Customer</option>
                 <option value="trainee">Trainee</option>
+                <option value="applicant">Applicant</option>
               </select>
             </label>
             {errors.role && (
