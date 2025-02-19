@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import AgentSystemsTraining from "./pages/agentPages/AgentSystemsTraining";
 import InteractionGuidePage from "./pages/IG/InteractionGuidePage";
 import AddUserSupervisor from "./pages/supervisorPages/AddUserSupervisor";
+import Support from "./pages/Support/Support";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -81,6 +82,7 @@ function App() {
         >
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/support" element={<Support />} />
             <Route path="/admin-navigation/add-user" element={<AddUser />} />
             <Route
               path="/admin-navigation/export-data"
