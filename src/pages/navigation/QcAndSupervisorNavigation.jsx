@@ -7,6 +7,7 @@ import ReportSvg from "../../assets/SVGs/salesManagerScreen/ReportSvg";
 import ScoringRulesSvg from "./../../assets/SVGs/QcAndSupervisorScreen/ScoringRulesSvg";
 import QcLookupSvg from "./../../assets/SVGs/QcAndSupervisorScreen/QcLookupSvg";
 import BuzzWordSvg from "../../assets/SVGs/BuzzWordSvg";
+import AutomateSvg from "../../assets/SVGs/globalSvgs/AutomateSvg";
 
 const QcAndSupervisorNavigation = () => {
   const navigate = useNavigate();
@@ -101,34 +102,27 @@ const QcAndSupervisorNavigation = () => {
             <ScoringRulesSvg />
           </div>
         </div>
-        {/*  */}
+        {/* fifth */}
         <div
-          onClick={() =>
-            navigate("/qc-and-supervisor-navigation/buzzword-supervisor")
-          }
-          onMouseOver={(e) => handleMouseOver(e, "BuzzWord")}
-          onMouseLeave={(e) => handleMouseOut(e, "BuzzWord")}
+          // onMouseOver={(e) => handleMouseOver(e, "fifth")}
+          // onMouseLeave={(e) => handleMouseOut(e, "fifth")}
           className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute right-20 -bottom-52 "
         >
           <div
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  ${
-              hoverStates.BuzzWord
-                ? "bg-[#F5760E] z-[6]"
-                : "z-[3] bg-[#F5760E4D]"
+              hoverStates.fifth ? "bg-[#F5760E] z-[6]" : "z-[3] bg-[#F5760E4D]"
             }`}
           >
-            {/* Dashed circle border */}
-            {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
-            {/* Star ribbon icon (replace with an actual SVG icon if available) */}
-            {hoverStates.BuzzWord ? (
+            {hoverStates.fifth ? (
               <p className="w-[9rem] text-center uppercase font-bold text-[24px]">
-                Buzzword
+                Support
               </p>
             ) : (
               // <img src="../../assets/react.svg" />
               <div className="relative text-black">
                 {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-                <BuzzWordSvg />
+                {/* <fifth /> */}
+                <AutomateSvg />
               </div>
             )}
 

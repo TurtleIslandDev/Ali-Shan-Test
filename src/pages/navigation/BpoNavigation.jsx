@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AutomateSvg from "../../assets/SVGs/globalSvgs/AutomateSvg";
 
 const BpoNavigation = () => {
   const navigate = useNavigate();
@@ -93,16 +94,30 @@ const BpoNavigation = () => {
             {/* <BpoSvg /> */}
           </div>
         </div>
-        {/* fifth*/}
-        <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute right-20 -bottom-52 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#F5760E4D] ">
-            {/* Dashed circle border */}
-            {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
-            {/* Star ribbon icon (replace with an actual SVG icon if available) */}
-            <div className="relative text-black">
-              {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-              {/* <PaidAdvertisingSvg /> */}
-            </div>
+        {/* fifth */}
+        <div
+          // onMouseOver={(e) => handleMouseOver(e, "fifth")}
+          // onMouseLeave={(e) => handleMouseOut(e, "fifth")}
+          className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute right-20 -bottom-52 "
+        >
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  ${
+              hoverStates.fifth ? "bg-[#F5760E] z-[6]" : "z-[3] bg-[#F5760E4D]"
+            }`}
+          >
+            {hoverStates.fifth ? (
+              <p className="w-[9rem] text-center uppercase font-bold text-[24px]">
+                Support
+              </p>
+            ) : (
+              // <img src="../../assets/react.svg" />
+              <div className="relative text-black">
+                {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
+                {/* <fifth /> */}
+                <AutomateSvg />
+              </div>
+            )}
+
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[-75deg] top-[75px] -left-[32px] border-[1px] border-dashed border-[#D9D9D9]" />
             <div className="absolute w-[1px] h-14 transform  rotate-[75deg] top-[75px] -right-[29px] border-[1px] border-dashed border-[#D9D9D9]" />
