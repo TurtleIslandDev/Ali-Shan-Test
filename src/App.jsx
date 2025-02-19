@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 
 import AgentSystemsTraining from "./pages/agentPages/AgentSystemsTraining";
 import InteractionGuidePage from "./pages/IG/InteractionGuidePage";
+import AddUserSupervisor from "./pages/supervisorPages/AddUserSupervisor";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -109,6 +110,10 @@ function App() {
               element={<ProgramOwnerNavigation />}
             />
             <Route
+              path="/program-owner-navigation/add-user"
+              element={<AddUser />}
+            />
+            <Route
               path="/team-lead-navigation"
               element={<TeamLeadNavigation />}
             />
@@ -123,6 +128,10 @@ function App() {
             <Route
               path="/qc-and-supervisor-navigation/upload-data"
               element={<UploadDataPage />}
+            />
+            <Route
+              path="/qc-and-supervisor-navigation/add-user"
+              element={<AddUserSupervisor />}
             />
             <Route
               path="/add-user-navigation"
