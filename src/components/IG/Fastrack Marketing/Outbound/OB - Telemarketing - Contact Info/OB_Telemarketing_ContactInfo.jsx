@@ -8,6 +8,7 @@ import { ProgressIG } from "../../../../Stepper/ProgressIG";
 import bg from "../../../../../assets/bgImages/bgInteractionGuide.png";
 import BackSvg from "../../../../../assets/SVGs/globalSvgs/BackSvg";
 import NextSvg from "../../../../../assets/SVGs/globalSvgs/NextSvg";
+import fasTrackLogo from "../../../../../assets/images/FasTrack_logo.png";
 const OB_Telemarketing_ContactInfo = () => {
   const ObjectionData = [
     {
@@ -83,7 +84,8 @@ const OB_Telemarketing_ContactInfo = () => {
         }}
       >
         <div className="bg-white w-full flex justify-between items-center px-10 py-4 rounded-b-md">
-          <ItsBuzzMarketingLogo size={"small"} />
+          {/* <ItsBuzzMarketingLogo size={"small"} /> */}
+          <img src={fasTrackLogo} className="w-40" />
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
             Introduction
           </p>

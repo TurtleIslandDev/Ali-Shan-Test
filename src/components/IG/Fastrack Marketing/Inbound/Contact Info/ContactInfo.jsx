@@ -1,14 +1,16 @@
 import React from "react";
 import Button from "../../../../Buttons/Button";
 import ObjectionsDropdown from "../../../../dropdowns/ObjectionsDropdown";
-import fasTrackLogo from "../../../../../assets/images/FasTrack_logo.png";
+import IntroductionSvg from "../../../../../assets/SVGs/interactionGuides/IntroductionSvg";
+import ItsBuzzMarketingLogo from "../../../../../assets/SVGs/logos/ItsBuzzMarketingLogo";
 import QuestionsDropdown from "../../../../dropdowns/QuestionsDropdown";
 import { ProgressIG } from "../../../../Stepper/ProgressIG";
 import bg from "../../../../../assets/bgImages/bgInteractionGuide.png";
 import BackSvg from "../../../../../assets/SVGs/globalSvgs/BackSvg";
 import NextSvg from "../../../../../assets/SVGs/globalSvgs/NextSvg";
-import OutBoundCall from "../../../../../assets/SVGs/OutBoundCall";
-const OB_Telemarketing_No_Contact = () => {
+import fasTrackLogo from "../../../../../assets/images/FasTrack_logo.png";
+import CallSvg from "../../../../../assets/SVGs/CallSvg";
+const ContactInfo = () => {
   const ObjectionData = [
     {
       objection: "Objection 1",
@@ -88,7 +90,7 @@ const OB_Telemarketing_No_Contact = () => {
             Introduction
           </p>
           <div className="transform scale-75">
-            <OutBoundCall color={"#228512"} />
+            <CallSvg color={"#FF0000"} />
           </div>
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
@@ -128,4 +130,4 @@ const OB_Telemarketing_No_Contact = () => {
   );
 };
 
-export default OB_Telemarketing_No_Contact;
+export default ContactInfo;

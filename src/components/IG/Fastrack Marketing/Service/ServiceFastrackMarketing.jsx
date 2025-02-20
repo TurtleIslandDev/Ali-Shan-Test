@@ -1,14 +1,15 @@
 import React from "react";
-import Button from "../../../../Buttons/Button";
-import ObjectionsDropdown from "../../../../dropdowns/ObjectionsDropdown";
-import fasTrackLogo from "../../../../../assets/images/FasTrack_logo.png";
-import QuestionsDropdown from "../../../../dropdowns/QuestionsDropdown";
-import { ProgressIG } from "../../../../Stepper/ProgressIG";
-import bg from "../../../../../assets/bgImages/bgInteractionGuide.png";
-import BackSvg from "../../../../../assets/SVGs/globalSvgs/BackSvg";
-import NextSvg from "../../../../../assets/SVGs/globalSvgs/NextSvg";
-import OutBoundCall from "../../../../../assets/SVGs/OutBoundCall";
-const OB_Telemarketing_No_Contact = () => {
+import Button from "../../../Buttons/Button";
+import ObjectionsDropdown from "../../../dropdowns/ObjectionsDropdown";
+import QuestionsDropdown from "../../../dropdowns/QuestionsDropdown";
+import { ProgressIG } from "../../../Stepper/ProgressIG";
+import bg from "../../../../assets/bgImages/bgInteractionGuide.png";
+import BackSvg from "../../../../assets/SVGs/globalSvgs/BackSvg";
+import NextSvg from "../../../../assets/SVGs/globalSvgs/NextSvg";
+import fasTrackLogo from "../../../../assets/images/FasTrack_logo.png";
+import CallSvg from "../../../../assets/SVGs/CallSvg";
+import ServiceSvg from "../../../../assets/SVGs/globalSvgs/ServiceSvg";
+const ServiceFastrackMarketing = () => {
   const ObjectionData = [
     {
       objection: "Objection 1",
@@ -87,8 +88,8 @@ const OB_Telemarketing_No_Contact = () => {
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
             Introduction
           </p>
-          <div className="transform scale-75">
-            <OutBoundCall color={"#228512"} />
+          <div className="transform scale-150">
+            <ServiceSvg />
           </div>
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
@@ -128,4 +129,4 @@ const OB_Telemarketing_No_Contact = () => {
   );
 };
 
-export default OB_Telemarketing_No_Contact;
+export default ServiceFastrackMarketing;

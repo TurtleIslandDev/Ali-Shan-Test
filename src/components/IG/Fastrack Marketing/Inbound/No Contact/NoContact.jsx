@@ -8,7 +8,8 @@ import bg from "../../../../../assets/bgImages/bgInteractionGuide.png";
 import BackSvg from "../../../../../assets/SVGs/globalSvgs/BackSvg";
 import NextSvg from "../../../../../assets/SVGs/globalSvgs/NextSvg";
 import OutBoundCall from "../../../../../assets/SVGs/OutBoundCall";
-const OB_Telemarketing_No_Contact = () => {
+import CallSvg from "../../../../../assets/SVGs/CallSvg";
+const NoContact = () => {
   const ObjectionData = [
     {
       objection: "Objection 1",
@@ -88,7 +89,7 @@ const OB_Telemarketing_No_Contact = () => {
             Introduction
           </p>
           <div className="transform scale-75">
-            <OutBoundCall color={"#228512"} />
+            <CallSvg color={"#FF0000"} />
           </div>
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
@@ -128,4 +129,4 @@ const OB_Telemarketing_No_Contact = () => {
   );
 };
 
-export default OB_Telemarketing_No_Contact;
+export default NoContact;
