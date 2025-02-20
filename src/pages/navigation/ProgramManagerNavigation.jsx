@@ -91,38 +91,55 @@ const ProgramManagerNavigation = () => {
         </div>
         {/* fourth*/}
         <div
+          onClick={() => {
+            navigate("add-user");
+          }}
+          onMouseOver={(e) => handleMouseOver(e, "fourth")}
+          onMouseLeave={(e) => handleMouseOut(e, "fourth")}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40  ${
             hoverStates.fourth ? "z-[6]" : "z-[3]"
           }`}
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)]  bg-[#1E40AF30]  z-3 hover:z-5">
-            <AddUserSvg />
+          {" "}
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)]    z-3 hover:z-5 ${
+              hoverStates.fourth
+                ? "z-[6] bg-[#1E40AF] "
+                : "z-[3] bg-[#1E40AF30]"
+            }`}
+          >
+            {hoverStates.fourth ? (
+              <p className="uppercase font-bold text-3xl text-center">
+                Add User
+              </p>
+            ) : (
+              <AddUserSvg />
+              // <OmnichannelCommunicationSvg />
+            )}
           </div>
         </div>
-        {/* fifth */}
+        {/* fifth*/}
         <div
-          // onMouseOver={(e) => handleMouseOver(e, "fifth")}
-          // onMouseLeave={(e) => handleMouseOut(e, "fifth")}
+          onMouseOver={(e) => handleMouseOver(e, "fifth")}
+          onMouseLeave={(e) => handleMouseOut(e, "fifth")}
+          onClick={() => {
+            navigate("/support");
+          }}
           className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute right-20 -bottom-52 "
         >
           <div
-            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  ${
-              hoverStates.fifth ? "bg-[#F5760E] z-[6]" : "z-[3] bg-[#F5760E4D]"
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] ${
+              hoverStates.fifth ? " bg-[#F5874B] z-[6]" : "z-[3]  bg-[#fbc89f]"
             }`}
           >
             {hoverStates.fifth ? (
-              <p className="w-[9rem] text-center uppercase font-bold text-[24px]">
+              <p className="uppercase font-bold text-3xl text-center">
                 Support
               </p>
             ) : (
-              // <img src="../../assets/react.svg" />
-              <div className="relative text-black">
-                {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-                {/* <fifth /> */}
-                <AutomateSvg />
-              </div>
+              <AutomateSvg />
+              // <OmnichannelCommunicationSvg />
             )}
-
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[-75deg] top-[75px] -left-[32px] border-[1px] border-dashed border-[#D9D9D9]" />
             <div className="absolute w-[1px] h-14 transform  rotate-[75deg] top-[75px] -right-[29px] border-[1px] border-dashed border-[#D9D9D9]" />

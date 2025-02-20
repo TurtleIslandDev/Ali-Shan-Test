@@ -152,8 +152,19 @@ const AdminNavigation = () => {
           </div>
         </div>
         {/* fifth*/}
-        <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute right-20 -bottom-52 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#F5760E4D] ">
+        <div
+          onMouseOver={(e) => handleMouseOver(e, "fifth")}
+          onMouseLeave={(e) => handleMouseOut(e, "fifth")}
+          onClick={() => {
+            navigate("/support");
+          }}
+          className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute right-20 -bottom-52 "
+        >
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] ${
+              hoverStates.fifth ? " bg-[#F5874B] z-[6]" : "z-[3]  bg-[#fbc89f]"
+            }`}
+          >
             {hoverStates.fifth ? (
               <p className="uppercase font-bold text-3xl text-center">
                 Support
