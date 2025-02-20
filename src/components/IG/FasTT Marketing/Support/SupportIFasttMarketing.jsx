@@ -7,7 +7,7 @@ import { ProgressIG } from "../../../Stepper/ProgressIG";
 import bg from "../../../../assets/bgImages/bgInteractionGuide.png";
 import BackSvg from "../../../../assets/SVGs/globalSvgs/BackSvg";
 import NextSvg from "../../../../assets/SVGs/globalSvgs/NextSvg";
-import OutBoundCall from "../../../../assets/SVGs/OutBoundCall";
+import AutomateSvg from "../../../../assets/SVGs/globalSvgs/AutomateSvg";
 const SupportIFasttMarketing = () => {
   const ObjectionData = [
     {
@@ -88,7 +88,7 @@ const SupportIFasttMarketing = () => {
             Introduction
           </p>
           <div className="transform scale-75">
-            <OutBoundCall color={"#228512"} />
+            <AutomateSvg color={"#228512"} />
           </div>
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
