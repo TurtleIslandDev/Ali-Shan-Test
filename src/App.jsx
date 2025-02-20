@@ -4,7 +4,17 @@ import { lazy, Suspense } from "react";
 import AgentSystemsTraining from "./pages/agentPages/AgentSystemsTraining";
 import InteractionGuidePage from "./pages/IG/InteractionGuidePage";
 import AddUserSupervisor from "./pages/supervisorPages/AddUserSupervisor";
-import Support from "./pages/Support/Support";
+import OB_Telemarketing_ContactInfo from "./components/IG/Fastrack Marketing/Outbound/OB - Telemarketing - Contact Info/OB_Telemarketing_ContactInfo";
+import useWindowHeight from "./features/hooks/useWindowHeight";
+import OB_Telemarketing_No_Contact from "./components/IG/Fastrack Marketing/Outbound/OB - Telemarketing - No Contact/OB_Telemarketing_No_Contact";
+import Outbound from "./components/IG/ItsBuzzmarketing/Outbound/OutBound";
+import Inbound from "./components/IG/ItsBuzzmarketing/Inbound/Inbound";
+import Service from "./components/IG/ItsBuzzmarketing/Service/Service";
+import Client from "./components/IG/ItsBuzzmarketing/Client/Client";
+import SupportPage from "./pages/Support/SupportPage";
+import SupportItsBuzzMarketing from "./components/IG/ItsBuzzmarketing/Support/SupportItsBuzzMarketing";
+import SupportIFasttMarketing from "./components/IG/FasTT Marketing/Support/SupportIFasttMarketing";
+import AddUserProgramManager from "./pages/ProgramManagerPages/AddUserProgramManager";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -67,6 +77,7 @@ const ExportDataPage = lazy(() =>
 const Login = lazy(() => import("./pages/auth/Login"));
 const AddUser = lazy(() => import("./pages/auth/AddUser"));
 function App() {
+  const height = useWindowHeight();
   return (
     <>
       {/* there is new react-router-version comming so if any issues faced for routing look at the new documentations */}
@@ -82,7 +93,7 @@ function App() {
         >
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/support" element={<Support />} />
+            <Route path="/support" element={<SupportPage />} />
             <Route path="/admin-navigation/add-user" element={<AddUser />} />
             <Route
               path="/admin-navigation/export-data"
@@ -122,6 +133,10 @@ function App() {
             <Route
               path="/program-manager-navigation"
               element={<ProgramManagerNavigation />}
+            />
+            <Route
+              path="/program-manager-navigation/add-user"
+              element={<AddUserProgramManager />}
             />
             <Route
               path="/qc-and-supervisor-navigation"
@@ -175,6 +190,70 @@ function App() {
             <Route
               path="/interaction-guide"
               element={<InteractionGuidePage />}
+            />
+            <Route
+              path="/interaction-guide/itsbuzzmarketing/outbound"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <Outbound />
+                </div>
+              }
+            />
+            <Route
+              path="/interaction-guide/itsbuzzmarketing/inbound"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <Inbound />
+                </div>
+              }
+            />
+            <Route
+              path="/interaction-guide/itsbuzzmarketing/service"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <Service />
+                </div>
+              }
+            />
+            <Route
+              path="/interaction-guide/itsbuzzmarketing/support"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <SupportItsBuzzMarketing />
+                </div>
+              }
+            />
+            <Route
+              path="/interaction-guide/itsbuzzmarketing/client"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <Client />
+                </div>
+              }
+            />
+            <Route
+              path="/interaction-guide/fastt-marketing/support"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <SupportIFasttMarketing />
+                </div>
+              }
+            />
+            <Route
+              path="/interaction-guide/fasttrack-marketing/outbound/ob-telemarketing-contact-info"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <OB_Telemarketing_ContactInfo />
+                </div>
+              }
+            />
+            <Route
+              path="/interaction-guide/fasttrack-marketing/outbound/ob-telemarketing-no-contact"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <OB_Telemarketing_No_Contact />
+                </div>
+              }
             />
             <Route path="/*" element={<div>Page not found</div>} />
           </Routes>
