@@ -274,6 +274,14 @@ function App() {
                 </div>
               }
             />
+            <Route
+              path="/interaction-guide/fastrack-marketing/outbound/ob-telemarketing-contact-info"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <OB_Telemarketing_ContactInfo />
+                </div>
+              }
+            />
             <Route path="/*" element={<div>Page not found</div>} />
           </Routes>
         </Suspense>
