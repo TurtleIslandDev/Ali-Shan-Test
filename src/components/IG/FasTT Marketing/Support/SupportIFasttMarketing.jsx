@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../../Buttons/Button";
 import ObjectionsDropdown from "../../../dropdowns/ObjectionsDropdown";
-import fasTTrackLogo from "../../../../assets/images/FasTT_logo.png";
+import fasTTrackLogo from "../../../../assets/images/fasTT_logo.png";
 import QuestionsDropdown from "../../../dropdowns/QuestionsDropdown";
 import { ProgressIG } from "../../../Stepper/ProgressIG";
 import bg from "../../../../assets/bgImages/bgInteractionGuide.png";
