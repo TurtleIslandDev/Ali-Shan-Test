@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useFetch from "../../features/hooks/useFetch";
 import { useSelector } from "react-redux";
-
 const AddUserProgramManager = () => {
   const { token } = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
-
   const { postData } = useFetch();
   const {
     register,
@@ -33,6 +31,7 @@ const AddUserProgramManager = () => {
       dataTypesAvailable: "",
       dataOwnershipDuration: "",
       authorizedPrograms: [],
+      authorizations: "",
     },
   });
   const checkRole = watch("role");
@@ -83,6 +82,7 @@ const AddUserProgramManager = () => {
       "dataOwnershipDuration",
       "authorizedPrograms",
       "perRecordCost",
+      "authorizations",
     ];
     for (let i = 0; i < fieldsToReset.length; i++) {
       resetField(fieldsToReset[i]);
@@ -164,9 +164,9 @@ const AddUserProgramManager = () => {
                 </option>
                 <option value="bpo">BPO</option>
                 <option value="internal">Internal</option>
+                <option value="client">Client</option>
                 <option value="partner">Partner</option>
                 <option value="supplier">Supplier</option>
-                <option value="client">Client</option>
               </select>
             </label>
             {errors.role && (
@@ -175,6 +175,7 @@ const AddUserProgramManager = () => {
               </span>
             )}
           </div>
+
           {checkRole === "partner" && (
             <div className="w-full">
               <div className="w-full mb-5">
