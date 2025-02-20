@@ -15,6 +15,9 @@ import SupportPage from "./pages/Support/SupportPage";
 import SupportItsBuzzMarketing from "./components/IG/ItsBuzzmarketing/Support/SupportItsBuzzMarketing";
 import SupportIFasttMarketing from "./components/IG/FasTT Marketing/Support/SupportIFasttMarketing";
 import AddUserProgramManager from "./pages/ProgramManagerPages/AddUserProgramManager";
+import ContactInfo from "./components/IG/Fastrack Marketing/Inbound/Contact Info/ContactInfo";
+import NoContact from "./components/IG/Fastrack Marketing/Inbound/No Contact/NoContact";
+import ServiceFastrackMarketing from "./components/IG/Fastrack Marketing/Service/ServiceFastrackMarketing";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -240,15 +243,31 @@ function App() {
               }
             />
             <Route
-              path="/interaction-guide/fasttrack-marketing/outbound/ob-telemarketing-contact-info"
+              path="/interaction-guide/fastrack-marketing/service"
               element={
                 <div style={{ height: `${height}px` }}>
-                  <OB_Telemarketing_ContactInfo />
+                  <ServiceFastrackMarketing />
                 </div>
               }
             />
             <Route
-              path="/interaction-guide/fasttrack-marketing/outbound/ob-telemarketing-no-contact"
+              path="/interaction-guide/fastrack-marketing/inbound/contact-info"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <ContactInfo />
+                </div>
+              }
+            />
+            <Route
+              path="/interaction-guide/fastrack-marketing/inbound/no-contact"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <NoContact />
+                </div>
+              }
+            />
+            <Route
+              path="/interaction-guide/fastrack-marketing/outbound/ob-telemarketing-no-contact"
               element={
                 <div style={{ height: `${height}px` }}>
                   <OB_Telemarketing_No_Contact />
