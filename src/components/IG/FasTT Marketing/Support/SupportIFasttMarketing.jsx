@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../../Buttons/Button";
 import ObjectionsDropdown from "../../../dropdowns/ObjectionsDropdown";
-import ItsBuzzMarketingLogo from "../../../../assets/SVGs/logos/ItsBuzzMarketingLogo";
+import fasTTrackLogo from "../../../../assets/images/FasTT_logo.png";
 import QuestionsDropdown from "../../../dropdowns/QuestionsDropdown";
 import { ProgressIG } from "../../../Stepper/ProgressIG";
 import bg from "../../../../assets/bgImages/bgInteractionGuide.png";
@@ -83,7 +83,7 @@ const SupportIFasttMarketing = () => {
         }}
       >
         <div className="bg-white w-full flex justify-between items-center px-10 py-4 rounded-b-md">
-          <ItsBuzzMarketingLogo size={"small"} />
+          <img src={fasTTrackLogo} className="w-40" />
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
             Introduction
           </p>

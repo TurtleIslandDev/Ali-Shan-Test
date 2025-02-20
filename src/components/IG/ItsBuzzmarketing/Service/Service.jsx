@@ -8,6 +8,7 @@ import bg from "../../../../assets/bgImages/bgInteractionGuide.png";
 import BackSvg from "../../../../assets/SVGs/globalSvgs/BackSvg";
 import NextSvg from "../../../../assets/SVGs/globalSvgs/NextSvg";
 import OutBoundCall from "../../../../assets/SVGs/OutBoundCall";
+import ServiceSvg from "../../../../assets/SVGs/globalSvgs/ServiceSvg";
 const Service = () => {
   const ObjectionData = [
     {
@@ -87,8 +88,8 @@ const Service = () => {
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
             Introduction
           </p>
-          <div className="transform scale-75">
-            <OutBoundCall color={"#228512"} />
+          <div className="transform scale-150">
+            <ServiceSvg />
           </div>
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
