@@ -290,6 +290,22 @@ const AddUserProgramManager = () => {
                   </span>
                 )}
               </div>
+              <div className="w-full mb-5">
+                <p className="text-2xl text-[#222] mb-2">Authorizations</p>
+                <label className="input input-bordered flex items-center gap-2 ">
+                  <input
+                    {...register("authorizations", { required: true })}
+                    type="text"
+                    className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                    placeholder="Authorizations"
+                  />
+                </label>
+                {errors.authorizations && (
+                  <span className="text-right text-red-500 text-xs">
+                    *This field is required
+                  </span>
+                )}
+              </div>
               {/* Revenue Share split % */}
               <div className="w-full mb-5">
                 <p className="text-2xl text-[#222] mb-2">
@@ -390,9 +406,9 @@ const AddUserProgramManager = () => {
                       <input
                         {...register("authorizedPrograms", { required: true })}
                         type="checkbox"
-                        value="coding"
+                        value="Debt"
                       />
-                      Coding
+                      Debt
                     </label>
                   </div>
                   <div>
@@ -400,9 +416,9 @@ const AddUserProgramManager = () => {
                       <input
                         {...register("authorizedPrograms", { required: true })}
                         type="checkbox"
-                        value="music"
+                        value="Personal Loans"
                       />
-                      Music
+                      Personal Loans
                     </label>
                   </div>
                   <div>
@@ -410,9 +426,9 @@ const AddUserProgramManager = () => {
                       <input
                         {...register("authorizedPrograms", { required: true })}
                         type="checkbox"
-                        value="art"
+                        value="Mortgages"
                       />
-                      Art
+                      Mortgages
                     </label>
                   </div>
                 </label>
@@ -539,7 +555,23 @@ const AddUserProgramManager = () => {
                   </span>
                 )}
               </div>
-              {/* Per Record cost % */}
+              <div className="w-full mb-5">
+                <p className="text-2xl text-[#222] mb-2">Authorizations</p>
+                <label className="input input-bordered flex items-center gap-2 ">
+                  <input
+                    {...register("authorizations", { required: true })}
+                    type="text"
+                    className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                    placeholder="Authorizations"
+                  />
+                </label>
+                {errors.authorizations && (
+                  <span className="text-right text-red-500 text-xs">
+                    *This field is required
+                  </span>
+                )}
+              </div>
+              {/* Per Record cost ($)*/}
               <div className="w-full mb-5">
                 <p className="text-2xl text-[#222] mb-2">Per Record cost ($)</p>
                 <label className="input input-bordered flex items-center gap-2 ">
@@ -547,7 +579,7 @@ const AddUserProgramManager = () => {
                     {...register("perRecordCost", { required: true })}
                     type="number"
                     className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
-                    placeholder="Revenue share split %"
+                    placeholder="Per Record cost ($)"
                   />
                 </label>
                 {errors.perRecordCost && (
@@ -637,9 +669,9 @@ const AddUserProgramManager = () => {
                       <input
                         {...register("authorizedPrograms", { required: true })}
                         type="checkbox"
-                        value="coding"
+                        value="Debt"
                       />
-                      Coding
+                      Debt
                     </label>
                   </div>
                   <div>
@@ -647,9 +679,9 @@ const AddUserProgramManager = () => {
                       <input
                         {...register("authorizedPrograms", { required: true })}
                         type="checkbox"
-                        value="music"
+                        value="Personal Loans"
                       />
-                      Music
+                      Personal Loans
                     </label>
                   </div>
                   <div>
@@ -657,9 +689,9 @@ const AddUserProgramManager = () => {
                       <input
                         {...register("authorizedPrograms", { required: true })}
                         type="checkbox"
-                        value="art"
+                        value="Mortgages"
                       />
-                      Art
+                      Mortgages
                     </label>
                   </div>
                 </label>
