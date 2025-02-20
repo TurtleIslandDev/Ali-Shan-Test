@@ -1,6 +1,6 @@
 import React from "react";
 
-const Support = () => {
+const SupportPage = () => {
   return (
     <div className="flex h-screen bg-gray-900 text-white">
       {/* Sidebar */}
@@ -69,4 +69,4 @@ const Support = () => {
   );
 };
 
-export default Support;
+export default SupportPage;
