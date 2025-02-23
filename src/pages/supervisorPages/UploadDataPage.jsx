@@ -34,9 +34,7 @@ const UploadDataPage = () => {
       });
 
       const data = await response.json();
-
       
-
       setResponseMessage(data);
 
       if (data.status === "success") {
@@ -67,7 +65,7 @@ const UploadDataPage = () => {
 
       const data = await response.json();
       setResponseMessage(data);
-      if (data.status === "success") {
+      if (data.status === "success") {        
         setUploadData(data.data);
       }
     }
@@ -111,7 +109,18 @@ const UploadDataPage = () => {
             });
 
             const data = await response.json();
-            setResponseMessage(data);
+                        
+            // add task to upload data            
+            if (data.status === "success") {
+              setUploadData((prevData) => {
+                const newData = [...prevData];
+                newData.push(data.data);
+                newData.slice().reverse();
+                return newData;
+              });
+            }
+            
+            setResponseMessage(data.message);
 
             setWait(false);
           } catch (error) {
@@ -187,8 +196,8 @@ const UploadDataPage = () => {
 
         <div className="w-full mt-8">
           <h2 className="text-2xl font-semibold mb-4">Recently Uploaded Tasks</h2>
-          <ul className="pl-5" >
-            {uploadData.map((data, index) => (
+          <ul className="pl-5"  style={{maxHeight: "200px", overflowY: "auto"}}>
+            {uploadData.slice().reverse().map((data, index) => (
               <li key={index} className="mb-2">
                 <span className="font-bold">{data.file_name}</span> - {data.timestamp} -{" "}
                 {data.completed ? (
