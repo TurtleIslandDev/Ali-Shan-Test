@@ -70,7 +70,7 @@ const AgentTraineeNavigation = () => {
         >
           <div
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] ] ${
-              hoverStates.second ? "bg-[#1E40AF] z-[6]" : "z-[3] bg-[#D5DEFA]"
+              hoverStates.second ? " bg-[#F5874B] z-[6]" : "z-[3]  bg-[#fbc89f]"
             } `}
           >
             {hoverStates.second ? (
@@ -84,16 +84,34 @@ const AgentTraineeNavigation = () => {
           </div>
         </div>
         {/* third */}
-        <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  bg-[#1E40AF66]">
-            {/* Dashed circle border */}
-            {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
-            {/* Star ribbon icon (replace with an actual SVG icon if available) */}
-
-            <div className="relative text-black">
-              {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-              <CeritficationsSvg />
+        <div
+          onMouseOver={(e) => handleMouseOver(e, "third")}
+          onMouseLeave={(e) => handleMouseOut(e, "third")}
+          onClick={() => {
+            window.location.href =
+              "https://workspace.google.com/products/docs/";
+          }}
+          className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 "
+        >
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] ${
+              hoverStates.third
+                ? " bg-[#228512] z-[6]"
+                : "z-[3]  bg-[#22851266]"
+            }`}
+          >
+            {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
+            <div className="relative text-white">
+              {hoverStates.third ? (
+                <p className="uppercase font-bold text-xl text-center"></p>
+              ) : (
+                <div className="transform scale-75">
+                  <AgentPerformanceSvg />
+                  {/* <PayrollSvg /> */}
+                </div>
+              )}
             </div>
+
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[125deg] -top-10 left-0 border-[1px] border-dashed border-[#D9D9D9]" />
             <div className="absolute w-[1px] h-14 transform  rotate-[0deg] -bottom-14 right-8 border-[1px] border-dashed border-[#D9D9D9]" />
@@ -102,12 +120,31 @@ const AgentTraineeNavigation = () => {
         </div>
         {/* fourth*/}
         <div
+          onMouseOver={(e) => handleMouseOver(e, "fourth")}
+          onMouseLeave={(e) => handleMouseOut(e, "fourth")}
+          onClick={() => {
+            window.location.href =
+              "https://workspace.google.com/products/docs/";
+          }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40  ${
             hoverStates.fourth ? "z-[6]" : "z-[3]"
           }`}
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#22851266]  z-3 hover:z-5">
-            <AgentPerformanceSvg />
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] z-3 hover:z-5 ${
+              hoverStates.fourth ? "bg-[#1E40AF] z-[6]" : "z-[3] bg-[#D5DEFA]"
+            }`}
+          >
+            {hoverStates.fourth ? (
+              <p className="uppercase font-bold text-3xl text-center">
+                Certifications
+              </p>
+            ) : (
+              <div className="transform scale-150">
+                <CeritficationsSvg />
+              </div>
+              // <OmnichannelCommunicationSvg />
+            )}
           </div>
         </div>
         {/* fifth */}
@@ -141,12 +178,33 @@ const AgentTraineeNavigation = () => {
 
         {/* sixth*/}
         <div
+          onMouseOver={(e) => handleMouseOver(e, "sixth")}
+          onMouseLeave={(e) => handleMouseOut(e, "sixth")}
+          onClick={() => {
+            window.location.href =
+              "https://workspace.google.com/products/docs/";
+          }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
             hoverStates.sixth ? "z-[6]" : "z-[3]"
           }`}
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#fbc89f]  z-3 hover:z-5">
-            <PayrollSvg />
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] ] ${
+              hoverStates.sixth
+                ? " bg-[#228512] z-[6]"
+                : "z-[3]  bg-[#22851266]"
+            } `}
+          >
+            {" "}
+            <div className="relative text-white">
+              {hoverStates.sixth ? (
+                <p className="uppercase font-bold text-xl text-center"></p>
+              ) : (
+                <div>
+                  <PayrollSvg />
+                </div>
+              )}
+            </div>
           </div>
         </div>
         {/* seventh */}
@@ -162,9 +220,7 @@ const AgentTraineeNavigation = () => {
         >
           <div
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] ${
-              hoverStates.seventh
-                ? " bg-[#228512] z-[6]"
-                : "z-[3]  bg-[#22851266]"
+              hoverStates.seventh ? "bg-[#1E40AF] z-[6]" : "z-[3] bg-[#D5DEFA]"
             }`}
           >
             <div className="relative text-white">
