@@ -37,11 +37,10 @@ const Login = () => {
         undefined,
         undefined,
         (res) => {
-          dispatch(
-            setUserAuth({ data: res.data }));
+          dispatch(setUserAuth({ data: res.data }));
           // resetForm();
           const resData = res.data;
-          
+
           if (resData.role === "agent") {
             setWait(true);
             setTimeout(() => {
@@ -74,7 +73,7 @@ const Login = () => {
           } else if (resData.role === "broadcastCustomer") {
             navigate("/broadcast-customer-navigation");
           } else if (resData.role === "trainee") {
-            navigate("/agent-navigation");
+            navigate("/agent-trainee-navigation");
           }
         }
       );
