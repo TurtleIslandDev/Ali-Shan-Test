@@ -18,6 +18,8 @@ import AddUserProgramManager from "./pages/ProgramManagerPages/AddUserProgramMan
 import ContactInfo from "./components/IG/Fastrack Marketing/Inbound/Contact Info/ContactInfo";
 import NoContact from "./components/IG/Fastrack Marketing/Inbound/No Contact/NoContact";
 import ServiceFastrackMarketing from "./components/IG/Fastrack Marketing/Service/ServiceFastrackMarketing";
+import AgentTraineeNavigation from "./pages/navigation/AgentTraineeNavigation";
+import TraineeInteractionGuideFasTTrack from "./components/IG/TraineeInteractionGuideFasTTrack";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -158,6 +160,18 @@ function App() {
               element={<AddUserNavigation />}
             />
             <Route path="/agent-navigation" element={<AgentNavigation />} />
+            <Route
+              path="/agent-trainee-navigation"
+              element={<AgentTraineeNavigation />}
+            />
+            <Route
+              path="/agent-trainee-navigation/trainee-interaction-guide-fasttrack"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <TraineeInteractionGuideFasTTrack />
+                </div>
+              }
+            />
             <Route
               path="/broadcast-customer-navigation"
               element={<BroadcastCustomerNavigation />}
