@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../Buttons/Button";
 import ObjectionsDropdown from "../dropdowns/ObjectionsDropdown";
 import fasTTrackLogo from "../../assets/images/fasTT_logo.png";
@@ -8,59 +8,30 @@ import bg from "../../assets/bgImages/bgInteractionGuide.png";
 import BackSvg from "../../assets/SVGs/globalSvgs/BackSvg";
 import NextSvg from "../../assets/SVGs/globalSvgs/NextSvg";
 import TraineeSVG from "../../assets/SVGs/TraineeSVG";
+import { useForm } from "react-hook-form";
 const TraineeInteractionGuideFasTTrack = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      radio: "yes", // Set 'option1' as the default selected value
+    },
+  });
+  const radio = watch("radio");
   const ObjectionData = [
     {
-      objection: "Objection 1",
+      objection: "X is not available, can I take a message for you?",
       answer:
-        "1 he customer wants to review their current bill, including charges, due date, and payment options",
-    },
-    {
-      objection: "Objection 2",
-      answer:
-        "2 he customer wants to review their current bill, including charges, due date, and payment options",
-    },
-    {
-      objection: "Objection 3",
-      answer:
-        "3 he customer wants to review their current bill, including charges, due date, and payment options",
-    },
-    {
-      objection: "Objection 4",
-      answer:
-        "4 he customer wants to review their current bill, including charges, due date, and payment options",
-    },
-    {
-      objection: "Objection 5",
-      answer:
-        "5 he customer wants to review their current bill, including charges, due date, and payment options",
+        " Is it possible to rather put through to their voicemail? If not, I will send through an email a bit later today. Thanks so very much for your help, you have been amazing",
     },
   ];
   const questionsData = [
     {
-      question: "Question 1",
-      answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
-    },
-    {
-      question: "Question 2",
-      answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
-    },
-    {
-      question: "Question 3",
-      answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
-    },
-    {
-      question: "Question 4",
-      answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
-    },
-    {
-      question: "Question 5",
-      answer:
-        "he customer wants to review their current bill, including charges, due date, and payment options",
+      question: "What is this about?",
+      answer: " Im calling regarding the debt invalidation program thats",
     },
   ];
   const handleButtonNext = () => {
@@ -71,6 +42,12 @@ const TraineeInteractionGuideFasTTrack = () => {
     const currentDate = new Date();
     console.log("Back:", currentDate.toString());
   };
+  const onSubmit = (data) => {
+    console.log(data); // You can send the form data to an API or use it elsewhere
+  };
+  useEffect(() => {
+    console.log(radio, "radio");
+  }, [radio]);
   return (
     <div className=" flex w-full justify-center h-full">
       <div
@@ -85,7 +62,7 @@ const TraineeInteractionGuideFasTTrack = () => {
         <div className="bg-white w-full flex justify-between items-center px-10 py-4 rounded-b-md">
           <img src={fasTTrackLogo} className="w-40" />
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
-            Introduction
+            Greeting
           </p>
           <div className="transform scale-125">
             <TraineeSVG color={"#228512"} />
@@ -93,20 +70,47 @@ const TraineeInteractionGuideFasTTrack = () => {
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
           <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
-            Hi is (Mr/Mrs) [Prospect Last] my name is [agents name], This is not
-            a Sales Call but I want to let you know Our team at Ti Solutions
-            helps businesses like yours identify cost-saving and profit
-            opportunities by designing, developing, implementing, and managing
-            efficient software and business systems that can simplify customer
-            interaction management operations and create a stable foundation for
-            growth at an increased profit margin. Does that sound like something
-            that could be of interest to you? Support fasTT
+            Hi this is [first] calling from fast track regarding the debt
+            invalidation program currently available to legal state residents of
+            [state]. You are a legal resident of [state] right?
           </p>
           <div>
-            <p className="font-nunitoSans text-xl text-[#ff0000]">WARNING</p>
-            <p className="font-nunitoSans text-xl text-[#24A652]">
-              COACHING NOTES
-            </p>
+            <div>
+              <p className="font-nunitoSans text-xl text-[#ff0000]">PAUSE</p>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      value="yes"
+                      defaultChecked
+                      {...register("radio", {
+                        required: "Please select an option",
+                      })}
+                    />
+                    Yes
+                  </label>
+                </div>
+
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      value="No"
+                      {...register("radio", {
+                        required: "Please select an option",
+                      })}
+                    />
+                    No
+                  </label>
+                </div>
+              </form>
+            </div>
+            <div>
+              <p className="font-nunitoSans text-xl text-[#24A652]">
+                COACHING NOTES
+              </p>
+            </div>
           </div>
         </div>
         <div className="bg-white w-full px-10 flex-col gap-4 justify-center items-center py-3">
