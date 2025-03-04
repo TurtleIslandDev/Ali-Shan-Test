@@ -57,7 +57,7 @@ const AdminNavigation = () => {
           onMouseLeave={(e) => handleMouseOut(e, "second")}
           onClick={() => {
             window.location.href =
-              "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+              "https://vici-lp1.itsbuzzmarketing.com/vicidial/admin.php";
           }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute left-2 -top-64 ${
             hoverStates.second ? "z-[6]" : "z-[3]"
