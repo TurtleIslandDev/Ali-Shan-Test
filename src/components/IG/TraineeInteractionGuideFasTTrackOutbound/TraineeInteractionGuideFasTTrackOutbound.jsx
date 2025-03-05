@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import GreetingFirst from "./_components/GreetingFirst";
 import { setStep } from "../../../features/slice/igSlice";
 import IntroductionSecond from "./_components/IntroductionSecond";
-const TraineeInteractionGuideFasTTrack = () => {
+const TraineeInteractionGuideFasTTrackOutbound = () => {
   const { step } = useSelector((state) => state.ig);
   const dispatch = useDispatch();
 
@@ -104,4 +104,4 @@ const TraineeInteractionGuideFasTTrack = () => {
   );
 };
 
-export default TraineeInteractionGuideFasTTrack;
+export default TraineeInteractionGuideFasTTrackOutbound;

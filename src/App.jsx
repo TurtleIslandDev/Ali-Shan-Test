@@ -19,7 +19,8 @@ import ContactInfo from "./components/IG/Fastrack Marketing/Inbound/Contact Info
 import NoContact from "./components/IG/Fastrack Marketing/Inbound/No Contact/NoContact";
 import ServiceFastrackMarketing from "./components/IG/Fastrack Marketing/Service/ServiceFastrackMarketing";
 import AgentTraineeNavigation from "./pages/navigation/AgentTraineeNavigation";
-import TraineeInteractionGuideFasTTrack from "./components/IG/TraineeInteractionGuideFasTTrack/TraineeInteractionGuideFasTTrack";
+import TraineeInteractionGuideFasTTrackOutbound from "./components/IG/TraineeInteractionGuideFasTTrackOutbound/TraineeInteractionGuideFasTTrackOutbound";
+import TraineeInteractionGuideFasTTrackInbound from "./components/IG/TraineeInteractionGuideFasTTrackInbound/TraineeInteractionGuideFasTTrackInbound";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -168,7 +169,15 @@ function App() {
               path="/agent-trainee-navigation/trainee-interaction-guide-fasttrack"
               element={
                 <div style={{ height: `${height}px` }}>
-                  <TraineeInteractionGuideFasTTrack />
+                  <TraineeInteractionGuideFasTTrackOutbound />
+                </div>
+              }
+            />
+            <Route
+              path="/agent-trainee-navigation/trainee-interaction-guide-fasttrack/inbound"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <TraineeInteractionGuideFasTTrackInbound />
                 </div>
               }
             />
