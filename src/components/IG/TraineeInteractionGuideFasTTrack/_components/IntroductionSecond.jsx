@@ -45,7 +45,7 @@ const IntroductionSecond = () => {
     },
   ];
   const handleButtonNext = () => {
-    dispatch(setStep({ step: 3 }));
+    // dispatch(setStep({ step: 3 }));
     const currentDate = new Date();
     console.log("Next:", currentDate.toString());
   };
