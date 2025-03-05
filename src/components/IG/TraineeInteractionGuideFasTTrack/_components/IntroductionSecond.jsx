@@ -1,15 +1,19 @@
 import React, { useEffect } from "react";
-import Button from "../Buttons/Button";
-import ObjectionsDropdown from "../dropdowns/ObjectionsDropdown";
-import fasTTrackLogo from "../../assets/images/fasTT_logo.png";
-import QuestionsDropdown from "../dropdowns/QuestionsDropdown";
-import { ProgressIG } from "../Stepper/ProgressIG";
-import bg from "../../assets/bgImages/bgInteractionGuide.png";
-import BackSvg from "../../assets/SVGs/globalSvgs/BackSvg";
-import NextSvg from "../../assets/SVGs/globalSvgs/NextSvg";
-import TraineeSVG from "../../assets/SVGs/TraineeSVG";
+
+import fasTTrackLogo from "../../../../assets/images/FasTrack_logo.png";
+import bg from "../../../../assets/bgImages/bgInteractionGuide.png";
 import { useForm } from "react-hook-form";
-const TraineeInteractionGuideFasTTrack = () => {
+import TraineeSVG from "../../../../assets/SVGs/TraineeSVG";
+import Button from "../../../Buttons/Button";
+import BackSvg from "../../../../assets/SVGs/globalSvgs/BackSvg";
+import ObjectionsDropdown from "../../../dropdowns/ObjectionsDropdown";
+import QuestionsDropdown from "../../../dropdowns/QuestionsDropdown";
+import NextSvg from "../../../../assets/SVGs/globalSvgs/NextSvg";
+import { ProgressIG } from "../../../Stepper/ProgressIG";
+import { useDispatch } from "react-redux";
+import { setStep } from "../../../../features/slice/igSlice";
+const IntroductionSecond = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -30,15 +34,23 @@ const TraineeInteractionGuideFasTTrack = () => {
   ];
   const questionsData = [
     {
-      question: "What is this about?",
-      answer: " Im calling regarding the debt invalidation program thats",
+      question: "IS THIS DEBT SETTLEMENT",
+      answer:
+        "No, debt invalidation is a service provided by licensed attorneys working on your behalf to have your debts invalidated so they can stop negatively impacting your credit report without you being required to pay the debt.",
+    },
+    {
+      question: "What is this about",
+      answer:
+        "Im calling regarding the debt invalidation program that is currently available in your state",
     },
   ];
   const handleButtonNext = () => {
+    dispatch(setStep({ step: 3 }));
     const currentDate = new Date();
     console.log("Next:", currentDate.toString());
   };
   const handleButtonBack = () => {
+    dispatch(setStep({ step: 1 }));
     const currentDate = new Date();
     console.log("Back:", currentDate.toString());
   };
@@ -62,7 +74,7 @@ const TraineeInteractionGuideFasTTrack = () => {
         <div className="bg-white w-full flex justify-between items-center px-10 py-4 rounded-b-md">
           <img src={fasTTrackLogo} className="w-40" />
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
-            Greeting
+            Introduction
           </p>
           <div className="transform scale-125">
             <TraineeSVG color={"#228512"} />
@@ -70,9 +82,7 @@ const TraineeInteractionGuideFasTTrack = () => {
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
           <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
-            Hi this is [first] calling from fast track regarding the debt
-            invalidation program currently available to legal state residents of
-            [state]. You are a legal resident of [state] right?
+            This is ( Mr/Mrs) [Last Name] right?
           </p>
           <div>
             <div>
@@ -133,4 +143,4 @@ const TraineeInteractionGuideFasTTrack = () => {
   );
 };
 
-export default TraineeInteractionGuideFasTTrack;
+export default IntroductionSecond;

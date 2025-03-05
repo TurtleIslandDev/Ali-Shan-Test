@@ -19,7 +19,7 @@ import ContactInfo from "./components/IG/Fastrack Marketing/Inbound/Contact Info
 import NoContact from "./components/IG/Fastrack Marketing/Inbound/No Contact/NoContact";
 import ServiceFastrackMarketing from "./components/IG/Fastrack Marketing/Service/ServiceFastrackMarketing";
 import AgentTraineeNavigation from "./pages/navigation/AgentTraineeNavigation";
-import TraineeInteractionGuideFasTTrack from "./components/IG/TraineeInteractionGuideFasTTrack";
+import TraineeInteractionGuideFasTTrack from "./components/IG/TraineeInteractionGuideFasTTrack/TraineeInteractionGuideFasTTrack";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
