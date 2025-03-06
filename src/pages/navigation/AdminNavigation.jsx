@@ -103,7 +103,7 @@ const AdminNavigation = () => {
           onMouseLeave={(e) => handleMouseOut(e, "fourth")}
           onClick={() => {
             window.location.href =
-              "http://52.6.26.233/vicidial/admin_listloader_fourth_gen.php";
+              "https://vici-lp1.itsbuzzmarketing/vicidial/admin_listloader_fourth_gen.php";
           }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40  ${
             hoverStates.fourth ? "z-[6] " : "z-[3]"
