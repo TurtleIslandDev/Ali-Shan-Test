@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableRow } from "../ui/table"
 import { TableHeader } from "../ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
-import { Combobox } from "../inputs/combobox"
+import { Combobox } from "../inputs/ComboBox"
 import { Checkbox } from "../ui/checkbox"
 
 import { useState, useEffect } from "react"
