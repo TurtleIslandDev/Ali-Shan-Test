@@ -21,6 +21,7 @@ import ServiceFastrackMarketing from "./components/IG/Fastrack Marketing/Service
 import AgentTraineeNavigation from "./pages/navigation/AgentTraineeNavigation";
 import TraineeInteractionGuideFasTTrackOutbound from "./components/IG/TraineeInteractionGuideFasTTrackOutbound/TraineeInteractionGuideFasTTrackOutbound";
 import TraineeInteractionGuideFasTTrackInbound from "./components/IG/TraineeInteractionGuideFasTTrackInbound/TraineeInteractionGuideFasTTrackInbound";
+import DataNavigation from "./pages/adminPages/DataNavigation";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -104,6 +105,11 @@ function App() {
             <Route
               path="/admin-navigation/export-data"
               element={<ExportDataPage />}
+            />
+            <Route path="/admin-navigation/data" element={<DataNavigation />} />
+            <Route
+              path="/admin-navigation/buzzword-admin"
+              element={<BuzzWord />}
             />
             <Route
               path="/qc-and-supervisor-navigation/buzzword-supervisor"
