@@ -10,7 +10,7 @@ import ObjectionsDropdown from "../../../dropdowns/ObjectionsDropdown";
 import QuestionsDropdown from "../../../dropdowns/QuestionsDropdown";
 import NextSvg from "../../../../assets/SVGs/globalSvgs/NextSvg";
 import { ProgressIG } from "../../../Stepper/ProgressIG";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setStep } from "../../../../features/slice/igSlice";
 const GreetingFirst = () => {
   const dispatch = useDispatch();
@@ -25,9 +25,10 @@ const GreetingFirst = () => {
     },
   });
   const radio = watch("radio");
+  const { callDetails } = useSelector((state) => state.ig);
   const ObjectionData = [
     {
-      objection: "X is not available, can I take a message for you?",
+      objection: `${callDetails?.first_name} is not available, can I take a message for you?`,
       answer:
         " Is it possible to rather put through to their voicemail? If not, I will send through an email a bit later today. Thanks so very much for your help, you have been amazing",
     },
@@ -52,7 +53,7 @@ const GreetingFirst = () => {
     console.log(data); // You can send the form data to an API or use it elsewhere
   };
   useEffect(() => {
-    console.log(radio, "radio");
+    console.log(radio, "radio", callDetails);
   }, [radio]);
   return (
     <div className=" flex w-full justify-center h-full">
@@ -76,9 +77,11 @@ const GreetingFirst = () => {
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
           <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
-            Hi this is [first] calling from fast track regarding the debt
-            invalidation program currently available to legal state residents of
-            [state]. You are a legal resident of [state] right?
+            Hi this is {callDetails?.first_name} calling from fast track
+            regarding the debt invalidation program currently available to legal
+            state residents of
+            {callDetails?.state}. You are a legal resident of{" "}
+            {callDetails?.state} right?
           </p>
           <div>
             <div>

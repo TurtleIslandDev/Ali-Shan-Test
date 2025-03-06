@@ -10,10 +10,11 @@ import ObjectionsDropdown from "../../../dropdowns/ObjectionsDropdown";
 import QuestionsDropdown from "../../../dropdowns/QuestionsDropdown";
 import NextSvg from "../../../../assets/SVGs/globalSvgs/NextSvg";
 import { ProgressIG } from "../../../Stepper/ProgressIG";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setStep } from "../../../../features/slice/igSlice";
 const IntroductionSecond = () => {
   const dispatch = useDispatch();
+  const { callDetails } = useSelector((state) => state.ig);
   const {
     register,
     handleSubmit,
@@ -27,7 +28,7 @@ const IntroductionSecond = () => {
   const radio = watch("radio");
   const ObjectionData = [
     {
-      objection: "X is not available, can I take a message for you?",
+      objection: `${callDetails?.first_name} is not available, can I take a message for you?`,
       answer:
         " Is it possible to rather put through to their voicemail? If not, I will send through an email a bit later today. Thanks so very much for your help, you have been amazing",
     },
@@ -82,7 +83,7 @@ const IntroductionSecond = () => {
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
           <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
-            This is ( Mr/Mrs) [Last Name] right?
+            This is ( Mr/Mrs) {callDetails?.last_name} right?
           </p>
           <div>
             <div>

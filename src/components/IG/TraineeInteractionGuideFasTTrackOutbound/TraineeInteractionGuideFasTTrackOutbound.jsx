@@ -1,13 +1,33 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GreetingFirst from "./_components/GreetingFirst";
-import { setStep } from "../../../features/slice/igSlice";
+import { setCallDetails, setStep } from "../../../features/slice/igSlice";
 import IntroductionSecond from "./_components/IntroductionSecond";
+import { useLocation } from "react-router-dom";
+import { dummyLead } from "../../../data/dummyData";
+
+const useQueryParams = () => {
+  const { search } = useLocation();
+  return new URLSearchParams(search);
+};
 const TraineeInteractionGuideFasTTrackOutbound = () => {
+  const queryParams = useQueryParams();
   const { step } = useSelector((state) => state.ig);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // Convert all query parameters to an object
+    let paramsObject = {};
+    queryParams?.forEach((value, key) => {
+      paramsObject[key] = value;
+    });
+    console.log(queryParams.size, "query params");
+
+    dispatch(
+      setCallDetails({
+        callDetails: queryParams?.size > 0 ? paramsObject : dummyLead,
+      })
+    );
     return () => {
       dispatch(setStep({ step: 1 }));
     };
