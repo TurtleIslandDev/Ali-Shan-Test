@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AgentGuiSvg from "../../assets/SVGs/AgentGuiSvg";
 import AddUserSvg from "../../assets/SVGs/programManagerScreen/AddUserSvg";
 import AutomateSvg from "../../assets/SVGs/globalSvgs/AutomateSvg";
+import BuzzWordSvg from "../../assets/SVGs/BuzzWordSvg";
 
 const AdminNavigation = () => {
   const navigate = useNavigate();
@@ -81,16 +82,37 @@ const AdminNavigation = () => {
           </div>
         </div>
         {/* third */}
-        <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  bg-[#22851266]">
-            {/* Dashed circle border */}
-            {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
-            {/* Star ribbon icon (replace with an actual SVG icon if available) */}
-
-            <div className="relative text-black">
-              {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-              {/* <SmsSVG /> */}
+        <div
+          onMouseOver={(e) => handleMouseOver(e, "third")}
+          onMouseLeave={(e) => handleMouseOut(e, "third")}
+          onClick={() => {
+            window.location.href =
+              "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+          }}
+          className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 "
+        >
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] ${
+              hoverStates.third
+                ? " bg-[#228512] z-[6]"
+                : "z-[3]  bg-[#22851266]"
+            }`}
+          >
+            {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
+            <div className="relative text-white">
+              {hoverStates.third ? (
+                <p className="uppercase font-bold text-xl text-center"></p>
+              ) : (
+                <div className="transform scale-75">
+                  <p className="uppercase font-bold text-xl text-center">
+                    Agent Link
+                  </p>
+                  {/* <AgentPerformanceSvg /> */}
+                  {/* <PayrollSvg /> */}
+                </div>
+              )}
             </div>
+
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[125deg] -top-10 left-0 border-[1px] border-dashed border-[#D9D9D9]" />
             <div className="absolute w-[1px] h-14 transform  rotate-[0deg] -bottom-14 right-8 border-[1px] border-dashed border-[#D9D9D9]" />
@@ -102,8 +124,9 @@ const AdminNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "fourth")}
           onMouseLeave={(e) => handleMouseOut(e, "fourth")}
           onClick={() => {
-            window.location.href =
-              "https://vici-lp1.itsbuzzmarketing/vicidial/admin_listloader_fourth_gen.php";
+            navigate("data");
+            // window.location.href =
+            //   "https://vici-lp1.itsbuzzmarketing/vicidial/admin_listloader_fourth_gen.php";
           }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40  ${
             hoverStates.fourth ? "z-[6] " : "z-[3]"
@@ -182,12 +205,32 @@ const AdminNavigation = () => {
 
         {/* sixth*/}
         <div
+          onMouseOver={(e) => handleMouseOver(e, "sixth")}
+          onMouseLeave={(e) => handleMouseOut(e, "sixth")}
+          onClick={() => {
+            navigate("buzzword-admin");
+          }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
             hoverStates.sixth ? "z-[6]" : "z-[3]"
           }`}
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#22851266]   z-3 hover:z-5">
-            {/* <ChatSvg /> */}
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] ] ${
+              hoverStates.sixth
+                ? " bg-[#228512] z-[6]"
+                : "z-[3]  bg-[#22851266]"
+            } `}
+          >
+            {" "}
+            <div className="relative text-white">
+              {hoverStates.sixth ? (
+                <p className="uppercase font-bold text-xl text-center">
+                  BuzzWord
+                </p>
+              ) : (
+                <BuzzWordSvg />
+              )}
+            </div>
           </div>
         </div>
         {/* TODO: Hurried implementation of upload button */}
