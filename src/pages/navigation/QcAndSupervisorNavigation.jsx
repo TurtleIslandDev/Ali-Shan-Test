@@ -76,7 +76,10 @@ const QcAndSupervisorNavigation = () => {
           </div>
         </div>
         {/* report */}
-        <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 ">
+        <div
+          className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10"
+          onClick={() => navigate("/qc-and-supervisor-navigation/create-template")}
+        >
           <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  bg-[#22851266]">
             {/* Dashed circle border */}
             {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
