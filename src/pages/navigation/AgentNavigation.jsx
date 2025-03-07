@@ -72,9 +72,9 @@ const AgentNavigation = () => {
           <div
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] ] ${
               hoverStates.agentReport
-                ? "bg-[#1E40AF] z-[6]"
-                : "z-[3] bg-[#D5DEFA]"
-            } `}
+                ? " bg-[#F5874B] z-[6]"
+                : "z-[3]  bg-[#fbc89f]"
+            }`}
           >
             {hoverStates.agentReport ? (
               <p className="w-[9rem] text-center uppercase font-bold text-[28px]">
@@ -87,16 +87,37 @@ const AgentNavigation = () => {
           </div>
         </div>
         {/* certification */}
-        <div className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)]  bg-[#1E40AF66]">
-            {/* Dashed circle border */}
-            {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
-            {/* Star ribbon icon (replace with an actual SVG icon if available) */}
 
-            <div className="relative text-black">
-              {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-              <CeritficationsSvg />
+        {/* third */}
+        <div
+          onMouseOver={(e) => handleMouseOver(e, "third")}
+          onMouseLeave={(e) => handleMouseOut(e, "third")}
+          onClick={() => {
+            window.location.href =
+              "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+          }}
+          className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 "
+        >
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] ${
+              hoverStates.third ? "bg-[#1E40AF] z-[6]" : "z-[3] bg-[#D5DEFA]"
+            }`}
+          >
+            {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
+            <div className="relative text-white">
+              {hoverStates.third ? (
+                <p className="uppercase font-bold text-xl text-center"></p>
+              ) : (
+                <div className="transform scale-75">
+                  <p className="uppercase font-bold text-xl text-center">
+                    Agent Link
+                  </p>
+                  {/* <AgentPerformanceSvg /> */}
+                  {/* <PayrollSvg /> */}
+                </div>
+              )}
             </div>
+
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[125deg] -top-10 left-0 border-[1px] border-dashed border-[#D9D9D9]" />
             <div className="absolute w-[1px] h-14 transform  rotate-[0deg] -bottom-14 right-8 border-[1px] border-dashed border-[#D9D9D9]" />
@@ -149,7 +170,11 @@ const AgentNavigation = () => {
             hoverStates.payroll ? "z-[6]" : "z-[3]"
           }`}
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#fbc89f]  z-3 hover:z-5">
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] ${
+              hoverStates.payroll ? "bg-[#1E40AF] z-[6]" : "z-[3] bg-[#D5DEFA]"
+            } `}
+          >
             <PayrollSvg />
           </div>
         </div>
@@ -161,7 +186,8 @@ const AgentNavigation = () => {
             {/* Star ribbon icon (replace with an actual SVG icon if available) */}
             <div className="relative text-black">
               {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-              <LearningSVG />
+
+              <CeritficationsSvg />
             </div>
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[50deg] -top-10 right-0 border-[1px] border-dashed border-[#D9D9D9]" />
