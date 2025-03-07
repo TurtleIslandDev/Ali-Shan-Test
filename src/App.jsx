@@ -172,6 +172,10 @@ function App() {
               element={<AgentTraineeNavigation />}
             />
             <Route
+              path="/agent-trainee-navigation/buzzword-trainee"
+              element={<BuzzWordTrainee />}
+            />
+            <Route
               path="/agent-trainee-navigation/trainee-interaction-guide-fasttrack"
               element={
                 <div style={{ height: `${height}px` }}>
