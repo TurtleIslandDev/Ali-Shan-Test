@@ -12,6 +12,7 @@ import NextSvg from "../../../../assets/SVGs/globalSvgs/NextSvg";
 import { ProgressIG } from "../../../Stepper/ProgressIG";
 import { useDispatch } from "react-redux";
 import { setStep } from "../../../../features/slice/igSlice";
+import CallSvg from "../../../../assets/SVGs/CallSvg";
 const IntroductionSecond = () => {
   const dispatch = useDispatch();
   const {
@@ -76,8 +77,9 @@ const IntroductionSecond = () => {
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
             Introduction
           </p>
-          <div className="transform scale-125">
-            <TraineeSVG color={"#228512"} />
+          <div className="transform scale-75">
+            {/* <OutBoundCall color={"#228512"} /> */}
+            <CallSvg color={"#FF0000"} />
           </div>
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">

@@ -28,6 +28,8 @@ const TraineeInteractionGuideFasTTrackOutbound = () => {
         callDetails: queryParams?.size > 0 ? paramsObject : dummyLead,
       })
     );
+  }, []);
+  useEffect(() => {
     return () => {
       dispatch(setStep({ step: 1 }));
     };

@@ -12,6 +12,7 @@ import NextSvg from "../../../../assets/SVGs/globalSvgs/NextSvg";
 import { ProgressIG } from "../../../Stepper/ProgressIG";
 import { useDispatch, useSelector } from "react-redux";
 import { setStep } from "../../../../features/slice/igSlice";
+import OutBoundCall from "../../../../assets/SVGs/OutBoundCall";
 const GreetingFirst = () => {
   const dispatch = useDispatch();
   const {
@@ -71,17 +72,16 @@ const GreetingFirst = () => {
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
             Greeting
           </p>
-          <div className="transform scale-125">
-            <TraineeSVG color={"#228512"} />
+          <div className="transform scale-75">
+            <OutBoundCall color={"#228512"} />
           </div>
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
           <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
             Hi this is {callDetails?.first_name} calling from fast track
             regarding the debt invalidation program currently available to legal
-            state residents of
-            {callDetails?.state}. You are a legal resident of{" "}
-            {callDetails?.state} right?
+            state residents of {" " + " " + callDetails?.state}. You are a legal
+            resident of {callDetails?.state} right?
           </p>
           <div>
             <div>
