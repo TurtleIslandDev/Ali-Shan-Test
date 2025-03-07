@@ -45,8 +45,9 @@ const Login = () => {
             setWait(true);
             setTimeout(() => {
               setWait(false);
-              window.location.href =
-                "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+              // window.location.href =
+              //   "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+              navigate("/agent-navigation");
             }, 3000);
           } else if (resData.role === "channelManager") {
             navigate("/channel-manager-navigation");
