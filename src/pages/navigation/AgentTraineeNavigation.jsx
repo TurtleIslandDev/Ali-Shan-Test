@@ -8,6 +8,7 @@ import AgentPerformanceSvg from "../../assets/SVGs/agentScreen/AgentPerformanceS
 import Cookies from "universal-cookie";
 import AutomateSvg from "../../assets/SVGs/globalSvgs/AutomateSvg";
 import TraineeSVG from "./../../assets/SVGs/TraineeSVG";
+import BuzzWordSvg from "../../assets/SVGs/BuzzWordSvg";
 
 const AgentTraineeNavigation = () => {
   const navigate = useNavigate();
@@ -88,8 +89,7 @@ const AgentTraineeNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "third")}
           onMouseLeave={(e) => handleMouseOut(e, "third")}
           onClick={() => {
-            window.location.href =
-              "https://workspace.google.com/products/docs/";
+            navigate("buzzword-trainee");
           }}
           className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 "
         >
@@ -106,8 +106,9 @@ const AgentTraineeNavigation = () => {
                 <p className="uppercase font-bold text-xl text-center"></p>
               ) : (
                 <div className="transform scale-75">
-                  <AgentPerformanceSvg />
+                  {/* <AgentPerformanceSvg /> */}
                   {/* <PayrollSvg /> */}
+                  <BuzzWordSvg />
                 </div>
               )}
             </div>
