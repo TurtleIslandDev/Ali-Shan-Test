@@ -13,7 +13,7 @@ import OutBoundCall from "../../../../assets/SVGs/OutBoundCall";
 import InteractionGuideHeader from "../../../Headers/InteractionGuideHeader";
 import useInteractionGuide from "../../../../features/hooks/InteractionGuideHooks";
 
-const GreetingFirst = () => {
+const Third = () => {
   const dispatch = useDispatch();
   const { handleButtonBack, handleButtonNext } = useInteractionGuide();
   const {
@@ -69,52 +69,13 @@ const GreetingFirst = () => {
           }
         />
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
-          <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
-            Hi this is {leadInfo?.first_name} calling from fast track regarding
-            the debt invalidation program currently available to legal state
-            residents of {" " + " " + leadInfo?.state}.
-          </p>
-          <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
-            You are a legal resident of {leadInfo?.state} right?
-          </p>
-          <div>
-            <div>
-              <p className="font-nunitoSans text-xl text-[#ff0000]">PAUSE</p>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      value="yes"
-                      defaultChecked
-                      {...register("radio", {
-                        required: "Please select an option",
-                      })}
-                    />
-                    Yes
-                  </label>
-                </div>
-
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      value="No"
-                      {...register("radio", {
-                        required: "Please select an option",
-                      })}
-                    />
-                    No
-                  </label>
-                </div>
-              </form>
-            </div>
-            <div>
-              <p className="font-nunitoSans text-xl text-[#24A652]">
-                COACHING NOTES
-              </p>
-            </div>
-          </div>
+          <iframe
+            src="https://login.debtpaypro.com/index.php?module=contacts&page=add&module=contacts&page=add&fid=28992"
+            width="100%"
+            height="100%"
+            style={{ border: "none" }}
+            title="DebtPayPro Contact Form"
+          />
         </div>
         <div className="bg-white w-full px-10 flex-col gap-4 justify-center items-center py-3">
           <div className="bg-transparent w-full flex justify-between items-center mb-3">
@@ -125,7 +86,10 @@ const GreetingFirst = () => {
             {/* #228512 */}
             <ObjectionsDropdown ObjectionsData={ObjectionData} />
             <QuestionsDropdown questionsData={questionsData} />
-            <Button bgColor={"#228512"} onClick={handleButtonNext()}>
+            <Button
+              bgColor={"#228512"}
+              //   onClick={handleButtonNext()}
+            >
               Next <NextSvg />
             </Button>
           </div>
@@ -136,4 +100,4 @@ const GreetingFirst = () => {
   );
 };
 
-export default GreetingFirst;
+export default Third;

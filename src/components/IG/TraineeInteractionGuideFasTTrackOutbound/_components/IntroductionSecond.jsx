@@ -15,7 +15,7 @@ import { setStep } from "../../../../features/slice/igSlice";
 import OutBoundCall from "../../../../assets/SVGs/OutBoundCall";
 const IntroductionSecond = () => {
   const dispatch = useDispatch();
-  const { callDetails } = useSelector((state) => state.ig);
+  const { leadInfo } = useSelector((state) => state.ig);
   const {
     register,
     handleSubmit,
@@ -29,7 +29,7 @@ const IntroductionSecond = () => {
   const radio = watch("radio");
   const ObjectionData = [
     {
-      objection: `${callDetails?.first_name} is not available, can I take a message for you?`,
+      objection: `${leadInfo?.first_name} is not available, can I take a message for you?`,
       answer:
         " Is it possible to rather put through to their voicemail? If not, I will send through an email a bit later today. Thanks so very much for your help, you have been amazing",
     },
@@ -47,7 +47,7 @@ const IntroductionSecond = () => {
     },
   ];
   const handleButtonNext = () => {
-    // dispatch(setStep({ step: 3 }));
+    dispatch(setStep({ step: 3 }));
     const currentDate = new Date();
     console.log("Next:", currentDate.toString());
   };
@@ -84,7 +84,7 @@ const IntroductionSecond = () => {
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
           <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
-            This is ( Mr/Mrs) {callDetails?.last_name} right?
+            This is ( Mr/Mrs) {leadInfo?.last_name} right?
           </p>
           <div>
             <div>
