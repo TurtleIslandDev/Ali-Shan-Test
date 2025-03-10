@@ -1,27 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  callDetails: null,
+  leadInfo: null,
   step: 1,
+  totalSteps: null,
 };
 
 const igSlice = createSlice({
   name: "interaction guide",
   initialState,
   reducers: {
-    setCallDetails: (state, action) => {
-      state.callDetails = action.payload.callDetails;
+    setLeadInfo: (state, action) => {
+      state.leadInfo = action.payload.leadInfo;
     },
 
     setStep: (state, action) => {
       state.step = action.payload.step;
     },
+    setTotalSteps: (state, action) => {
+      state.totalSteps = action.payload.totalSteps;
+    },
   },
-
-  // extraReducers: (builder) => {
-
-  // },
 });
 
-export const { setStep, setCallDetails } = igSlice.actions;
+export const { setStep, setLeadInfo, setTotalSteps } = igSlice.actions;
 export default igSlice.reducer;
