@@ -13,7 +13,7 @@ import { ProgressIG } from "../../../Stepper/ProgressIG";
 import { useDispatch } from "react-redux";
 import { setStep } from "../../../../features/slice/igSlice";
 import CallSvg from "../../../../assets/SVGs/CallSvg";
-const IntroductionSecond = () => {
+const Third = () => {
   const dispatch = useDispatch();
   const {
     register,
@@ -35,18 +35,12 @@ const IntroductionSecond = () => {
   ];
   const questionsData = [
     {
-      question: "IS THIS DEBT SETTLEMENT",
-      answer:
-        "No, debt invalidation is a service provided by licensed attorneys working on your behalf to have your debts invalidated so they can stop negatively impacting your credit report without you being required to pay the debt.",
-    },
-    {
-      question: "What is this about",
-      answer:
-        "Im calling regarding the debt invalidation program that is currently available in your state",
+      question: "What is this about?",
+      answer: " Im calling regarding the debt invalidation program thats",
     },
   ];
   const handleButtonNext = () => {
-    dispatch(setStep({ step: 3 }));
+    // dispatch(setStep({ step: 2 }));
     const currentDate = new Date();
     console.log("Next:", currentDate.toString());
   };
@@ -75,7 +69,7 @@ const IntroductionSecond = () => {
         <div className="bg-white w-full flex justify-between items-center px-10 py-4 rounded-b-md">
           <img src={fasTTrackLogo} className="w-40" />
           <p className="font-bold text-2xl text-[#1414C9] bg-[#EAEAEA] rounded-md px-2.5 py-1.5">
-            Introduction
+            Greeting
           </p>
           <div className="transform scale-75">
             {/* <OutBoundCall color={"#228512"} /> */}
@@ -83,47 +77,13 @@ const IntroductionSecond = () => {
           </div>
         </div>
         <div className="bg-white w-full flex justify-between flex-col px-10 py-4 flex-1  mt-3">
-          <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
-            This is ( Mr/Mrs) [Last Name] right?
-          </p>
-          <div>
-            <div>
-              <p className="font-nunitoSans text-xl text-[#ff0000]">PAUSE</p>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      value="yes"
-                      defaultChecked
-                      {...register("radio", {
-                        required: "Please select an option",
-                      })}
-                    />
-                    Yes
-                  </label>
-                </div>
-
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      value="No"
-                      {...register("radio", {
-                        required: "Please select an option",
-                      })}
-                    />
-                    No
-                  </label>
-                </div>
-              </form>
-            </div>
-            <div>
-              <p className="font-nunitoSans text-xl text-[#24A652]">
-                COACHING NOTES
-              </p>
-            </div>
-          </div>
+          <iframe
+            src="https://login.debtpaypro.com/index.php?module=contacts&page=add&module=contacts&page=add&fid=28992"
+            width="100%"
+            height="100%"
+            style={{ border: "none" }}
+            title="DebtPayPro Contact Form"
+          />
         </div>
         <div className="bg-white w-full px-10 flex-col gap-4 justify-center items-center py-3">
           <div className="bg-transparent w-full flex justify-between items-center mb-3">
@@ -145,4 +105,4 @@ const IntroductionSecond = () => {
   );
 };
 
-export default IntroductionSecond;
+export default Third;
