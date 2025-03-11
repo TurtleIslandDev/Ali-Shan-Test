@@ -86,10 +86,7 @@ const Third = () => {
             {/* #228512 */}
             <ObjectionsDropdown ObjectionsData={ObjectionData} />
             <QuestionsDropdown questionsData={questionsData} />
-            <Button
-              bgColor={"#228512"}
-              //   onClick={handleButtonNext()}
-            >
+            <Button bgColor={"#228512"} onClick={handleButtonNext()}>
               Next <NextSvg />
             </Button>
           </div>

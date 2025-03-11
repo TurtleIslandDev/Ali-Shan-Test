@@ -13,7 +13,9 @@ import { ProgressIG } from "../../../Stepper/ProgressIG";
 import { useDispatch } from "react-redux";
 import { setStep } from "../../../../features/slice/igSlice";
 import CallSvg from "../../../../assets/SVGs/CallSvg";
+import useInteractionGuide from "@features/hooks/InteractionGuideHooks";
 const GreetingFirst = () => {
+  const { handleButtonBack, handleButtonNext } = useInteractionGuide();
   const dispatch = useDispatch();
   const {
     register,
@@ -39,16 +41,6 @@ const GreetingFirst = () => {
       answer: " Im calling regarding the debt invalidation program thats",
     },
   ];
-  const handleButtonNext = () => {
-    dispatch(setStep({ step: 2 }));
-    const currentDate = new Date();
-    console.log("Next:", currentDate.toString());
-  };
-  const handleButtonBack = () => {
-    dispatch(setStep({ step: 1 }));
-    const currentDate = new Date();
-    console.log("Back:", currentDate.toString());
-  };
   const onSubmit = (data) => {
     console.log(data); // You can send the form data to an API or use it elsewhere
   };
@@ -122,14 +114,14 @@ const GreetingFirst = () => {
         </div>
         <div className="bg-white w-full px-10 flex-col gap-4 justify-center items-center py-3">
           <div className="bg-transparent w-full flex justify-between items-center mb-3">
-            <Button bgColor={"#1414C9"} onClick={handleButtonBack}>
+            <Button bgColor={"#1414C9"} onClick={handleButtonBack()}>
               <BackSvg />
               Back
             </Button>
             {/* #228512 */}
             <ObjectionsDropdown ObjectionsData={ObjectionData} />
             <QuestionsDropdown questionsData={questionsData} />
-            <Button bgColor={"#228512"} onClick={handleButtonNext}>
+            <Button bgColor={"#228512"} onClick={handleButtonNext()}>
               Next <NextSvg />
             </Button>
           </div>
