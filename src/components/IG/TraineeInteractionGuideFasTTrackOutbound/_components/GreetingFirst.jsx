@@ -72,10 +72,10 @@ const GreetingFirst = () => {
           <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
             Hi this is {leadInfo?.first_name} calling from fast track regarding
             the debt invalidation program currently available to legal state
-            residents of {" " + " " + leadInfo?.state}.
+            residents of {" " + " " + leadInfo?.address3}.
           </p>
           <p className="font-nunitoSans text-[#3F3F3F] text-[18px] leading-7">
-            You are a legal resident of {leadInfo?.state} right?
+            You are a legal resident of {leadInfo?.address3} right?
           </p>
           <div>
             <div>
