@@ -22,6 +22,8 @@ import AgentTraineeNavigation from "./pages/navigation/AgentTraineeNavigation";
 import TraineeInteractionGuideFasTTrackOutbound from "./components/IG/TraineeInteractionGuideFasTTrackOutbound/TraineeInteractionGuideFasTTrackOutbound";
 import TraineeInteractionGuideFasTTrackInbound from "./components/IG/TraineeInteractionGuideFasTTrackInbound/TraineeInteractionGuideFasTTrackInbound";
 import DataNavigation from "./pages/adminPages/DataNavigation";
+import Form1099 from "./components/googleDriveForms/Form1099";
+import TestForm1099 from "./components/googleDriveForms/testForm";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -315,6 +317,8 @@ function App() {
                 </div>
               }
             />
+            <Route path="/form1099" element={<Form1099 />} />
+            <Route path="/testform1099" element={<TestForm1099 />} />
             <Route path="/*" element={<div>Page not found</div>} />
           </Routes>
         </Suspense>
