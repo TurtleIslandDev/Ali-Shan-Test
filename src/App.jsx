@@ -24,6 +24,10 @@ import TraineeInteractionGuideFasTTrackInbound from "./components/IG/TraineeInte
 import DataNavigation from "./pages/adminPages/DataNavigation";
 import Form1099 from "./components/googleDriveForms/Form1099";
 import TestForm1099 from "./components/googleDriveForms/testForm";
+import FormW9 from "./components/googleDriveForms/FormW9";
+import HrNavigationPage from "./pages/traineePages/HR/HrNavigationPage";
+import TraineeForm1099 from "./pages/traineePages/HR/TraineeForm1099";
+import TraineeFormW9 from "./pages/traineePages/HR/TraineeFormw9";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -174,6 +178,18 @@ function App() {
               element={<AgentTraineeNavigation />}
             />
             <Route
+              path="/agent-trainee-navigation/hr"
+              element={<HrNavigationPage />}
+            />
+            <Route
+              path="/agent-trainee-navigation/hr/documentation/form-1099"
+              element={<TraineeForm1099 />}
+            />
+            <Route
+              path="/agent-trainee-navigation/hr/documentation/form-w9"
+              element={<TraineeFormW9 />}
+            />
+            <Route
               path="/agent-trainee-navigation/buzzword-trainee"
               element={<BuzzWordTrainee />}
             />
@@ -319,6 +335,7 @@ function App() {
             />
             <Route path="/form1099" element={<Form1099 />} />
             <Route path="/testform1099" element={<TestForm1099 />} />
+            <Route path="/formW9" element={<FormW9 />} />
             <Route path="/*" element={<div>Page not found</div>} />
           </Routes>
         </Suspense>
