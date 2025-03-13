@@ -73,9 +73,7 @@ const Form1099 = () => {
       yPosition += pageHeight; // Move to the next section
       if (yPosition < imgHeight) pdf.addPage();
     }
-  
-    pdf.save("FormData.pdf");
-  
+    pdf.save("form1099.pdf");
     // Restore original form inputs
     originalValues.forEach(({ input, span }) => {
       formElement.removeChild(span);
