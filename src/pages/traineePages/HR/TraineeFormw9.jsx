@@ -2,90 +2,15 @@ import React, { useState, useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useForm } from "react-hook-form";
+import { saveAs } from "file-saver";
+import { PDFDocument } from "pdf-lib";
+import { useSelector } from "react-redux";
 const TraineeFormW9 = () => {
+  const { token } = useSelector((state) => state.user);
   const formRef = useRef();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const generatePDF = async () => {
-    const formElement = formRef.current;
-    const inputs = formElement.querySelectorAll("input, textarea, button");
-    const originalValues = [];
-    // Replace inputs with span elements
-    inputs.forEach((input) => {
-      const span = document.createElement("span");
-      span.style.position = "absolute";
-      span.innerText =
-        input.type === "checkbox" ? (input.checked ? "✅" : "⬜") : input.value;
-      if (input.maxLength == "1") {
-        span.style.top = `${input.offsetTop}px`;
-        span.style.border = `1px solid black`;
-      } else {
-        span.style.border = "none";
-        span.style.top = `${input.offsetTop - 3}px`;
-      }
-      // Apply exact styles to match the original input
-      span.style.left = `${input.offsetLeft - 0}px`;
-      span.style.width = `${input.offsetWidth}px`;
-      span.style.height = `${input.offsetHeight}px`;
-      span.style.fontSize = window.getComputedStyle(input).fontSize;
-      span.style.fontFamily = window.getComputedStyle(input).fontFamily;
-      span.style.fontWeight = 600;
-      span.style.color = "#000000";
-      span.style.background = "transparent";
+  const { register, handleSubmit, watch } = useForm();
 
-      span.style.padding = window.getComputedStyle(input).padding;
-      span.style.textAlign = window.getComputedStyle(input).textAlign;
-      span.style.display = "flex";
-      span.style.alignItems = "center";
-      span.style.justifyContent = "left";
-      span.style.lineHeight = window.getComputedStyle(input).lineHeight;
-      span.style.whiteSpace = "nowrap";
-      span.style.zIndex = "99999";
-
-      // Store original input reference for later restoration
-      originalValues.push({ input, span });
-
-      formElement.appendChild(span);
-      input.style.opacity = "0"; // Hide original input but keep space
-    });
-
-    // Capture form as an image
-    const canvas = await html2canvas(formElement, {
-      scale: 2, // Higher resolution for better quality
-      scrollX: 0,
-      scrollY: 0,
-      useCORS: true,
-      foreignObjectRendering: true,
-    });
-
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-
-    // Define page size
-    const imgWidth = 190; // Max image width for A4 page
-    const pageHeight = 297; // A4 page height
-    const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
-
-    let yPosition = 0;
-
-    // Add multiple pages if content is longer than one page
-    while (yPosition < imgHeight) {
-      pdf.addImage(imgData, "PNG", 10, -yPosition + 10, imgWidth, imgHeight);
-      yPosition += pageHeight; // Move to the next section
-      if (yPosition < imgHeight) pdf.addPage();
-    }
-    pdf.save("form1099.pdf");
-    // Restore original form inputs
-    originalValues.forEach(({ input, span }) => {
-      formElement.removeChild(span);
-      input.style.opacity = "1";
-    });
-  };
-  // this way i am setting a from and can i get set header and foorter of this pdf?
-
+  const watchCheck = watch("federalTexClassification");
   const createRefs = (length) =>
     Array(length)
       .fill(0)
@@ -132,10 +57,245 @@ const TraineeFormW9 = () => {
     }
   };
   const onSubmit = async (data) => {
-    console.log(data);
+    let firstSSN = "";
+    let secondSSN = "";
+    let thirdSSN = "";
+    let firstEIN = "";
+    let secondEIN = "";
+    for (let i = 0; i < ssn?.length; i++) {
+      if (i < 3) {
+        firstSSN += ssn[i];
+      }
+      if (i > 2 && i < 5) {
+        secondSSN += ssn[i];
+      }
+      if (i > 4) {
+        thirdSSN += ssn[i];
+      }
+    }
+    for (let i = 0; i < ein?.length; i++) {
+      if (i < 2) {
+        firstEIN += ein[i];
+      }
+      if (i > 1) {
+        secondEIN += ein[i];
+      }
+    }
+    if (
+      firstSSN.length === 3 &&
+      secondSSN.length === 2 &&
+      thirdSSN.length === 4 &&
+      firstEIN.length === 2 &&
+      secondEIN.length === 7
+    ) {
+      try {
+        // Load the existing fillable PDF
+        const existingPdfBytes = await fetch("/fw9.pdf").then((res) =>
+          res.arrayBuffer()
+        );
+        const pdfDoc = await PDFDocument.load(existingPdfBytes);
+        const form = pdfDoc.getForm();
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_01[0]")
+          .setText(data.name);
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_02[0]")
+          .setText(data.businessName);
+        if (data.federalTexClassification == "Individual") {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[0]"
+            )
+            .check();
+        } else {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[0]"
+            )
+            .uncheck();
+        }
+        if (data.federalTexClassification == "C") {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[1]"
+            )
+            .check();
+        } else {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[1]"
+            )
+            .uncheck();
+        }
+        if (data.federalTexClassification == "S") {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[2]"
+            )
+            .check();
+        } else {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[2]"
+            )
+            .uncheck();
+        }
+        if (data.federalTexClassification == "partnership") {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[3]"
+            )
+            .check();
+        } else {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[3]"
+            )
+            .uncheck();
+        }
+        if (data.federalTexClassification == "Trust/estate") {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[4]"
+            )
+            .check();
+        } else {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[4]"
+            )
+            .uncheck();
+        }
+        if (data.federalTexClassification == "LLC") {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[5]"
+            )
+            .check();
+        } else {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[5]"
+            )
+            .uncheck();
+        }
+        form
+          .getTextField(
+            "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].f1_03[0]"
+          )
+          .setText(data.federalTexClassification == "LLC" ? data.llc : "");
 
-    await generatePDF();
-    console.log("pdf downloaded");
+        if (data.federalTexClassification == "other") {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[6]"
+            )
+            .check();
+        } else {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[6]"
+            )
+            .uncheck();
+        }
+
+        form
+          .getTextField(
+            "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].f1_04[0]"
+          )
+          .setText(data.federalTexClassification == "other" ? data.other : "");
+
+        if (data?.threeB == "3bChecked") {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_2[0]"
+            )
+            .check();
+        } else {
+          form
+            .getCheckBox(
+              "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_2[0]"
+            )
+            .uncheck();
+        }
+
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_05[0]")
+          .setText(data.payeeCode);
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_06[0]")
+          .setText(data.exemption);
+        form
+          .getTextField(
+            "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_07[0]"
+          )
+          .setText(data.address);
+        form
+          .getTextField(
+            "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_08[0]"
+          )
+          .setText(data.cityOrStateOrZip);
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_09[0]")
+          .setText(data.requesterName);
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_10[0]")
+          .setText(data.accountNo);
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_11[0]")
+          .setText(firstSSN);
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_12[0]")
+          .setText(secondSSN);
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_13[0]")
+          .setText(thirdSSN);
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_14[0]")
+          .setText(firstEIN);
+        form
+          .getTextField("topmostSubform[0].Page1[0].f1_15[0]")
+          .setText(secondEIN);
+        // Save the modified PDF
+        const pdfBytes = await pdfDoc.save();
+        // Download the filled PDF
+        // saveAs(
+        //   new Blob([pdfBytes], { type: "application/pdf" }),
+        //   "filled-form.pdf"
+        // );
+        saveAs(
+          new Blob([pdfBytes], { type: "application/pdf" }),
+          "filled-form.pdf"
+        );
+        let blobPDF = new Blob([pdfBytes], { type: "application/pdf" });
+
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+
+        const formdata = new FormData();
+        formdata.append("file", blobPDF, "w9.pdf");
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: formdata,
+          redirect: "follow",
+        };
+
+        fetch(
+          "https://endpoint.itsbuzzmarketing.com/user/upload_document",
+          requestOptions
+        )
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.error(error));
+      } catch (error) {
+        console.error("Error filling PDF:", error);
+      }
+    } else {
+      alert("Please fillout EIN and SSN");
+      return;
+    }
   };
 
   return (
@@ -234,6 +394,174 @@ const TraineeFormW9 = () => {
               </div>
               <div className="flex">
                 <div className="w-3/4">
+                  <div>
+                    <div
+                      className="w-full overflow-hidden pr-2 py-3"
+                      style={{ borderBottom: "2px solid #898989" }}
+                    >
+                      <div className=" text-sm p-1 flex">
+                        <span className="font-bold text-base">3a</span>.
+                        <p>
+                          Check the appropriate box for federal tax
+                          classification of the entity/individual whose name is
+                          entered on line 1. Check only one of the following
+                          seven boxes.
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap">
+                        <div className="flex items-center gap-5 ml-7">
+                          <input
+                            {...register("federalTexClassification")}
+                            type="radio"
+                            value={"Individual"}
+                          />
+                          <p>Individual/sole proprietor</p>
+                        </div>
+                        <div className="flex items-center gap-5 ml-7">
+                          <input
+                            {...register("federalTexClassification")}
+                            type="radio"
+                            value={"C"}
+                          />
+                          <p>C corporation</p>
+                        </div>
+                        <div className="flex items-center gap-5 ml-7">
+                          <input
+                            {...register("federalTexClassification")}
+                            type="radio"
+                            value={"S"}
+                          />
+                          <p>S corporation</p>
+                        </div>
+                        <div className="flex items-center gap-5 ml-7">
+                          <input
+                            {...register("federalTexClassification")}
+                            type="radio"
+                            value={"partnership"}
+                          />
+                          <p>Partnership </p>
+                        </div>
+                        <div className="flex items-center gap-5 ml-7">
+                          <input
+                            {...register("federalTexClassification")}
+                            type="radio"
+                            value={"Trust/estate"}
+                          />
+                          <p>Trust/estate </p>
+                        </div>
+
+                        <div className="flex items-center gap-5 ml-7">
+                          <input
+                            {...register("federalTexClassification")}
+                            type="radio"
+                            value={"LLC"}
+                          />
+                          {/* watchCheck */}
+                          <p>
+                            LLC. Enter the tax classification (C = C
+                            corporation, S = S corporation, P = Partnership){" "}
+                          </p>
+                          <input
+                            {...register("llc")}
+                            disabled={watchCheck !== "LLC"}
+                            className="overflow-hidden h-full p-2 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
+                            style={{
+                              borderBottom: "2px solid #898989",
+                            }}
+                          />
+                        </div>
+                        <p className="ml-7">
+                          <span className={spanClass}>Note</span>: Check the
+                          “LLC” box above and, in the entry space, enter the
+                          appropriate code (C, S, or P) for the tax
+                          classification of the LLC, unless it is a disregarded
+                          entity. A disregarded entity should instead check the
+                          appropriate box for the tax classification of its
+                          owner.
+                        </p>
+                        <div className="flex items-center gap-5 ml-7 w-full">
+                          <input
+                            {...register("federalTexClassification")}
+                            type="radio"
+                            value={"other"}
+                          />
+                          {/* watchCheck */}
+                          <p>Other (see instructions)</p>
+                          <input
+                            {...register("other")}
+                            disabled={watchCheck !== "other"}
+                            className="w-full overflow-hidden h-full p-2 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
+                            style={{
+                              borderBottom: "2px solid #898989",
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className="w-full overflow-hidden flex items-end pr-4 py-3"
+                    style={{ borderBottom: "2px solid #898989" }}
+                  >
+                    <div className=" text-sm p-1 ">
+                      <span className="font-bold text-base">3b</span>. If on
+                      line 3a you checked “Partnership” or “Trust/estate,” or
+                      checked “LLC” and entered “P” as its tax classification,
+                      and you are providing this form to a partnership, trust,
+                      or estate in which you have an ownership interest, check
+                      this box if you have any foreign partners, owners, or
+                      beneficiaries. See instructions . . . . . . . . .
+                      <span>
+                        {" "}
+                        <input
+                          {...register("threeB")}
+                          type="checkbox"
+                          value={"3bChecked"}
+                        />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  className="w-1/4 overflow-hidden"
+                  style={{
+                    // borderBottom: "2px solid #898989",
+                    borderLeft: "2px solid #898989",
+                  }}
+                >
+                  <div className=" p-1">
+                    <span className="font-bold text-base">4</span>. City,
+                    Exemptions (codes apply only to certain entities, not
+                    individuals; see instructions on page 3):
+                  </div>
+                  <div className="flex text-sm">
+                    Exempt payee code (if any)
+                    <input
+                      {...register("payeeCode")}
+                      style={{ borderBottom: "2px solid #898989" }}
+                      className=" overflow-hidden h-full p-2 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
+                    />
+                  </div>
+                  <div className="text-sm mt-2">
+                    Exemption from Foreign Account Tax Compliance Act (FATCA)
+                    reporting code (if any)
+                    <input
+                      style={{ borderBottom: "2px solid #898989" }}
+                      {...register("exemption")}
+                      className="overflow-hidden h-full p-2 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
+                    />
+                  </div>
+                  <br />
+                  <p className="text-center">
+                    (Applies to accounts maintained <br /> outside the United
+                    States.)
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="w-3/4">
                   {" "}
                   <div
                     className="w-full overflow-hidden"
@@ -267,6 +595,7 @@ const TraineeFormW9 = () => {
                   className="w-1/4 overflow-hidden"
                   style={{
                     borderBottom: "2px solid #898989",
+                    borderTop: "2px solid #898989",
                     borderLeft: "2px solid #898989",
                   }}
                 >
