@@ -287,7 +287,11 @@ const TraineeFormW9 = () => {
           requestOptions
         )
           .then((response) => response.text())
-          .then((result) => console.log(result))
+          .then((result) => {
+            result = JSON.parse(result);
+            alert(result.message);
+            console.log(result);
+          })
           .catch((error) => console.error(error));
       } catch (error) {
         console.error("Error filling PDF:", error);
