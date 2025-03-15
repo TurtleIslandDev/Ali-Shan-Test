@@ -34,7 +34,8 @@ const AddUserProgramManager = () => {
       authorizations: "",
     },
   });
-  const checkRole = watch("role");
+  const checkRole = watch("subRole");
+  const isDataVendor = watch("role");
   const onSubmit = async (data) => {
     const excludedKeys = ["role", "username", "password"];
     let newFields = {};
@@ -88,7 +89,17 @@ const AddUserProgramManager = () => {
       resetField(fieldsToReset[i]);
     }
   }, [checkRole]);
-  // useEffect(() => {}, [responseMessage]);
+  useEffect(() => {
+    // Only run this effect if responseMessage is set
+    if (responseMessage) {
+      const timer = setTimeout(() => {
+        setResponseMessage(""); // Reset the responseMessage after 5 seconds
+      }, 10000);
+
+      // Cleanup the timeout if component unmounts or responseMessage changes
+      return () => clearTimeout(timer);
+    }
+  }, [responseMessage]); //
   return (
     <div className="w-full  flex items-center justify-center">
       <div className="rounded-[38px] bg-white w-[780px] py-14 px-16 flex flex-col items-center justify-center gap-14">
@@ -103,6 +114,54 @@ const AddUserProgramManager = () => {
             ) : responseMessage?.status === "error" ? (
               <p className="text-red-400">{responseMessage?.message}</p>
             ) : null)}
+          <div className="w-full mb-8">
+            <p className="text-2xl text-[#222] mb-2">Select User Role</p>
+            <label className="input input-bordered flex bg-transparent items-center gap-2 relative">
+              <select
+                className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                placeholder="Select User Role"
+                {...register("role", { required: true })}
+              >
+                <option value="" disabled selected>
+                  Select User Role
+                </option>
+                <option value="bpo">BPO</option>
+                <option value="internal">Internal</option>
+                <option value="client">Client</option>
+                <option value="dataVendor">Data Vendor</option>
+              </select>
+            </label>
+            {errors.role && (
+              <span className="text-right text-red-500 text-xs">
+                *This field is required
+              </span>
+            )}
+          </div>
+
+          {isDataVendor === "dataVendor" &&
+            (checkRole === "partner" || "supplier") && (
+              <div className="w-full mb-8">
+                <p className="text-2xl text-[#222] mb-2">Select Sub Role</p>
+                <label className="input input-bordered flex bg-transparent items-center gap-2 relative">
+                  <select
+                    className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                    placeholder="Select User Role"
+                    {...register("subRole", { required: true })}
+                  >
+                    <option value="" disabled selected>
+                      Select Sub User Role
+                    </option>
+                    <option value="partner">Partner</option>
+                    <option value="supplier">Supplier</option>
+                  </select>
+                </label>
+                {errors.subRole && (
+                  <span className="text-right text-red-500 text-xs">
+                    *This field is required
+                  </span>
+                )}
+              </div>
+            )}
           <div className="w-full mb-5">
             <p className="text-2xl text-[#222] mb-2">User</p>
             <label className="input input-bordered flex items-center gap-2 ">
@@ -151,32 +210,8 @@ const AddUserProgramManager = () => {
               </span>
             )}
           </div>
-          <div className="w-full mb-8">
-            <p className="text-2xl text-[#222] mb-2">Select User Role</p>
-            <label className="input input-bordered flex bg-transparent items-center gap-2 relative">
-              <select
-                className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
-                placeholder="Select User Role"
-                {...register("role", { required: true })}
-              >
-                <option value="" disabled selected>
-                  Select User Role
-                </option>
-                <option value="bpo">BPO</option>
-                <option value="internal">Internal</option>
-                <option value="client">Client</option>
-                <option value="partner">Partner</option>
-                <option value="supplier">Supplier</option>
-              </select>
-            </label>
-            {errors.role && (
-              <span className="text-right text-red-500 text-xs">
-                *This field is required
-              </span>
-            )}
-          </div>
 
-          {checkRole === "partner" && (
+          {checkRole === "partner" && isDataVendor === "dataVendor" && (
             <div className="w-full">
               <div className="w-full mb-5">
                 <p className="text-2xl text-[#222] mb-2">Company</p>
@@ -441,7 +476,7 @@ const AddUserProgramManager = () => {
               </div>
             </div>
           )}
-          {checkRole === "supplier" && (
+          {checkRole === "supplier" && isDataVendor === "dataVendor" && (
             <div className="w-full">
               <div className="w-full mb-5">
                 <p className="text-2xl text-[#222] mb-2">Company</p>

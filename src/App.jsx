@@ -18,6 +18,12 @@ import AddUserProgramManager from "./pages/ProgramManagerPages/AddUserProgramMan
 import ContactInfo from "./components/IG/Fastrack Marketing/Inbound/Contact Info/ContactInfo";
 import NoContact from "./components/IG/Fastrack Marketing/Inbound/No Contact/NoContact";
 import ServiceFastrackMarketing from "./components/IG/Fastrack Marketing/Service/ServiceFastrackMarketing";
+import AgentTraineeNavigation from "./pages/navigation/AgentTraineeNavigation";
+import TraineeInteractionGuideFasTTrackOutbound from "./components/IG/TraineeInteractionGuideFasTTrackOutbound/TraineeInteractionGuideFasTTrackOutbound";
+import TraineeInteractionGuideFasTTrackInbound from "./components/IG/TraineeInteractionGuideFasTTrackInbound/TraineeInteractionGuideFasTTrackInbound";
+import DataNavigation from "./pages/adminPages/DataNavigation";
+import Form1099 from "./components/googleDriveForms/Form1099";
+import TestForm1099 from "./components/googleDriveForms/testForm";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -110,6 +116,11 @@ function App() {
               path="/admin-navigation/create-template"
               element={<CreateTemplatePage />}
             />
+            <Route path="/admin-navigation/data" element={<DataNavigation />} />
+            <Route
+              path="/admin-navigation/buzzword-admin"
+              element={<BuzzWord />}
+            />
             <Route
               path="/qc-and-supervisor-navigation/buzzword-supervisor"
               element={<BuzzWord />}
@@ -170,6 +181,30 @@ function App() {
               element={<AddUserNavigation />}
             />
             <Route path="/agent-navigation" element={<AgentNavigation />} />
+            <Route
+              path="/agent-trainee-navigation"
+              element={<AgentTraineeNavigation />}
+            />
+            <Route
+              path="/agent-trainee-navigation/buzzword-trainee"
+              element={<BuzzWordTrainee />}
+            />
+            <Route
+              path="/agent-trainee-navigation/trainee-interaction-guide-fasttrack"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <TraineeInteractionGuideFasTTrackOutbound />
+                </div>
+              }
+            />
+            <Route
+              path="/agent-trainee-navigation/trainee-interaction-guide-fasttrack/inbound"
+              element={
+                <div style={{ height: `${height}px` }}>
+                  <TraineeInteractionGuideFasTTrackInbound />
+                </div>
+              }
+            />
             <Route
               path="/broadcast-customer-navigation"
               element={<BroadcastCustomerNavigation />}
@@ -294,6 +329,8 @@ function App() {
                 </div>
               }
             />
+            <Route path="/form1099" element={<Form1099 />} />
+            <Route path="/testform1099" element={<TestForm1099 />} />
             <Route path="/*" element={<div>Page not found</div>} />
           </Routes>
         </Suspense>

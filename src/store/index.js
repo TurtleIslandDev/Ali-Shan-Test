@@ -12,8 +12,10 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import userReducer from "../features/slice/userSlice";
+import igSlice from "../features/slice/igSlice";
 export const rootReducer = combineReducers({
   user: userReducer,
+  ig: igSlice,
 });
 
 const persistConfig = {

@@ -37,17 +37,17 @@ const Login = () => {
         undefined,
         undefined,
         (res) => {
-          dispatch(
-            setUserAuth({ data: res.data }));
+          dispatch(setUserAuth({ data: res.data }));
           // resetForm();
           const resData = res.data;
-          
+
           if (resData.role === "agent") {
             setWait(true);
             setTimeout(() => {
               setWait(false);
-              window.location.href =
-                "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+              // window.location.href =
+              //   "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+              navigate("/agent-navigation");
             }, 3000);
           } else if (resData.role === "channelManager") {
             navigate("/channel-manager-navigation");
@@ -74,7 +74,7 @@ const Login = () => {
           } else if (resData.role === "broadcastCustomer") {
             navigate("/broadcast-customer-navigation");
           } else if (resData.role === "trainee") {
-            navigate("/agent-navigation");
+            navigate("/agent-trainee-navigation");
           }
         }
       );

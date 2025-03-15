@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import InformationSvg from "../../assets/SVGs/interactionGuides/InformationSvg";
-import QuestionSvg from './../../assets/SVGs/interactionGuides/QuestionSvg';
+import QuestionSvg from "./../../assets/SVGs/interactionGuides/QuestionSvg";
 
 const DropdownMenu = styled.div`
   position: absolute;
@@ -13,7 +13,7 @@ const DropdownMenu = styled.div`
   height: 284px;
   top: -300px;
   overflow-y: auto;
-  width:220px
+  width: 220px;
 `;
 
 const DropdownContainer = styled.div`
@@ -31,15 +31,14 @@ const AnswerBox = styled.div`
   padding: 16px;
   z-index: 1000;
   width: 200px;
-font-size: 12px;
-font-weight: 400;
-line-height: 18px;
-letter-spacing: 0.5px;
-text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
-color:#6F6F6F;
-
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #6f6f6f;
 `;
 
 const ListItem = styled.li`
@@ -50,7 +49,7 @@ const ListItem = styled.li`
   padding: 10px 20px;
   font-size: 12px;
   color: #228512;
-  font-weight:700;
+  font-weight: 700;
   &:hover {
     background-color: #f7f7f7;
   }
@@ -59,7 +58,7 @@ const ListItem = styled.li`
 const ArrowIcon = styled.svg`
   width: 12px;
   height: 6px;
-  transform: ${({ isOpen }) => (isOpen ? "rotate(-90deg)" : "rotate(0)")};
+  transform: ${({ isOpen }) => (isOpen ? "rotate(90deg)" : "rotate(0)")};
   transition: transform 0.2s;
 `;
 
@@ -82,8 +81,8 @@ const QuestionsDropdown = ({ questionsData }) => {
         !(answerBoxRef.current && answerBoxRef.current.contains(event.target))
       ) {
         setIsOpen(false); // Close the dropdown
-        setSelectedAnswer(null)
-        setSelectedIndex(null)
+        setSelectedAnswer(null);
+        setSelectedIndex(null);
       }
     };
 
