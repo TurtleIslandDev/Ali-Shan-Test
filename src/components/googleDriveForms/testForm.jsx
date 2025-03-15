@@ -120,7 +120,7 @@ const TestForm1099 = () => {
 
   const getFieldNames = async () => {
     // Load the PDF file
-    const existingPdfBytes = await fetch("/.pdf").then((res) =>
+    const existingPdfBytes = await fetch("/fw9.pdf").then((res) =>
       res.arrayBuffer()
     );
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
