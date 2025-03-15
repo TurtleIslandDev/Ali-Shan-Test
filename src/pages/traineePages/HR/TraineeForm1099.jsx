@@ -1,147 +1,410 @@
-import React, { useState, useRef } from "react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import React, { useRef } from "react";
 import b from "@assets/images/irs.jpg";
 import { useForm } from "react-hook-form";
+import { saveAs } from "file-saver";
+import { PDFDocument } from "pdf-lib";
+import { useSelector } from "react-redux";
 const TraineeForm1099 = () => {
+  const { token } = useSelector((state) => state.user);
   const formRef = useRef();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const generatePDF = async () => {
-    const formElement = formRef.current;
-    const inputs = formElement.querySelectorAll("input, textarea, button");
-    const originalValues = [];
 
-    // Replace inputs with span elements
-    inputs.forEach((input) => {
-      const span = document.createElement("span");
-      span.innerText =
-        input.type === "checkbox" ? (input.checked ? "✅" : "⬜") : input.value;
-
-      // Apply exact styles to match the original input
-      span.style.position = "absolute";
-      span.style.left = `${input.offsetLeft - 0}px`;
-      span.style.top = `${input.offsetTop - 3}px`;
-      span.style.width = `${input.offsetWidth}px`;
-      span.style.height = `${input.offsetHeight}px`;
-      span.style.fontSize = window.getComputedStyle(input).fontSize;
-      span.style.fontFamily = window.getComputedStyle(input).fontFamily;
-      span.style.fontWeight = 600;
-      span.style.color = "#ff0000";
-      span.style.background = "transparent";
-      span.style.border = "none";
-      span.style.padding = window.getComputedStyle(input).padding;
-      span.style.textAlign = window.getComputedStyle(input).textAlign;
-      span.style.display = "flex";
-      span.style.alignItems = "center";
-      span.style.justifyContent = "left";
-      span.style.lineHeight = window.getComputedStyle(input).lineHeight;
-      span.style.whiteSpace = "nowrap";
-      span.style.zIndex = "99999";
-
-      // Store original input reference for later restoration
-      originalValues.push({ input, span });
-
-      formElement.appendChild(span);
-      input.style.opacity = "0"; // Hide original input but keep space
-    });
-
-    // Capture form as an image
-    const canvas = await html2canvas(formElement, {
-      scale: 2, // Higher resolution for better quality
-      scrollX: 0,
-      scrollY: 0,
-      useCORS: true,
-    });
-
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-
-    // Define page size
-    const imgWidth = 190; // Max image width for A4 page
-    const pageHeight = 297; // A4 page height
-    const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
-
-    let yPosition = 0;
-
-    // Add multiple pages if content is longer than one page
-    while (yPosition < imgHeight) {
-      pdf.addImage(imgData, "PNG", 10, -yPosition + 10, imgWidth, imgHeight);
-      yPosition += pageHeight; // Move to the next section
-      if (yPosition < imgHeight) pdf.addPage();
-    }
-    pdf.save("form1099.pdf");
-    // Restore original form inputs
-    originalValues.forEach(({ input, span }) => {
-      formElement.removeChild(span);
-      input.style.opacity = "1";
-    });
-  };
-
-  // const generatePDF = async () => {
-  //   const formElement = formRef.current;
-  //   const inputs = formElement.querySelectorAll("input, textarea");
-
-  //   // Ensure inputs display their values as static text before capturing
-  //   inputs.forEach((input) => {
-  //     const span = document.createElement("span");
-  //     // const rect = input.getBoundingClientRect(); // Get accurate position
-  //     span.innerText =
-  //       input.type === "checkbox" ? (input.checked ? "✅" : "⬜") : input.value;
-
-  //     // Apply exact styles to match original input
-  //     span.style.position = "absolute";
-  //     span.style.left = `${input.offsetLeft - 0}px`;
-  //     span.style.top = `${input.offsetTop - 3}px`;
-  //     span.style.width = `${input.offsetWidth}px`;
-  //     span.style.height = `${input.offsetHeight}px`;
-  //     span.style.fontSize = window.getComputedStyle(input).fontSize;
-  //     span.style.fontFamily = window.getComputedStyle(input).fontFamily;
-  //     span.style.fontWeight = 600;
-  //     span.style.color = "#ff0000";
-  //     span.style.background = "transparent";
-  //     span.style.border = "none";
-  //     span.style.padding = window.getComputedStyle(input).padding;
-  //     span.style.textAlign = window.getComputedStyle(input).textAlign;
-  //     span.style.display = "flex";
-  //     span.style.alignItems = "center";
-  //     span.style.justifyContent = "left";
-  //     span.style.lineHeight = window.getComputedStyle(input).lineHeight;
-  //     span.style.whiteSpace = "nowrap";
-  //     // span.style.overflow = "hidden";
-  //     span.style.zIndex = "99999";
-
-  //     formElement.appendChild(span);
-  //     input.style.opacity = "0"; // Hide original input but keep space
-  //   });
-
-  //   // Capture the form as an image
-  //   const canvas = await html2canvas(formElement, {
-  //     scrollX: 0,
-  //     scrollY: 0,
-  //     useCORS: true,
-  //   });
-  //   const imgData = canvas.toDataURL("image/png");
-
-  //   // Generate PDF
-  //   const pdf = new jsPDF("p", "mm", "a4");
-  //   pdf.addImage(imgData, "PNG", 10, 10, 190, 0);
-  //   pdf.save("FormData.pdf"); // Download the PDF
-
-  //   // Clean up: Remove the generated span elements & restore inputs
-  //   inputs.forEach((input) => {
-  //     formElement.removeChild(formElement.lastChild);
-  //     input.style.opacity = "1";
-  //   });
-  // };
   const onSubmit = async (data) => {
     console.log(data);
+    try {
+      const existingPdfBytes = await fetch("/f1099msc.pdf").then((res) =>
+        res.arrayBuffer()
+      );
+      const pdfDoc = await PDFDocument.load(existingPdfBytes);
+      const form = pdfDoc.getForm();
+      form
+        .getTextField(
+          "topmostSubform[0].Copy1[0].CopyHeader[0].CalendarYear[0].f2_1[0]"
+        )
+        .setText(data.copy1calenderYear);
+      if (data.copy1Void === true) {
+        form
+          .getCheckBox("topmostSubform[0].Copy1[0].CopyHeader[0].c2_1[0]")
+          .check();
+      } else {
+        form
+          .getCheckBox("topmostSubform[0].Copy1[0].CopyHeader[0].c2_1[0]")
+          .uncheck();
+      }
+      if (data.copy1corrected === true) {
+        form
+          .getCheckBox("topmostSubform[0].Copy1[0].CopyHeader[0].c2_1[1]")
+          .check();
+      } else {
+        form
+          .getCheckBox("topmostSubform[0].Copy1[0].CopyHeader[0].c2_1[1]")
+          .uncheck();
+      }
+      form
+        .getTextField("topmostSubform[0].Copy1[0].LeftColumn[0].f2_2[0]")
+        .setText(data.copy1payerName);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].LeftColumn[0].f2_3[0]")
+        .setText(data.copy1payersTin);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].LeftColumn[0].f2_4[0]")
+        .setText(data.copy1recipientsTin);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].LeftColumn[0].f2_5[0]")
+        .setText(data.copy1recipientsName);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].LeftColumn[0].f2_6[0]")
+        .setText(data.copy1streetAddress);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].LeftColumn[0].f2_7[0]")
+        .setText(data.copy1cityOrTown);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].LeftColumn[0].f2_8[0]")
+        .setText(data.copy1accountNumber);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_9[0]")
+        .setText(data.copy1rents);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_10[0]")
+        .setText(data.copy1royalties);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_11[0]")
+        .setText(data.copy1otherIncome);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_12[0]")
+        .setText(data.copy1federalIncomeTextWithheld);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_13[0]")
+        .setText(data.copy1fishingBoatProceeds);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_14[0]")
+        .setText(data.copy1medicalAndHealthCarePayments);
+      if (data.copy1payerDirectSales === true) {
+        form
+          .getCheckBox("topmostSubform[0].Copy1[0].RightColumn[0].c2_4[0]")
+          .check();
+      } else {
+        form
+          .getCheckBox("topmostSubform[0].Copy1[0].RightColumn[0].c2_4[0]")
+          .uncheck();
+      }
+      if (data.copy1FATCA !== false) {
+        form
+          .getCheckBox(
+            "topmostSubform[0].Copy1[0].RightColumn[0].TagCorrectingSubform[0].c2_3[0]"
+          )
+          .check();
+      } else {
+        form
+          .getCheckBox(
+            "topmostSubform[0].Copy1[0].RightColumn[0].TagCorrectingSubform[0].c2_3[0]"
+          )
+          .uncheck();
+      }
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_15[0]")
+        .setText(data.copy1substitutePayments);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_16[0]")
+        .setText(data.copy1cropInsurance);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_17[0]")
+        .setText(data.copy1grossProceedsPaid);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_18[0]")
+        .setText(data.copy1fishPurchased);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_19[0]")
+        .setText(data.copy1section409ADeferrals);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].RightColumn[0].f2_21[0]")
+        .setText(data.copy1nonQualifiedDeferred);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].Box16_ReadOrder[0].f2_22[0]")
+        .setText(data.copy1stateTexWithheld1);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].Box16_ReadOrder[0].f2_23[0]")
+        .setText(data.copy1stateTexWithheld2);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].Box17_ReadOrder[0].f2_24[0]")
+        .setText(data.copy1state1);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].Box17_ReadOrder[0].f2_25[0]")
+        .setText(data.copy1state2);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].f2_26[0]")
+        .setText(data.copy1stateIncome1);
+      form
+        .getTextField("topmostSubform[0].Copy1[0].f2_27[0]")
+        .setText(data.copy1stateIncome2);
 
-    await generatePDF();
-    console.log("pdf downloaded");
+      //form COPY b Fields
+
+      form
+        .getTextField(
+          "topmostSubform[0].CopyB[0].CopyHeader[0].CalendarYear[0].f2_1[0]"
+        )
+        .setText(data.copyBcalenderYear);
+      if (data.copyBcorrected === true) {
+        form
+          .getCheckBox("topmostSubform[0].CopyB[0].CopyHeader[0].c2_1[0]")
+          .check();
+      } else {
+        form
+          .getCheckBox("topmostSubform[0].CopyB[0].CopyHeader[0].c2_1[0]")
+          .uncheck();
+      }
+      form
+        .getTextField("topmostSubform[0].CopyB[0].LeftColumn[0].f2_2[0]")
+        .setText(data.copyBpayerName);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].LeftColumn[0].f2_3[0]")
+        .setText(data.copyBpayersTin);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].LeftColumn[0].f2_4[0]")
+        .setText(data.copyBrecipientsTin);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].LeftColumn[0].f2_5[0]")
+        .setText(data.copyBrecipientsName);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].LeftColumn[0].f2_6[0]")
+        .setText(data.copyBstreetAddress);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].LeftColumn[0].f2_7[0]")
+        .setText(data.copyBcityOrTown);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].LeftColumn[0].f2_8[0]")
+        .setText(data.copyBaccountNumber);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_9[0]")
+        .setText(data.copyBrents);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_10[0]")
+        .setText(data.copyBroyalties);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_11[0]")
+        .setText(data.copyBotherIncome);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_12[0]")
+        .setText(data.copyBfederalIncomeTextWithheld);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_13[0]")
+        .setText(data.copyBfishingBoatProceeds);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_14[0]")
+        .setText(data.copyBmedicalAndHealthCarePayments);
+      if (data.copyBpayerDirectSales === true) {
+        form
+          .getCheckBox("topmostSubform[0].CopyB[0].RightColumn[0].c2_4[0]")
+          .check();
+      } else {
+        form
+          .getCheckBox("topmostSubform[0].CopyB[0].RightColumn[0].c2_4[0]")
+          .uncheck();
+      }
+      if (data.copyBFATCA !== false) {
+        form
+          .getCheckBox(
+            "topmostSubform[0].CopyB[0].RightColumn[0].TagCorrectingSubform[0].c2_3[0]"
+          )
+          .check();
+      } else {
+        form
+          .getCheckBox(
+            "topmostSubform[0].CopyB[0].RightColumn[0].TagCorrectingSubform[0].c2_3[0]"
+          )
+          .uncheck();
+      }
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_15[0]")
+        .setText(data.copyBsubstitutePayments);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_16[0]")
+        .setText(data.copyBcropInsurance);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_17[0]")
+        .setText(data.copyBgrossProceedsPaid);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_18[0]")
+        .setText(data.copyBfishPurchased);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_19[0]")
+        .setText(data.copyBsection409ADeferrals);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].RightColumn[0].f2_21[0]")
+        .setText(data.copyBnonQualifiedDeferred);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].Box16_ReadOrder[0].f2_22[0]")
+        .setText(data.copyBstateTexWithheld1);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].Box16_ReadOrder[0].f2_23[0]")
+        .setText(data.copyBstateTexWithheld2);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].Box17_ReadOrder[0].f2_24[0]")
+        .setText(data.copyBstate1);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].Box17_ReadOrder[0].f2_25[0]")
+        .setText(data.copyBstate2);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].f2_26[0]")
+        .setText(data.copyBstateIncome1);
+      form
+        .getTextField("topmostSubform[0].CopyB[0].f2_27[0]")
+        .setText(data.copyBstateIncome2);
+
+      //form copy 2
+      form
+        .getTextField(
+          "topmostSubform[0].Copy2[0].CopyHeader[0].CalendarYear[0].f2_1[0]"
+        )
+        .setText(data.copy2calenderYear);
+
+      if (data.copy2corrected === true) {
+        form
+          .getCheckBox("topmostSubform[0].Copy2[0].CopyHeader[0].c2_1[0]")
+          .check();
+      } else {
+        form
+          .getCheckBox("topmostSubform[0].Copy2[0].CopyHeader[0].c2_1[0]")
+          .uncheck();
+      }
+      form
+        .getTextField("topmostSubform[0].Copy2[0].LeftColumn[0].f2_2[0]")
+        .setText(data.copy2payerName);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].LeftColumn[0].f2_3[0]")
+        .setText(data.copy2payersTin);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].LeftColumn[0].f2_4[0]")
+        .setText(data.copy2recipientsTin);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].LeftColumn[0].f2_5[0]")
+        .setText(data.copy2recipientsName);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].LeftColumn[0].f2_6[0]")
+        .setText(data.copy2streetAddress);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].LeftColumn[0].f2_7[0]")
+        .setText(data.copy2cityOrTown);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].LeftColumn[0].f2_8[0]")
+        .setText(data.copy2accountNumber);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_9[0]")
+        .setText(data.copy2rents);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_10[0]")
+        .setText(data.copy2royalties);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_11[0]")
+        .setText(data.copy2otherIncome);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_12[0]")
+        .setText(data.copy2federalIncomeTextWithheld);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_13[0]")
+        .setText(data.copy2fishingBoatProceeds);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_14[0]")
+        .setText(data.copy2medicalAndHealthCarePayments);
+      if (data.copy2payerDirectSales === true) {
+        form
+          .getCheckBox("topmostSubform[0].Copy2[0].RightColumn[0].c2_4[0]")
+          .check();
+      } else {
+        form
+          .getCheckBox("topmostSubform[0].Copy2[0].RightColumn[0].c2_4[0]")
+          .uncheck();
+      }
+      if (data.copy2FATCA !== false) {
+        form
+          .getCheckBox(
+            "topmostSubform[0].Copy2[0].RightColumn[0].TagCorrectingSubform[0].c2_3[0]"
+          )
+          .check();
+      } else {
+        form
+          .getCheckBox(
+            "topmostSubform[0].Copy2[0].RightColumn[0].TagCorrectingSubform[0].c2_3[0]"
+          )
+          .uncheck();
+      }
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_15[0]")
+        .setText(data.copy2substitutePayments);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_16[0]")
+        .setText(data.copy2cropInsurance);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_17[0]")
+        .setText(data.copy2grossProceedsPaid);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_18[0]")
+        .setText(data.copy2fishPurchased);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_19[0]")
+        .setText(data.copy2section409ADeferrals);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].RightColumn[0].f2_21[0]")
+        .setText(data.copy2nonQualifiedDeferred);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].Box16_ReadOrder[0].f2_22[0]")
+        .setText(data.copy2stateTexWithheld1);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].Box16_ReadOrder[0].f2_23[0]")
+        .setText(data.copy2stateTexWithheld2);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].Box17_ReadOrder[0].f2_24[0]")
+        .setText(data.copy2state1);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].Box17_ReadOrder[0].f2_25[0]")
+        .setText(data.copy2state2);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].f2_26[0]")
+        .setText(data.copy2stateIncome1);
+      form
+        .getTextField("topmostSubform[0].Copy2[0].f2_27[0]")
+        .setText(data.copy2stateIncome2);
+
+      const pdfBytes = await pdfDoc.save();
+      saveAs(
+        new Blob([pdfBytes], { type: "application/pdf" }),
+        "filled-form.pdf"
+      );
+
+      let blobPDF = new Blob([pdfBytes], { type: "application/pdf" });
+
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${token}`);
+
+      const formdata = new FormData();
+      formdata.append("file", blobPDF, "form1099msc.pdf");
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formdata,
+        redirect: "follow",
+      };
+
+      fetch(
+        "https://endpoint.itsbuzzmarketing.com/user/upload_document",
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => {
+          result = JSON.parse(result);
+          alert(result.message);
+          console.log(result);
+        })
+        .catch((error) => console.error(error));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -247,7 +510,17 @@ const TraineeForm1099 = () => {
       </section>
       <section className="px-20 mt-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* first form */}
+          {/* first form COPY 1*/}
+          <div className="flex justify-center items-center gap-10">
+            <div className=" flex gap-2 items-center">
+              <input {...register("copy1Void")} type="checkbox" />
+              <label className=" text-xl p-1 ">VOID</label>
+            </div>
+            <div className=" flex gap-2 items-center">
+              <input {...register("copy1corrected")} type="checkbox" />
+              <label className=" text-xl p-1 ">CORRECTED</label>
+            </div>
+          </div>
           <div>
             <div className="flex w-full">
               <div className="w-[40%]">
@@ -258,7 +531,7 @@ const TraineeForm1099 = () => {
                     no.
                   </div>
                   <textarea
-                    {...register("payerName")}
+                    {...register("copy1payerName")}
                     className="w-full overflow-hidden h-full p-2 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     placeholder="Enter details here..."
                   ></textarea>
@@ -268,7 +541,7 @@ const TraineeForm1099 = () => {
                     <label className=" text-xs p-1 ">PAYER’S TIN</label>
                     <span className="ml-1 flex gap-2">
                       <input
-                        {...register("payersTin")}
+                        {...register("copy1payersTin")}
                         type="text"
                         className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -278,8 +551,9 @@ const TraineeForm1099 = () => {
                     <label className=" text-xs p-1 ">RECIPIENT’S TIN</label>
                     <span className="ml-1 flex gap-2">
                       <input
-                        {...register("recipientsTin")}
+                        {...register("copy1recipientsTin")}
                         type="text"
+                        maxLength={11}
                         className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
                     </span>
@@ -289,7 +563,7 @@ const TraineeForm1099 = () => {
                   <label className=" text-xs p-1 ">RECIPIENT’S name</label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("recipientsName")}
+                      {...register("copy1recipientsName")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -301,7 +575,7 @@ const TraineeForm1099 = () => {
                   </label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("streetAddress")}
+                      {...register("copy1streetAddress")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -314,7 +588,7 @@ const TraineeForm1099 = () => {
                   </label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("cityOrTown")}
+                      {...register("copy1cityOrTown")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -328,11 +602,7 @@ const TraineeForm1099 = () => {
                       13 FATCA filing requirement
                     </label>
                     <span className="ml-1 flex gap-2">
-                      <input
-                        {...register("FATCA")}
-                        type="checkbox"
-                        value="true"
-                      />
+                      <input {...register("copy1FATCA")} type="checkbox" />
                     </span>
                   </div>
                 </div>
@@ -342,7 +612,7 @@ const TraineeForm1099 = () => {
                   </label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("accountNumber")}
+                      {...register("copy1accountNumber")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -356,7 +626,7 @@ const TraineeForm1099 = () => {
                     <span className="ml-1 flex gap-2">
                       $
                       <input
-                        {...register("rents")}
+                        {...register("copy1rents")}
                         type="text"
                         className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -367,7 +637,7 @@ const TraineeForm1099 = () => {
                     <span className="ml-1 flex gap-2">
                       $
                       <input
-                        {...register("royalties")}
+                        {...register("copy1royalties")}
                         type="text"
                         className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -378,7 +648,7 @@ const TraineeForm1099 = () => {
                     <span className="ml-1 flex gap-2">
                       $
                       <input
-                        {...register("otherIncome")}
+                        {...register("copy1otherIncome")}
                         type="text"
                         className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -392,7 +662,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("fishingBoatProceeds")}
+                      {...register("copy1fishingBoatProceeds")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -405,7 +675,10 @@ const TraineeForm1099 = () => {
                     consumer products to recipient for resale
                   </label>
                   <span className="ml-1 flex gap-2">
-                    <input {...register("payerDirectSales")} type="checkbox" />
+                    <input
+                      {...register("copy1payerDirectSales")}
+                      type="checkbox"
+                    />
                   </span>
                 </div>
                 <div className="w-full border border-black h-24 flex flex-col justify-between">
@@ -415,7 +688,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2 font-semibold">
                     $
                     <input
-                      {...register("cropInsurance")}
+                      {...register("copy1cropInsurance")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -428,7 +701,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("fishPurchased")}
+                      {...register("copy1fishPurchased")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -441,7 +714,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("excessGolden")}
+                      {...register("copy1excessGolden")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -452,7 +725,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2 border-dashed border-black">
                     $
                     <input
-                      {...register("stateIncome1")}
+                      {...register("copy1stateTexWithheld1")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -461,7 +734,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("stateIncome2")}
+                      {...register("copy1stateTexWithheld2")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -485,8 +758,9 @@ const TraineeForm1099 = () => {
                       </label>
                       <span className="ml-1 flex gap-2">
                         <input
-                          {...register("calenderYear")}
+                          {...register("copy1calenderYear")}
                           type="text"
+                          maxLength={"4"}
                           className="w-[80%] mb-1 p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
                       </span>
@@ -507,7 +781,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("federalIncomeTextWithheld")}
+                          {...register("copy1federalIncomeTextWithheld")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -520,7 +794,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("medicalAndHealthCarePayments")}
+                          {...register("copy1medicalAndHealthCarePayments")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -533,7 +807,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("substitutePayments")}
+                          {...register("copy1substitutePayments")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -546,7 +820,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("grossProceedsPaid")}
+                          {...register("copy1grossProceedsPaid")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -559,7 +833,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("section409ADeferrals")}
+                          {...register("copy1section409ADeferrals")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -572,7 +846,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("nonQualifiedDeferred")}
+                          {...register("copy1nonQualifiedDeferred")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -585,7 +859,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2 border-dashed border-black">
                         $
                         <input
-                          {...register("state1")}
+                          {...register("copy1state1")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -594,7 +868,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("state2")}
+                          {...register("copy1state2")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -615,7 +889,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2 border-dashed border-black">
                         $
                         <input
-                          {...register("stateIncome1")}
+                          {...register("copy1stateIncome1")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -624,7 +898,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("stateText2")}
+                          {...register("copy1stateIncome2")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -651,7 +925,13 @@ const TraineeForm1099 = () => {
               <p>Department of the Treasury - Internal Revenue Service</p>
             </div>
           </div>
-          {/* second form */}
+          {/* second form COPY B*/}
+          <div className="flex justify-center items-center gap-10">
+            <div className=" flex gap-2 items-center">
+              <input {...register("copyBcorrected")} type="checkbox" />
+              <label className=" text-xl p-1 ">CORRECTED (if checked)</label>
+            </div>
+          </div>
           <div>
             <div className="flex w-full">
               <div className="w-[40%]">
@@ -662,7 +942,7 @@ const TraineeForm1099 = () => {
                     no.
                   </div>
                   <textarea
-                    {...register("payerName")}
+                    {...register("copyBpayerName")}
                     className="w-full overflow-hidden h-full p-2 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     placeholder="Enter details here..."
                   ></textarea>
@@ -672,7 +952,7 @@ const TraineeForm1099 = () => {
                     <label className=" text-xs p-1 ">PAYER’S TIN</label>
                     <span className="ml-1 flex gap-2">
                       <input
-                        {...register("payersTin")}
+                        {...register("copyBpayersTin")}
                         type="text"
                         className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -682,8 +962,9 @@ const TraineeForm1099 = () => {
                     <label className=" text-xs p-1 ">RECIPIENT’S TIN</label>
                     <span className="ml-1 flex gap-2">
                       <input
-                        {...register("recipientsTin")}
+                        {...register("copyBrecipientsTin")}
                         type="text"
+                        maxLength={11}
                         className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
                     </span>
@@ -693,7 +974,7 @@ const TraineeForm1099 = () => {
                   <label className=" text-xs p-1 ">RECIPIENT’S name</label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("recipientsName")}
+                      {...register("copyBrecipientsName")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -705,7 +986,7 @@ const TraineeForm1099 = () => {
                   </label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("streetAddress")}
+                      {...register("copyBstreetAddress")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -718,7 +999,7 @@ const TraineeForm1099 = () => {
                   </label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("cityOrTown")}
+                      {...register("copyBcityOrTown")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -732,11 +1013,7 @@ const TraineeForm1099 = () => {
                       13 FATCA filing requirement
                     </label>
                     <span className="ml-1 flex gap-2">
-                      <input
-                        {...register("FATCA")}
-                        type="checkbox"
-                        value="true"
-                      />
+                      <input {...register("copyBFATCA")} type="checkbox" />
                     </span>
                   </div>
                 </div>
@@ -746,7 +1023,7 @@ const TraineeForm1099 = () => {
                   </label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("accountNumber")}
+                      {...register("copyBaccountNumber")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -760,7 +1037,7 @@ const TraineeForm1099 = () => {
                     <span className="ml-1 flex gap-2">
                       $
                       <input
-                        {...register("rents")}
+                        {...register("copyBrents")}
                         type="text"
                         className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -771,7 +1048,7 @@ const TraineeForm1099 = () => {
                     <span className="ml-1 flex gap-2">
                       $
                       <input
-                        {...register("royalties")}
+                        {...register("copyBroyalties")}
                         type="text"
                         className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -782,7 +1059,7 @@ const TraineeForm1099 = () => {
                     <span className="ml-1 flex gap-2">
                       $
                       <input
-                        {...register("otherIncome")}
+                        {...register("copyBotherIncome")}
                         type="text"
                         className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -796,7 +1073,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("fishingBoatProceeds")}
+                      {...register("copyBfishingBoatProceeds")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -809,7 +1086,10 @@ const TraineeForm1099 = () => {
                     consumer products to recipient for resale
                   </label>
                   <span className="ml-1 flex gap-2">
-                    <input {...register("payerDirectSales")} type="checkbox" />
+                    <input
+                      {...register("copyBpayerDirectSales")}
+                      type="checkbox"
+                    />
                   </span>
                 </div>
                 <div className="w-full border border-black h-24 flex flex-col justify-between">
@@ -819,7 +1099,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2 font-semibold">
                     $
                     <input
-                      {...register("cropInsurance")}
+                      {...register("copyBcropInsurance")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -832,7 +1112,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("fishPurchased")}
+                      {...register("copyBfishPurchased")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -845,7 +1125,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("excessGolden")}
+                      {...register("copyBexcessGolden")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -856,7 +1136,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2 border-dashed border-black">
                     $
                     <input
-                      {...register("stateIncome1")}
+                      {...register("copyBstateTexWithheld1")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -865,7 +1145,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("stateIncome2")}
+                      {...register("copyBstateTexWithheld2")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -889,8 +1169,9 @@ const TraineeForm1099 = () => {
                       </label>
                       <span className="ml-1 flex gap-2">
                         <input
-                          {...register("calenderYear")}
+                          {...register("copyBcalenderYear")}
                           type="text"
+                          maxLength={"4"}
                           className="w-[80%] mb-1 p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
                       </span>
@@ -911,7 +1192,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("federalIncomeTextWithheld")}
+                          {...register("copyBfederalIncomeTextWithheld")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -924,7 +1205,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("medicalAndHealthCarePayments")}
+                          {...register("copyBmedicalAndHealthCarePayments")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -937,7 +1218,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("substitutePayments")}
+                          {...register("copyBsubstitutePayments")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -950,7 +1231,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("grossProceedsPaid")}
+                          {...register("copyBgrossProceedsPaid")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -963,7 +1244,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("section409ADeferrals")}
+                          {...register("copyBsection409ADeferrals")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -976,7 +1257,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("nonQualifiedDeferred")}
+                          {...register("copyBnonQualifiedDeferred")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -989,7 +1270,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2 border-dashed border-black">
                         $
                         <input
-                          {...register("state1")}
+                          {...register("copyBstate1")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -998,7 +1279,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("state2")}
+                          {...register("copyBstate2")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1028,7 +1309,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2 border-dashed border-black">
                         $
                         <input
-                          {...register("stateIncome1")}
+                          {...register("copyBstateIncome1")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1037,7 +1318,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("stateText2")}
+                          {...register("copyBstateIncome2")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1282,7 +1563,13 @@ const TraineeForm1099 = () => {
               </div>
             </div>
           </div>
-          {/* third form */}
+          {/* third form COPY 2*/}
+          <div className="flex justify-center items-center gap-10">
+            <div className=" flex gap-2 items-center">
+              <input {...register("copy2corrected")} type="checkbox" />
+              <label className=" text-xl p-1 ">CORRECTED (if checked)</label>
+            </div>
+          </div>
           <div>
             <div className="flex w-full">
               <div className="w-[40%]">
@@ -1293,7 +1580,7 @@ const TraineeForm1099 = () => {
                     no.
                   </div>
                   <textarea
-                    {...register("payerName")}
+                    {...register("copy2payerName")}
                     className="w-full overflow-hidden h-full p-2 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     placeholder="Enter details here..."
                   ></textarea>
@@ -1303,7 +1590,7 @@ const TraineeForm1099 = () => {
                     <label className=" text-xs p-1 ">PAYER’S TIN</label>
                     <span className="ml-1 flex gap-2">
                       <input
-                        {...register("payersTin")}
+                        {...register("copy2payersTin")}
                         type="text"
                         className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -1313,7 +1600,8 @@ const TraineeForm1099 = () => {
                     <label className=" text-xs p-1 ">RECIPIENT’S TIN</label>
                     <span className="ml-1 flex gap-2">
                       <input
-                        {...register("recipientsTin")}
+                        {...register("copy2recipientsTin")}
+                        maxLength={11}
                         type="text"
                         className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -1324,7 +1612,7 @@ const TraineeForm1099 = () => {
                   <label className=" text-xs p-1 ">RECIPIENT’S name</label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("recipientsName")}
+                      {...register("copy2recipientsName")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1336,7 +1624,7 @@ const TraineeForm1099 = () => {
                   </label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("streetAddress")}
+                      {...register("copy2streetAddress")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1349,7 +1637,7 @@ const TraineeForm1099 = () => {
                   </label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("cityOrTown")}
+                      {...register("copy2cityOrTown")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1364,7 +1652,7 @@ const TraineeForm1099 = () => {
                     </label>
                     <span className="ml-1 flex gap-2">
                       <input
-                        {...register("FATCA")}
+                        {...register("copy2FATCA")}
                         type="checkbox"
                         value="true"
                       />
@@ -1377,7 +1665,7 @@ const TraineeForm1099 = () => {
                   </label>
                   <span className="ml-1 flex gap-2">
                     <input
-                      {...register("accountNumber")}
+                      {...register("copy2accountNumber")}
                       type="text"
                       className="w-full p-3 h-16 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1391,7 +1679,7 @@ const TraineeForm1099 = () => {
                     <span className="ml-1 flex gap-2">
                       $
                       <input
-                        {...register("rents")}
+                        {...register("copy2rents")}
                         type="text"
                         className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -1402,7 +1690,7 @@ const TraineeForm1099 = () => {
                     <span className="ml-1 flex gap-2">
                       $
                       <input
-                        {...register("royalties")}
+                        {...register("copy2royalties")}
                         type="text"
                         className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -1413,7 +1701,7 @@ const TraineeForm1099 = () => {
                     <span className="ml-1 flex gap-2">
                       $
                       <input
-                        {...register("otherIncome")}
+                        {...register("copy2otherIncome")}
                         type="text"
                         className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                       />
@@ -1427,7 +1715,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("fishingBoatProceeds")}
+                      {...register("copy2fishingBoatProceeds")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1440,7 +1728,10 @@ const TraineeForm1099 = () => {
                     consumer products to recipient for resale
                   </label>
                   <span className="ml-1 flex gap-2">
-                    <input {...register("payerDirectSales")} type="checkbox" />
+                    <input
+                      {...register("copy2payerDirectSales")}
+                      type="checkbox"
+                    />
                   </span>
                 </div>
                 <div className="w-full border border-black h-24 flex flex-col justify-between">
@@ -1450,7 +1741,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2 font-semibold">
                     $
                     <input
-                      {...register("cropInsurance")}
+                      {...register("copy2cropInsurance")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1463,7 +1754,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("fishPurchased")}
+                      {...register("copy2fishPurchased")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1476,7 +1767,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("excessGolden")}
+                      {...register("copy2excessGolden")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1487,7 +1778,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2 border-dashed border-black">
                     $
                     <input
-                      {...register("stateIncome1")}
+                      {...register("copy2stateIncome1")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1496,7 +1787,7 @@ const TraineeForm1099 = () => {
                   <span className="ml-1 flex gap-2">
                     $
                     <input
-                      {...register("stateIncome2")}
+                      {...register("copy2stateIncome2")}
                       type="text"
                       className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                     />
@@ -1520,7 +1811,7 @@ const TraineeForm1099 = () => {
                       </label>
                       <span className="ml-1 flex gap-2">
                         <input
-                          {...register("calenderYear")}
+                          {...register("copy2calenderYear")}
                           type="text"
                           className="w-[80%] mb-1 p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1542,7 +1833,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("federalIncomeTextWithheld")}
+                          {...register("copy2federalIncomeTextWithheld")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1555,7 +1846,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("medicalAndHealthCarePayments")}
+                          {...register("copy2medicalAndHealthCarePayments")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1568,7 +1859,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("substitutePayments")}
+                          {...register("copy2substitutePayments")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1581,7 +1872,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("grossProceedsPaid")}
+                          {...register("copy2grossProceedsPaid")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1594,7 +1885,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("section409ADeferrals")}
+                          {...register("copy2section409ADeferrals")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1607,7 +1898,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("nonQualifiedDeferred")}
+                          {...register("copy2nonQualifiedDeferred")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1620,7 +1911,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2 border-dashed border-black">
                         $
                         <input
-                          {...register("state1")}
+                          {...register("copy2state1")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1629,7 +1920,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("state2")}
+                          {...register("copy2state2")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1652,7 +1943,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2 border-dashed border-black">
                         $
                         <input
-                          {...register("stateIncome1")}
+                          {...register("copy2stateIncome1")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />
@@ -1661,7 +1952,7 @@ const TraineeForm1099 = () => {
                       <span className="ml-1 flex gap-2">
                         $
                         <input
-                          {...register("stateText2")}
+                          {...register("copy2stateText2")}
                           type="text"
                           className="w-full p-3 h-3 text-sm border-none outline-none resize-none bg-gray-100 focus:bg-white focus:ring-0 focus:border-none"
                         />

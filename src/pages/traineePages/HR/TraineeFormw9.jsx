@@ -1,6 +1,4 @@
 import React, { useState, useRef } from "react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import { useForm } from "react-hook-form";
 import { saveAs } from "file-saver";
 import { PDFDocument } from "pdf-lib";
