@@ -18,8 +18,6 @@
     "cors": "^2.8.5",
     "file-saver": "^2.0.5",
     "flowbite": "^2.5.2",
-    "googleapis": "^146.0.0",
-    "html2canvas": "^1.4.1",
     "jspdf": "^3.0.0",
     "moment": "^2.30.1",
     "pdf-lib": "^1.17.1",

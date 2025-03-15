@@ -1,6 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import React, { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 // import {} from "../../assets/docs/fw9.pdf"
 import { PDFDocument } from "pdf-lib";
@@ -12,74 +10,74 @@ const TestForm1099 = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const generatePDF = async () => {
-    const formElement = formRef.current;
-    const inputs = formElement.querySelectorAll("input, textarea");
+  // const generatePDF = async () => {
+  //   const formElement = formRef.current;
+  //   const inputs = formElement.querySelectorAll("input, textarea");
 
-    const formRect = formElement.getBoundingClientRect();
+  //   const formRect = formElement.getBoundingClientRect();
 
-    inputs.forEach((input) => {
-      const rect = input.getBoundingClientRect();
-      const span = document.createElement("span");
+  //   inputs.forEach((input) => {
+  //     const rect = input.getBoundingClientRect();
+  //     const span = document.createElement("span");
 
-      span.innerText = input.value;
+  //     span.innerText = input.value;
 
-      // Apply styles to match input field
-      span.style.position = "absolute";
-      span.style.left = `${rect.left - formRect.left + window.scrollX}px`;
-      span.style.top = `${rect.top - formRect.top + window.scrollY}px`;
-      span.style.width = `${rect.width}px`;
-      span.style.height = `${rect.height}px`;
-      span.style.lineHeight = window.getComputedStyle(input).lineHeight;
-      span.style.fontSize = window.getComputedStyle(input).fontSize;
-      span.style.fontFamily = window.getComputedStyle(input).fontFamily;
-      span.style.fontWeight = window.getComputedStyle(input).fontWeight;
-      span.style.color = "#000";
-      span.style.background = "transparent";
-      span.style.border = "none";
-      span.style.padding = window.getComputedStyle(input).padding;
-      span.style.textAlign = window.getComputedStyle(input).textAlign;
-      span.style.display = "flex";
-      span.style.alignItems = "center"; // Ensures vertical centering
-      span.style.justifyContent = "left";
-      span.style.overflow = "visible"; // Prevents text cutoff
-      span.style.whiteSpace = "pre-wrap"; // Ensures multi-line text displays correctly
-      span.style.zIndex = "10";
+  //     // Apply styles to match input field
+  //     span.style.position = "absolute";
+  //     span.style.left = `${rect.left - formRect.left + window.scrollX}px`;
+  //     span.style.top = `${rect.top - formRect.top + window.scrollY}px`;
+  //     span.style.width = `${rect.width}px`;
+  //     span.style.height = `${rect.height}px`;
+  //     span.style.lineHeight = window.getComputedStyle(input).lineHeight;
+  //     span.style.fontSize = window.getComputedStyle(input).fontSize;
+  //     span.style.fontFamily = window.getComputedStyle(input).fontFamily;
+  //     span.style.fontWeight = window.getComputedStyle(input).fontWeight;
+  //     span.style.color = "#000";
+  //     span.style.background = "transparent";
+  //     span.style.border = "none";
+  //     span.style.padding = window.getComputedStyle(input).padding;
+  //     span.style.textAlign = window.getComputedStyle(input).textAlign;
+  //     span.style.display = "flex";
+  //     span.style.alignItems = "center"; // Ensures vertical centering
+  //     span.style.justifyContent = "left";
+  //     span.style.overflow = "visible"; // Prevents text cutoff
+  //     span.style.whiteSpace = "pre-wrap"; // Ensures multi-line text displays correctly
+  //     span.style.zIndex = "10";
 
-      formElement.appendChild(span);
-      input.style.opacity = "0"; // Hide input but keep space
-    });
+  //     formElement.appendChild(span);
+  //     input.style.opacity = "0"; // Hide input but keep space
+  //   });
 
-    // Small delay to ensure correct rendering
-    await new Promise((resolve) => setTimeout(resolve, 300));
+  //   // Small delay to ensure correct rendering
+  //   await new Promise((resolve) => setTimeout(resolve, 300));
 
-    // Capture form as an image
-    const canvas = await html2canvas(formElement, {
-      scrollX: -window.scrollX,
-      scrollY: -window.scrollY,
-      useCORS: true,
-    });
+  //   // Capture form as an image
+  //   const canvas = await html2canvas(formElement, {
+  //     scrollX: -window.scrollX,
+  //     scrollY: -window.scrollY,
+  //     useCORS: true,
+  //   });
 
-    const imgData = canvas.toDataURL("image/png");
+  //   const imgData = canvas.toDataURL("image/png");
 
-    // Generate PDF
-    const pdf = new jsPDF("p", "mm", "a4");
-    pdf.addImage(imgData, "PNG", 10, 10, 190, 0);
-    pdf.save("data.pdf");
+  //   // Generate PDF
+  //   const pdf = new jsPDF("p", "mm", "a4");
+  //   pdf.addImage(imgData, "PNG", 10, 10, 190, 0);
+  //   pdf.save("data.pdf");
 
-    // Cleanup: Remove spans & restore inputs
-    inputs.forEach((input) => {
-      formElement.removeChild(formElement.lastChild);
-      input.style.opacity = "1";
-    });
-  };
+  //   // Cleanup: Remove spans & restore inputs
+  //   inputs.forEach((input) => {
+  //     formElement.removeChild(formElement.lastChild);
+  //     input.style.opacity = "1";
+  //   });
+  // };
 
   const onSubmit = async (data) => {
     console.log(data);
 
     try {
       // Load the existing fillable PDF
-      const existingPdfBytes = await fetch("/fw9.pdf").then((res) =>
+      const existingPdfBytes = await fetch("/f1099msc.pdf").then((res) =>
         res.arrayBuffer()
       );
 
@@ -91,16 +89,16 @@ const TestForm1099 = () => {
 
       // Fill the form fields
       form
-        .getTextField("topmostSubform[0].Page1[0].f1_01[0]")
+        .getTextField(
+          "topmostSubform[0].CopyA[0].CopyHeader[0].CalendarYear[0].f1_1[0]"
+        )
         .setText(data.name);
       form
-        .getTextField("topmostSubform[0].Page1[0].f1_02[0]")
-        .setText(data.email);
-      form
-        .getCheckBox(
-          "topmostSubform[0].Page1[0].Boxes3a-b_ReadOrder[0].c1_1[0]"
-        )
+        .getCheckBox("topmostSubform[0].Copy2[0].CopyHeader[0].c2_1[0]")
         .check();
+      form
+        .getTextField("topmostSubform[0].CopyA[0].Box16_ReadOrder[0].f1_22[0]")
+        .setText(data.email);
 
       // Save the modified PDF
       const pdfBytes = await pdfDoc.save();
@@ -120,7 +118,7 @@ const TestForm1099 = () => {
 
   const getFieldNames = async () => {
     // Load the PDF file
-    const existingPdfBytes = await fetch("/fw9.pdf").then((res) =>
+    const existingPdfBytes = await fetch("/f1099msc.pdf").then((res) =>
       res.arrayBuffer()
     );
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
