@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   token: null,
   role: null,
+  toBeEdited: null,
 };
 
 const userSlice = createSlice({
@@ -24,6 +25,9 @@ const userSlice = createSlice({
         ? action.payload.data.role
         : action.payload.data;
     },
+    setTobeEdited: (state, action) => {
+      state.toBeEdited = action.payload.data;
+    },
   },
 
   // extraReducers: (builder) => {
@@ -31,5 +35,6 @@ const userSlice = createSlice({
   // },
 });
 
-export const { logout, setUser, setUserAuth } = userSlice.actions;
+export const { logout, setUser, setUserAuth, setTobeEdited } =
+  userSlice.actions;
 export default userSlice.reducer;
