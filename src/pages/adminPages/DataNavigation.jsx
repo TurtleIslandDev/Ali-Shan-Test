@@ -132,12 +132,12 @@ const DataNavigation = () => {
         </div>
         {/* fourth*/}
         <div
-          //   onMouseOver={(e) => handleMouseOver(e, "fourth")}
-          //   onMouseLeave={(e) => handleMouseOut(e, "fourth")}
-          //   onClick={() => {
-          //     window.location.href =
-          //       "https://workspace.google.com/products/docs/";
-          //   }}
+          onMouseOver={(e) => handleMouseOver(e, "fourth")}
+          onMouseLeave={(e) => handleMouseOut(e, "fourth")}
+          onClick={() => {
+            window.location.href =
+              "https://vici-lp1.itsbuzzmarketing.com/vicidial/admin.php";
+          }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40  ${
             hoverStates.fourth ? "z-[6]" : "z-[3]"
           }`}
@@ -148,14 +148,11 @@ const DataNavigation = () => {
             }`}
           >
             {hoverStates.fourth ? (
-              <p className="uppercase font-bold text-3xl text-center">
-                Certifications
+              <p className="w-[9rem] text-center uppercase font-bold text-[28px]">
+                Work
               </p>
             ) : (
-              <div className="transform scale-150">
-                <CeritficationsSvg />
-              </div>
-              // <OmnichannelCommunicationSvg />
+              <AgentGuiSvg />
             )}
           </div>
         </div>
