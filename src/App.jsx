@@ -28,6 +28,7 @@ import FormW9 from "./components/googleDriveForms/FormW9";
 import HrNavigationPage from "./pages/traineePages/HR/HrNavigationPage";
 import TraineeForm1099 from "./pages/traineePages/HR/TraineeForm1099";
 import TraineeFormW9 from "./pages/traineePages/HR/TraineeFormw9";
+import Rooster from "./pages/adminPages/Rooster";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -108,6 +109,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/admin-navigation/add-user" element={<AddUser />} />
+            <Route path="/admin-navigation/rooster" element={<Rooster />} />
             <Route
               path="/admin-navigation/export-data"
               element={<ExportDataPage />}
