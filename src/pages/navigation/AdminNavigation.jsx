@@ -57,8 +57,7 @@ const AdminNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "second")}
           onMouseLeave={(e) => handleMouseOut(e, "second")}
           onClick={() => {
-            window.location.href =
-              "https://vici-lp1.itsbuzzmarketing.com/vicidial/admin.php";
+            navigate("rooster");
           }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute left-2 -top-64 ${
             hoverStates.second ? "z-[6]" : "z-[3]"
@@ -71,7 +70,7 @@ const AdminNavigation = () => {
           >
             {hoverStates.second ? (
               <p className="w-[9rem] text-center uppercase font-bold text-[28px]">
-                Work
+                Rooster
               </p>
             ) : (
               // <EmailSvg />
