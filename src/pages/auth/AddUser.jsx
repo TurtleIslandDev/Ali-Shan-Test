@@ -151,6 +151,28 @@ const AddUser = () => {
               </span>
             )}
           </div>
+          <div className="w-full mb-8">
+            <p className="text-2xl text-[#222] mb-2">Select User Company</p>
+            <label className="input input-bordered flex bg-transparent items-center gap-2 relative">
+              <select
+                className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                placeholder="Password"
+                {...register("userCompany", { required: true })}
+              >
+                <option value="" disabled selected>
+                  Select User Company
+                </option>
+                <option value="Buzz">Buzz</option>
+                <option value="Fasttrack">Fasttrack</option>
+                <option value="Total Interactions">Total Interactions</option>
+              </select>
+            </label>
+            {errors.userCompany && (
+              <span className="text-right text-red-500 text-xs">
+                *This field is required
+              </span>
+            )}
+          </div>
           {role === "dataVendor" && (checkRole === "partner" || "supplier") && (
             <div className="w-full mb-8">
               <p className="text-2xl text-[#222] mb-2">Select Sub Role</p>
