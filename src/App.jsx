@@ -26,9 +26,12 @@ import Form1099 from "./components/googleDriveForms/Form1099";
 import TestForm1099 from "./components/googleDriveForms/testForm";
 import FormW9 from "./components/googleDriveForms/FormW9";
 import HrNavigationPage from "./pages/traineePages/HR/HrNavigationPage";
-import TraineeForm1099 from "./pages/traineePages/HR/TraineeForm1099";
-import TraineeFormW9 from "./pages/traineePages/HR/TraineeFormw9";
+import TraineeForm1099 from "./pages/traineePages/HR/Documentation/TraineeForm1099";
+import TraineeFormW9 from "./pages/traineePages/HR/Documentation/TraineeFormw9";
 import Rooster from "./pages/adminPages/Rooster";
+import AvailabilityPage from "./pages/traineePages/HR/AvailabilityPage";
+import UploadIdentification from "./pages/traineePages/HR/Documentation/UploadIdentification";
+import DocumentationNavigationPage from "./pages/traineePages/HR/Documentation/DocumentationNavigationPage";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -184,12 +187,24 @@ function App() {
               element={<HrNavigationPage />}
             />
             <Route
+              path="/agent-trainee-navigation/hr/availability"
+              element={<AvailabilityPage />}
+            />
+            <Route
+              path="/agent-trainee-navigation/hr/documentation"
+              element={<DocumentationNavigationPage />}
+            />
+            <Route
               path="/agent-trainee-navigation/hr/documentation/form-1099"
               element={<TraineeForm1099 />}
             />
             <Route
               path="/agent-trainee-navigation/hr/documentation/form-w9"
               element={<TraineeFormW9 />}
+            />
+            <Route
+              path="/agent-trainee-navigation/hr/documentation/upload-identification"
+              element={<UploadIdentification />}
             />
             <Route
               path="/agent-trainee-navigation/buzzword-trainee"
