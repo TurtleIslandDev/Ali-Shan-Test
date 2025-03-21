@@ -9,6 +9,7 @@ import Cookies from "universal-cookie";
 import AutomateSvg from "../../assets/SVGs/globalSvgs/AutomateSvg";
 import TraineeSVG from "./../../assets/SVGs/TraineeSVG";
 import BuzzWordSvg from "../../assets/SVGs/BuzzWordSvg";
+import ProcessSvg from "../../assets/SVGs/ProcessSvg";
 
 const AgentTraineeNavigation = () => {
   const navigate = useNavigate();
@@ -124,8 +125,9 @@ const AgentTraineeNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "fourth")}
           onMouseLeave={(e) => handleMouseOut(e, "fourth")}
           onClick={() => {
-            window.location.href =
-              "https://workspace.google.com/products/docs/";
+            navigate("/agent-trainee-navigation/hr");
+            // window.location.href =
+            //   "https://workspace.google.com/products/docs/";
           }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40  ${
             hoverStates.fourth ? "z-[6]" : "z-[3]"
@@ -137,12 +139,11 @@ const AgentTraineeNavigation = () => {
             }`}
           >
             {hoverStates.fourth ? (
-              <p className="uppercase font-bold text-3xl text-center">
-                Certifications
-              </p>
+              <p className="uppercase font-bold text-3xl text-center">HR</p>
             ) : (
               <div className="transform scale-150">
-                <CeritficationsSvg />
+                {/* <CeritficationsSvg /> */}
+                <ProcessSvg />
               </div>
               // <OmnichannelCommunicationSvg />
             )}

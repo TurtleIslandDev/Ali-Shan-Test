@@ -3,7 +3,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import b from "@assets/images/irs.jpg";
 import { useForm } from "react-hook-form";
-const Form1099 = () => {
+const TraineeForm1099 = () => {
   const formRef = useRef();
   const {
     register,
@@ -14,13 +14,13 @@ const Form1099 = () => {
     const formElement = formRef.current;
     const inputs = formElement.querySelectorAll("input, textarea, button");
     const originalValues = [];
-  
+
     // Replace inputs with span elements
     inputs.forEach((input) => {
       const span = document.createElement("span");
       span.innerText =
         input.type === "checkbox" ? (input.checked ? "✅" : "⬜") : input.value;
-  
+
       // Apply exact styles to match the original input
       span.style.position = "absolute";
       span.style.left = `${input.offsetLeft - 0}px`;
@@ -41,14 +41,14 @@ const Form1099 = () => {
       span.style.lineHeight = window.getComputedStyle(input).lineHeight;
       span.style.whiteSpace = "nowrap";
       span.style.zIndex = "99999";
-  
+
       // Store original input reference for later restoration
       originalValues.push({ input, span });
-  
+
       formElement.appendChild(span);
       input.style.opacity = "0"; // Hide original input but keep space
     });
-  
+
     // Capture form as an image
     const canvas = await html2canvas(formElement, {
       scale: 2, // Higher resolution for better quality
@@ -56,17 +56,17 @@ const Form1099 = () => {
       scrollY: 0,
       useCORS: true,
     });
-  
+
     const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF("p", "mm", "a4");
-  
+
     // Define page size
     const imgWidth = 190; // Max image width for A4 page
     const pageHeight = 297; // A4 page height
     const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
-  
+
     let yPosition = 0;
-  
+
     // Add multiple pages if content is longer than one page
     while (yPosition < imgHeight) {
       pdf.addImage(imgData, "PNG", 10, -yPosition + 10, imgWidth, imgHeight);
@@ -80,7 +80,7 @@ const Form1099 = () => {
       input.style.opacity = "1";
     });
   };
-  
+
   // const generatePDF = async () => {
   //   const formElement = formRef.current;
   //   const inputs = formElement.querySelectorAll("input, textarea");
@@ -1170,25 +1170,26 @@ const Form1099 = () => {
               <div className="w-1/2">
                 <div>
                   <p className="text-black">
-                    <span className="font-semibold leading-3">Box 6</span>.
-                     For individuals, report on Schedule C (Form 1040).
-
+                    <span className="font-semibold leading-3">Box 6</span>. For
+                    individuals, report on Schedule C (Form 1040).
                   </p>
                 </div>
                 <div>
                   <p className="text-black">
-                    <span className="font-semibold leading-3">Box 7</span>.
-                    If checked, consumer products totaling $5,000 or more were sold to you
-for resale, on a buy-sell, a deposit-commission, or other basis. Generally, report
-any income from your sale of these products on Schedule C (Form 1040).
+                    <span className="font-semibold leading-3">Box 7</span>. If
+                    checked, consumer products totaling $5,000 or more were sold
+                    to you for resale, on a buy-sell, a deposit-commission, or
+                    other basis. Generally, report any income from your sale of
+                    these products on Schedule C (Form 1040).
                   </p>
                 </div>
                 <div>
                   <p className="text-black">
                     <span className="font-semibold leading-3">Box 8</span>.
-                    Shows substitute payments in lieu of dividends or tax-exempt interest
-received by your broker on your behalf as a result of a loan of your securities.
-Report on the “Other income” line of Schedule 1 (Form 1040).
+                    Shows substitute payments in lieu of dividends or tax-exempt
+                    interest received by your broker on your behalf as a result
+                    of a loan of your securities. Report on the “Other income”
+                    line of Schedule 1 (Form 1040).
                   </p>
                 </div>
                 <div>
@@ -1200,51 +1201,55 @@ Report on the “Other income” line of Schedule 1 (Form 1040).
                 <div>
                   <p className="text-black">
                     <span className="font-semibold leading-3">Box 10</span>.
-                    Shows gross proceeds paid to an attorney in connection with legal
-services. Report only the taxable part as income on your return.
+                    Shows gross proceeds paid to an attorney in connection with
+                    legal services. Report only the taxable part as income on
+                    your return.
                   </p>
                 </div>
                 <div>
                   <p className="text-black">
                     <span className="font-semibold leading-3">Box 11</span>.
-                    Shows the amount of cash you received for the sale of fish if you are in
-the trade or business of catching fish.
+                    Shows the amount of cash you received for the sale of fish
+                    if you are in the trade or business of catching fish.
                   </p>
                 </div>
                 <div>
                   <p className="text-black">
-                    <span className="font-semibold leading-3">Box 12</span>.
-                    May show current year deferrals as a nonemployee under a
-nonqualified deferred compensation (NQDC) plan that is subject to the
-requirements of section 409A plus any earnings on current and prior year
-deferrals
+                    <span className="font-semibold leading-3">Box 12</span>. May
+                    show current year deferrals as a nonemployee under a
+                    nonqualified deferred compensation (NQDC) plan that is
+                    subject to the requirements of section 409A plus any
+                    earnings on current and prior year deferrals
                   </p>
                 </div>
                 <div>
                   <p className="text-black">
-                    <span className="font-semibold leading-3">Box 13</span>.
-                    If the FATCA filing requirement box is checked, the payer is reporting
-on this Form 1099 to satisfy its account reporting requirement under chapter 4
-of the Internal Revenue Code. You may also have a filing requirement. See the
-Instructions for Form 8938.
+                    <span className="font-semibold leading-3">Box 13</span>. If
+                    the FATCA filing requirement box is checked, the payer is
+                    reporting on this Form 1099 to satisfy its account reporting
+                    requirement under chapter 4 of the Internal Revenue Code.
+                    You may also have a filing requirement. See the Instructions
+                    for Form 8938.
                   </p>
                 </div>
                 <div>
                   <p className="text-black">
                     <span className="font-semibold leading-3">Box 14</span>.
-                    Shows your total compensation of excess golden parachute payments
-subject to a 20% excise tax. See your tax return instructions for where to report
+                    Shows your total compensation of excess golden parachute
+                    payments subject to a 20% excise tax. See your tax return
+                    instructions for where to report
                   </p>
                 </div>
                 <div>
                   <p className="text-black">
                     <span className="font-semibold leading-3">Box 15</span>.
-                    Shows income as a nonemployee under an NQDC plan that does not
-meet the requirements of section 409A. Any amount included in box 12 that is
-currently taxable is also included in this box. Report this amount as income on
-your tax return. This income is also subject to a substantial additional tax to be
-reported on Form 1040, 1040-SR, or 1040-NR. See the instructions for your tax
-return.
+                    Shows income as a nonemployee under an NQDC plan that does
+                    not meet the requirements of section 409A. Any amount
+                    included in box 12 that is currently taxable is also
+                    included in this box. Report this amount as income on your
+                    tax return. This income is also subject to a substantial
+                    additional tax to be reported on Form 1040, 1040-SR, or
+                    1040-NR. See the instructions for your tax return.
                   </p>
                 </div>
                 <div>
@@ -1255,17 +1260,23 @@ return.
                 </div>
                 <div>
                   <p className="text-black">
-                    <span className="font-semibold leading-3">Future developments</span>.
-                    For the latest information about developments related to
-Form 1099-MISC and its instructions, such as legislation enacted after they
-were published, go to www.irs.gov/Form1099MISC
+                    <span className="font-semibold leading-3">
+                      Future developments
+                    </span>
+                    . For the latest information about developments related to
+                    Form 1099-MISC and its instructions, such as legislation
+                    enacted after they were published, go to
+                    www.irs.gov/Form1099MISC
                   </p>
                 </div>
                 <div>
                   <p className="text-black">
-                    <span className="font-semibold leading-3">Free File Program</span>.
-                    Go to www.irs.gov/FreeFile to see if you qualify for no-cost
-                    online federal tax preparation, e-filing, and direct deposit or payment options.
+                    <span className="font-semibold leading-3">
+                      Free File Program
+                    </span>
+                    . Go to www.irs.gov/FreeFile to see if you qualify for
+                    no-cost online federal tax preparation, e-filing, and direct
+                    deposit or payment options.
                   </p>
                 </div>
               </div>
@@ -1689,4 +1700,4 @@ were published, go to www.irs.gov/Form1099MISC
   );
 };
 
-export default Form1099;
+export default TraineeForm1099;
