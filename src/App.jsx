@@ -88,6 +88,10 @@ const BroadcastCustomerNavigation = lazy(() =>
 const ExportDataPage = lazy(() =>
   import("./pages/navigation/ExportDataNavigation")
 );
+const CreateTemplatePage = lazy(() =>
+  import("./pages/supervisorPages/CreateTemplatePage")
+);
+
 const Login = lazy(() => import("./pages/auth/Login"));
 const AddUser = lazy(() => import("./pages/auth/AddUser"));
 function App() {
@@ -113,6 +117,10 @@ function App() {
             <Route
               path="/admin-navigation/export-data"
               element={<ExportDataPage />}
+            />
+            <Route 
+              path="/admin-navigation/create-template"
+              element={<CreateTemplatePage />}
             />
             <Route path="/admin-navigation/data" element={<DataNavigation />} />
             <Route
@@ -161,6 +169,10 @@ function App() {
             <Route
               path="/qc-and-supervisor-navigation"
               element={<QcAndSupervisorNavigation />}
+            />
+            <Route
+              path="/qc-and-supervisor-navigation/create-template"
+              element={<CreateTemplatePage />}
             />
             <Route
               path="/qc-and-supervisor-navigation/upload-data"

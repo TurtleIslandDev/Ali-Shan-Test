@@ -12,7 +12,7 @@ const UploadDataPage = () => {
   const [wait, setWait] = useState(false);
 
   const UPLOAD_URL = "https://endpoint.itsbuzzmarketing.com";
-  // const UPLOAD_URL = "http://127.0.0.1:3000";
+  // const UPLOAD_URL = "http://127.0.0.1:3173";
   // const UPLOAD_URL = "https://combined-service.r9tsjnbaapfz8.us-east-1.cs.amazonlightsail.com/"
 
   const { postData } = useFetch();
