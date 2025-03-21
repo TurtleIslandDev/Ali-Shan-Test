@@ -4,6 +4,7 @@ import PerformanceManagementSvg from "@assets/SVGs/PerformanceManagementSvg";
 import AgentPerformanceSvg from "@assets/SVGs/agentScreen/AgentPerformanceSvg";
 import ReportSvg from "@assets/SVGs/salesManagerScreen/ReportSvg";
 import RevenueSvg from "@assets/SVGs/dataManagerScreen/RevenueSvg";
+import ResultsSvg from "../../../assets/SVGs/globalSvgs/ResultsSvg";
 
 const HrNavigationPage = () => {
   const navigate = useNavigate();
@@ -49,12 +50,13 @@ const HrNavigationPage = () => {
             <div className="absolute w-[1px] h-[230px] transform rotate-[-45deg] -bottom-44 -right-14 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
         </div>
-        {/*3 */}
+        {/*2 */}
         <div
           onMouseOver={(e) => handleMouseOver(e, "second")}
           onMouseLeave={(e) => handleMouseOut(e, "second")}
           onClick={() => {
-            navigate("/agent-trainee-navigation/hr/documentation/form-1099");
+            // navigate("/agent-trainee-navigation/hr/documentation/form-1099");
+            navigate("/agent-trainee-navigation/hr/documentation");
           }}
           className="flex items-center justify-center rounded-full border border-1 border-[#D9D9D930] w-[312px] h-[312px] absolute -right-80 -bottom-28 "
         >
@@ -64,7 +66,7 @@ const HrNavigationPage = () => {
             }`}
           >
             {hoverStates.second ? (
-              <p className="uppercase font-bold text-3xl">Form 1099</p>
+              <p className="uppercase font-bold text-3xl">Documentation</p>
             ) : (
               <ReportSvg />
             )}
@@ -72,10 +74,10 @@ const HrNavigationPage = () => {
             <div className="absolute w-[1px] h-[330px] transform rotate-[90deg] -top-5 -left-48 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
         </div>
-        {/*4 */}
+        {/*3 */}
         <div
-          // onMouseOver={(e) => handleMouseOver(e, "third")}
-          // onMouseLeave={(e) => handleMouseOut(e, "third")}
+          onMouseOver={(e) => handleMouseOver(e, "third")}
+          onMouseLeave={(e) => handleMouseOut(e, "third")}
           className={`relative flex items-center justify-center rounded-full border border-1 border-[#D9D9D930] w-[312px] h-[312px] bg-white  z-[100] -left-80 -bottom-28`}
         >
           <div
@@ -86,10 +88,10 @@ const HrNavigationPage = () => {
             {" "}
             {hoverStates.third ? (
               <p className="uppercase font-bold text-3xl text-center">
-                Upload Identification
+                Policies
               </p>
             ) : (
-              <PerformanceManagementSvg />
+              <ResultsSvg />
             )}
             <div className="absolute w-[1px] h-[230px] transform rotate-[45deg]  -top-52 right-0 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
