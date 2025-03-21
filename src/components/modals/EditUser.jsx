@@ -11,7 +11,6 @@ import {
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import useFetch from "../../features/hooks/useFetch";
-let userPermissions = ["Add User", "Update User", "Upload Data"];
 export function EditUser({ open, setOpen }) {
   const { toBeEdited } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state.user);
@@ -22,6 +21,7 @@ export function EditUser({ open, setOpen }) {
     setOpen(!open);
   };
 
+  let userPermissions = ["Add User", "Update User", "Upload Data"];
   const {
     register,
     handleSubmit,
