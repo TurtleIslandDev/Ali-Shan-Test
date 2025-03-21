@@ -19,6 +19,7 @@ export function CSVMapper({
   const [filter, setFilter] = useState("");
   const [filtertedFields, setFilteredFields] = useState(predefinedFields);
 
+
   return (
     <div className="border rounded-md">
       <Table>
@@ -46,12 +47,12 @@ export function CSVMapper({
                 <Combobox
                   items={filtertedFields.map(
                     (field) => ({
-                    value: field.id,
-                    label: field.label,
-                    description: field.name,
+                    value: field.key,
+                    label: field.name,
+                    description: field.description,
                   }))}
                   value={mappings[header]?.fieldId || ""}
-                  onChange={(value) => {                  
+                  onChange={(value) => {     
                     onFieldMapping(header, value)
                   }}
                   placeholder="Search fields..."

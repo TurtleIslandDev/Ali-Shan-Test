@@ -42,13 +42,14 @@ export function Combobox({
 
     setAllItems(
       predefinedFields.filter((field) =>
-        field.label.toLowerCase().includes(filter.toLowerCase())
+        field?.label?.toLowerCase().includes(filter.toLowerCase())
       )      
     );
   }, [filter]);
 
 
   const selectedItem = allItems.find((item) => item.value === value)
+
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -75,7 +76,7 @@ export function Combobox({
                 <CommandItem
                   key={item.value}
                   value={item.value}
-                  onSelect={() => {                    
+                  onSelect={() => {    
                     onChange(item.value)
                     setOpen(false)
                   }}

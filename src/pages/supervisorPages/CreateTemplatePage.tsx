@@ -21,7 +21,9 @@ const dataTypes = [
   { value: "boolean", label: "Yes/No" },
 ]
 
-const UPLOAD_URL = "https://combined-service.r9tsjnbaapfz8.us-east-1.cs.amazonlightsail.com/"
+// const UPLOAD_URL = "https://combined-service.r9tsjnbaapfz8.us-east-1.cs.amazonlightsail.com/"
+// const UPLOAD_URL = "http://localhost:3173"
+const UPLOAD_URL = "https://endpoint.itsbuzzmarketing.com/"
 
 
 export default function CreateTemplatePage() {
@@ -34,7 +36,7 @@ export default function CreateTemplatePage() {
   const [mappings, setMappings] = useState<Record<string, { fieldId: string; dataType: string; included: boolean }>>({})
   const [isUploaded, setIsUploaded] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [predefinedFields, setPredefinedFields] = useState<{ id: string; name: string; label: string; dataType: string }[]>([])
+  const [predefinedFields, setPredefinedFields] = useState<{ id: string; name: string; key: string; description: string; dataType: string }[]>([])
   const [dataSources, setDataSources] = useState<{ id: string; name: string }[]>([])
   const [templates, setTemplates] = useState<{ id: string; name: string; sourceId: string }[]>([])
 
@@ -56,15 +58,16 @@ export default function CreateTemplatePage() {
         const data = await response.json()
         const fields = data.data
 
-        const displayFields: { id: string; name: string; label: string; dataType: string  }[] = []
+
+        const displayFields: { id: string; name: string; key: string; description: string; dataType: string;   }[] = []
 
         // add id, name, label, dataType to fields
-        fields.forEach((field, index) => {
-
+        fields.forEach((field: any, index) => {
           const newField = {
-            id: field,
-            name: field,
-            label: field,
+            id: index,
+            key: field["key"],
+            name: field["name"],
+            description: field["description"],
             dataType: "string"
           }          
 
