@@ -207,7 +207,7 @@ const AdminNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "sixth")}
           onMouseLeave={(e) => handleMouseOut(e, "sixth")}
           onClick={() => {
-            navigate("buzzword-admin");
+            navigate("other-roles-access");
           }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
             hoverStates.sixth ? "z-[6]" : "z-[3]"
@@ -223,11 +223,13 @@ const AdminNavigation = () => {
             {" "}
             <div className="relative text-white">
               {hoverStates.sixth ? (
-                <p className="uppercase font-bold text-xl text-center">
-                  BuzzWord
+                <p className="uppercase font-bold text-2xl text-center">
+                  Roles Access
                 </p>
               ) : (
-                <BuzzWordSvg />
+                <p className="uppercase font-bold text-xl text-center">
+                  Roles Access
+                </p>
               )}
             </div>
           </div>
@@ -235,19 +237,21 @@ const AdminNavigation = () => {
         {/* TODO: Hurried implementation of upload button */}
         <div
           onClick={() => navigate("upload-data")}
-          onMouseOver={(e) => handleMouseOver(e, "web")}
-          onMouseLeave={(e) => handleMouseOut(e, "web")}
+          onMouseOver={(e) => handleMouseOver(e, "seventh")}
+          onMouseLeave={(e) => handleMouseOut(e, "seventh")}
           className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  "
         >
           <div
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] ${
-              hoverStates.web ? "z-[6] bg-[#1E40AF] " : "z-[3] bg-[#1E40AF66]"
+              hoverStates.seventh
+                ? "z-[6] bg-[#1E40AF] "
+                : "z-[3] bg-[#1E40AF66]"
             }`}
           >
             <div className="relative text-white">
               {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
               {/* <WebSvg /> */}
-              {hoverStates.web ? (
+              {hoverStates.seventh ? (
                 <p className="uppercase font-bold text-3xl text-center">
                   Upload
                 </p>
