@@ -28,7 +28,7 @@ const HrNavigationPage = () => {
           onMouseOver={(e) => handleMouseOver(e, "first")}
           onMouseLeave={(e) => handleMouseOut(e, "first")}
           onClick={() => {
-            navigate("/agent-trainee-navigation/hr/documentation/form-w9");
+            navigate("/agent-trainee-navigation/hr/availability");
           }}
           className={`flex items-center justify-center rounded-full border border-1 border-[#D9D9D930] w-[312px] h-[312px] absolute left-0 -top-80  ${
             hoverStates.first ? "z-[6]" : "z-[3]"
@@ -41,7 +41,7 @@ const HrNavigationPage = () => {
           >
             {hoverStates.first ? (
               <p className="uppercase font-bold text-3xl text-center">
-                Form-w9
+                Availability
               </p>
             ) : (
               <RevenueSvg />
@@ -91,7 +91,9 @@ const HrNavigationPage = () => {
                 Policies
               </p>
             ) : (
-              <ResultsSvg />
+              <div className="transform scale-150">
+                <ResultsSvg />
+              </div>
             )}
             <div className="absolute w-[1px] h-[230px] transform rotate-[45deg]  -top-52 right-0 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
