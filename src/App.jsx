@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-
 import AgentSystemsTraining from "./pages/agentPages/AgentSystemsTraining";
 import InteractionGuidePage from "./pages/IG/InteractionGuidePage";
 import AddUserSupervisor from "./pages/supervisorPages/AddUserSupervisor";
@@ -32,6 +31,10 @@ import Rooster from "./pages/adminPages/Rooster";
 import AvailabilityPage from "./pages/traineePages/HR/AvailabilityPage";
 import UploadIdentification from "./pages/traineePages/HR/Documentation/UploadIdentification";
 import DocumentationNavigationPage from "./pages/traineePages/HR/Documentation/DocumentationNavigationPage";
+import OtherRolesAccessNavigation from "./pages/adminPages/OtherRolesAccessNavigation";
+import PerformanceManagerNavigation from "./pages/navigation/PerformanceManagerNavigation";
+import AgentLearningNavigation from "./pages/agentPages/Learning/AgentLearningNavigation";
+import TraineeLearningNavigation from "./pages/traineePages/Learning/TraineeLearningNavigation";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -133,6 +136,14 @@ function App() {
             <Route path="/three-circles" element={<ThreeCircleLayout />} />
             <Route path="/admin-navigation" element={<AdminNavigation />} />
             <Route
+              path="/performance-manager-navigation"
+              element={<PerformanceManagerNavigation />}
+            />
+            <Route
+              path="/admin-navigation/other-roles-access"
+              element={<OtherRolesAccessNavigation />}
+            />
+            <Route
               path="/admin-navigation/upload-data"
               element={<UploadDataPage />}
             />
@@ -179,8 +190,16 @@ function App() {
             />
             <Route path="/agent-navigation" element={<AgentNavigation />} />
             <Route
+              path="/agent-navigation/learning"
+              element={<AgentLearningNavigation />}
+            />
+            <Route
               path="/agent-trainee-navigation"
               element={<AgentTraineeNavigation />}
+            />
+            <Route
+              path="/agent-trainee-navigation/learning"
+              element={<TraineeLearningNavigation />}
             />
             <Route
               path="/agent-trainee-navigation/hr"
@@ -207,7 +226,7 @@ function App() {
               element={<UploadIdentification />}
             />
             <Route
-              path="/agent-trainee-navigation/buzzword-trainee"
+              path="/agent-trainee-navigation/learning/buzzword-trainee"
               element={<BuzzWordTrainee />}
             />
             <Route
