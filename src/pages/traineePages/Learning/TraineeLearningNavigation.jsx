@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AgentGuiSvg from "../../assets/SVGs/AgentGuiSvg";
-import PayrollSvg from "../../assets/SVGs/PayrollSvg";
-import CeritficationsSvg from "../../assets/SVGs/CeritficationsSvg";
-import AgentLearningSvg from "../../assets/SVGs/agentScreen/AgentLearningSvg";
-import AgentPerformanceSvg from "../../assets/SVGs/agentScreen/AgentPerformanceSvg";
-import Cookies from "universal-cookie";
-import AutomateSvg from "../../assets/SVGs/globalSvgs/AutomateSvg";
-import TraineeSVG from "./../../assets/SVGs/TraineeSVG";
-import BuzzWordSvg from "../../assets/SVGs/BuzzWordSvg";
-import ProcessSvg from "../../assets/SVGs/ProcessSvg";
+import AgentGuiSvg from "@assets/SVGs/AgentGuiSvg";
+import PayrollSvg from "@assets/SVGs/PayrollSvg";
+import AgentLearningSvg from "@assets/SVGs/agentScreen/AgentLearningSvg";
+import AutomateSvg from "@assets/SVGs/globalSvgs/AutomateSvg";
+import TraineeSVG from "@assets/SVGs/TraineeSVG";
+import BuzzWordSvg from "@assets/SVGs/BuzzWordSvg";
+import ProcessSvg from "@assets/SVGs/ProcessSvg";
+import CeritficationsSvg from "@assets/SVGs/CeritficationsSvg";
+import AgentPerformanceSvg from "@assets/SVGs/agentScreen/AgentPerformanceSvg";
 
-const AgentTraineeNavigation = () => {
+const TraineeLearningNavigation = () => {
   const navigate = useNavigate();
-  const cookies = new Cookies(null, null, { path: "/" });
   const [hoverStates, setHoverStates] = useState({
     first: false,
     second: false,
@@ -31,13 +29,6 @@ const AgentTraineeNavigation = () => {
     setHoverStates((prev) => ({ ...prev, [name]: false }));
   };
 
-  useEffect(() => {
-    const token = cookies.get("token");
-    // if (!token) {
-    //   navigate("/");
-    // }
-  }, []);
-
   return (
     <div className="w-full h-[calc(100vh+300px)]  flex items-center justify-center ">
       <div className="relative  rounded-full">
@@ -46,9 +37,9 @@ const AgentTraineeNavigation = () => {
           className={`relative flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-[336px] h-[336px] bg-white  z-[100] `}
         >
           <div
-            onClick={() => navigate("/agent-system-interface")}
-            onMouseOver={(e) => handleMouseOver(e, "first")}
-            onMouseLeave={(e) => handleMouseOut(e, "first")}
+            // onClick={() => navigate("/agent-system-interface")}
+            // onMouseOver={(e) => handleMouseOver(e, "first")}
+            // onMouseLeave={(e) => handleMouseOut(e, "first")}
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-10px)] h-[calc(100%-10px)]  ${
               hoverStates.first ? "bg-[#333] " : "bg-[#D9D9D9] "
             }`}
@@ -65,10 +56,7 @@ const AgentTraineeNavigation = () => {
         <div
           onMouseOver={(e) => handleMouseOver(e, "second")}
           onMouseLeave={(e) => handleMouseOut(e, "second")}
-          onClick={() => {
-            // navigate("/coaching-report-accept")
-            navigate("learning");
-          }}
+          onClick={() => navigate("/coaching-report-accept")}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute left-2 -top-64 ${
             hoverStates.second ? "z-[6]" : "z-[3]"
           }`}
@@ -79,8 +67,8 @@ const AgentTraineeNavigation = () => {
             } `}
           >
             {hoverStates.second ? (
-              <p className="w-[9rem] text-center uppercase font-bold text-[28px]">
-                Learning
+              <p className=" text-center uppercase font-bold text-[28px]">
+                Product Knowledge
               </p>
             ) : (
               // <img src="../../assets/react.svg" />
@@ -107,7 +95,9 @@ const AgentTraineeNavigation = () => {
             {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
             <div className="relative text-white">
               {hoverStates.third ? (
-                <p className="uppercase font-bold text-xl text-center"></p>
+                <p className="uppercase font-bold text-xl text-center">
+                  BuzzWord
+                </p>
               ) : (
                 <div className="transform scale-75">
                   {/* <AgentPerformanceSvg /> */}
@@ -142,13 +132,14 @@ const AgentTraineeNavigation = () => {
             }`}
           >
             {hoverStates.fourth ? (
-              <p className="uppercase font-bold text-3xl text-center">HR</p>
+              <p className="uppercase font-bold text-3xl text-center">
+                Certifications
+              </p>
             ) : (
               <div className="transform scale-150">
-                {/* <CeritficationsSvg /> */}
-                <ProcessSvg />
+                <CeritficationsSvg />
+                {/* <ProcessSvg /> */}
               </div>
-              // <OmnichannelCommunicationSvg />
             )}
           </div>
         </div>
@@ -167,8 +158,8 @@ const AgentTraineeNavigation = () => {
             }`}
           >
             {hoverStates.fifth ? (
-              <p className="uppercase font-bold text-3xl text-center">
-                Support
+              <p className="uppercase font-bold text-base text-center">
+                Communication
               </p>
             ) : (
               <AutomateSvg />
@@ -203,7 +194,9 @@ const AgentTraineeNavigation = () => {
             {" "}
             <div className="relative text-white">
               {hoverStates.sixth ? (
-                <p className="uppercase font-bold text-xl text-center"></p>
+                <p className="uppercase font-bold text-xl text-center">
+                  Agent Systems Training
+                </p>
               ) : (
                 <div>
                   <PayrollSvg />
@@ -214,13 +207,13 @@ const AgentTraineeNavigation = () => {
         </div>
         {/* seventh */}
         <div
-          onMouseOver={(e) => handleMouseOver(e, "seventh")}
-          onMouseLeave={(e) => handleMouseOut(e, "seventh")}
-          onClick={() => {
-            navigate(
-              "/agent-trainee-navigation/trainee-interaction-guide-fasttrack"
-            );
-          }}
+          // onMouseOver={(e) => handleMouseOver(e, "seventh")}
+          // onMouseLeave={(e) => handleMouseOut(e, "seventh")}
+          // onClick={() => {
+          //   navigate(
+          //     "/agent-trainee-navigation/trainee-interaction-guide-fasttrack"
+          //   );
+          // }}
           className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  "
         >
           <div
@@ -251,4 +244,4 @@ const AgentTraineeNavigation = () => {
   );
 };
 
-export default AgentTraineeNavigation;
+export default TraineeLearningNavigation;

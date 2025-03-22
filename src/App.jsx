@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-
 import AgentSystemsTraining from "./pages/agentPages/AgentSystemsTraining";
 import InteractionGuidePage from "./pages/IG/InteractionGuidePage";
 import AddUserSupervisor from "./pages/supervisorPages/AddUserSupervisor";
@@ -26,9 +25,16 @@ import Form1099 from "./components/googleDriveForms/Form1099";
 import TestForm1099 from "./components/googleDriveForms/testForm";
 import FormW9 from "./components/googleDriveForms/FormW9";
 import HrNavigationPage from "./pages/traineePages/HR/HrNavigationPage";
-import TraineeForm1099 from "./pages/traineePages/HR/TraineeForm1099";
-import TraineeFormW9 from "./pages/traineePages/HR/TraineeFormw9";
+import TraineeForm1099 from "./pages/traineePages/HR/Documentation/TraineeForm1099";
+import TraineeFormW9 from "./pages/traineePages/HR/Documentation/TraineeFormw9";
 import Rooster from "./pages/adminPages/Rooster";
+import AvailabilityPage from "./pages/traineePages/HR/AvailabilityPage";
+import UploadIdentification from "./pages/traineePages/HR/Documentation/UploadIdentification";
+import DocumentationNavigationPage from "./pages/traineePages/HR/Documentation/DocumentationNavigationPage";
+import OtherRolesAccessNavigation from "./pages/adminPages/OtherRolesAccessNavigation";
+import PerformanceManagerNavigation from "./pages/navigation/PerformanceManagerNavigation";
+import AgentLearningNavigation from "./pages/agentPages/Learning/AgentLearningNavigation";
+import TraineeLearningNavigation from "./pages/traineePages/Learning/TraineeLearningNavigation";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -138,6 +144,14 @@ function App() {
             <Route path="/three-circles" element={<ThreeCircleLayout />} />
             <Route path="/admin-navigation" element={<AdminNavigation />} />
             <Route
+              path="/performance-manager-navigation"
+              element={<PerformanceManagerNavigation />}
+            />
+            <Route
+              path="/admin-navigation/other-roles-access"
+              element={<OtherRolesAccessNavigation />}
+            />
+            <Route
               path="/admin-navigation/upload-data"
               element={<UploadDataPage />}
             />
@@ -188,12 +202,28 @@ function App() {
             />
             <Route path="/agent-navigation" element={<AgentNavigation />} />
             <Route
+              path="/agent-navigation/learning"
+              element={<AgentLearningNavigation />}
+            />
+            <Route
               path="/agent-trainee-navigation"
               element={<AgentTraineeNavigation />}
             />
             <Route
+              path="/agent-trainee-navigation/learning"
+              element={<TraineeLearningNavigation />}
+            />
+            <Route
               path="/agent-trainee-navigation/hr"
               element={<HrNavigationPage />}
+            />
+            <Route
+              path="/agent-trainee-navigation/hr/availability"
+              element={<AvailabilityPage />}
+            />
+            <Route
+              path="/agent-trainee-navigation/hr/documentation"
+              element={<DocumentationNavigationPage />}
             />
             <Route
               path="/agent-trainee-navigation/hr/documentation/form-1099"
@@ -204,7 +234,11 @@ function App() {
               element={<TraineeFormW9 />}
             />
             <Route
-              path="/agent-trainee-navigation/buzzword-trainee"
+              path="/agent-trainee-navigation/hr/documentation/upload-identification"
+              element={<UploadIdentification />}
+            />
+            <Route
+              path="/agent-trainee-navigation/learning/buzzword-trainee"
               element={<BuzzWordTrainee />}
             />
             <Route

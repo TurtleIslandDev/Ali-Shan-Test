@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PerformanceManagementSvg from "@assets/SVGs/PerformanceManagementSvg";
-import AgentPerformanceSvg from "@assets/SVGs/agentScreen/AgentPerformanceSvg";
 import ReportSvg from "@assets/SVGs/salesManagerScreen/ReportSvg";
-import RevenueSvg from "@assets/SVGs/dataManagerScreen/RevenueSvg";
-import ResultsSvg from "../../../assets/SVGs/globalSvgs/ResultsSvg";
+import ResultsSvg from "../../../../assets/SVGs/globalSvgs/ResultsSvg";
+import DocumentSvg from "../../../../assets/SVGs/globalSvgs/DocumentSvg";
 
-const HrNavigationPage = () => {
+const DocumentationNavigationPage = () => {
   const navigate = useNavigate();
   const [hoverStates, setHoverStates] = useState({
     first: false,
@@ -28,7 +26,7 @@ const HrNavigationPage = () => {
           onMouseOver={(e) => handleMouseOver(e, "first")}
           onMouseLeave={(e) => handleMouseOut(e, "first")}
           onClick={() => {
-            navigate("/agent-trainee-navigation/hr/availability");
+            navigate("/agent-trainee-navigation/hr/documentation/form-w9");
           }}
           className={`flex items-center justify-center rounded-full border border-1 border-[#D9D9D930] w-[312px] h-[312px] absolute left-0 -top-80  ${
             hoverStates.first ? "z-[6]" : "z-[3]"
@@ -41,10 +39,10 @@ const HrNavigationPage = () => {
           >
             {hoverStates.first ? (
               <p className="uppercase font-bold text-3xl text-center">
-                Availability
+                Form-w9
               </p>
             ) : (
-              <RevenueSvg />
+              <ReportSvg />
               //   <p>per</p>
             )}
             <div className="absolute w-[1px] h-[230px] transform rotate-[-45deg] -bottom-44 -right-14 border-[1px] border-dashed border-[#D9D9D9]" />
@@ -55,8 +53,7 @@ const HrNavigationPage = () => {
           onMouseOver={(e) => handleMouseOver(e, "second")}
           onMouseLeave={(e) => handleMouseOut(e, "second")}
           onClick={() => {
-            // navigate("/agent-trainee-navigation/hr/documentation/form-1099");
-            navigate("/agent-trainee-navigation/hr/documentation");
+            navigate("/agent-trainee-navigation/hr/documentation/form-1099");
           }}
           className="flex items-center justify-center rounded-full border border-1 border-[#D9D9D930] w-[312px] h-[312px] absolute -right-80 -bottom-28 "
         >
@@ -66,7 +63,7 @@ const HrNavigationPage = () => {
             }`}
           >
             {hoverStates.second ? (
-              <p className="uppercase font-bold text-3xl">Documentation</p>
+              <p className="uppercase font-bold text-3xl">Form 1099</p>
             ) : (
               <ReportSvg />
             )}
@@ -78,6 +75,11 @@ const HrNavigationPage = () => {
         <div
           onMouseOver={(e) => handleMouseOver(e, "third")}
           onMouseLeave={(e) => handleMouseOut(e, "third")}
+          onClick={() => {
+            navigate(
+              "/agent-trainee-navigation/hr/documentation/upload-identification"
+            );
+          }}
           className={`relative flex items-center justify-center rounded-full border border-1 border-[#D9D9D930] w-[312px] h-[312px] bg-white  z-[100] -left-80 -bottom-28`}
         >
           <div
@@ -88,11 +90,11 @@ const HrNavigationPage = () => {
             {" "}
             {hoverStates.third ? (
               <p className="uppercase font-bold text-3xl text-center">
-                Policies
+                Upload Identification
               </p>
             ) : (
-              <div className="transform scale-150">
-                <ResultsSvg />
+              <div className="transform" style={{ scale: "2" }}>
+                <DocumentSvg />
               </div>
             )}
             <div className="absolute w-[1px] h-[230px] transform rotate-[45deg]  -top-52 right-0 border-[1px] border-dashed border-[#D9D9D9]" />
@@ -102,4 +104,4 @@ const HrNavigationPage = () => {
     </div>
   );
 };
-export default HrNavigationPage;
+export default DocumentationNavigationPage;

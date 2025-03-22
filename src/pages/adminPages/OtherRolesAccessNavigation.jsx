@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AgentGuiSvg from "../../assets/SVGs/AgentGuiSvg";
-import PayrollSvg from "../../assets/SVGs/PayrollSvg";
-import CeritficationsSvg from "../../assets/SVGs/CeritficationsSvg";
-import AgentLearningSvg from "../../assets/SVGs/agentScreen/AgentLearningSvg";
-import AgentPerformanceSvg from "../../assets/SVGs/agentScreen/AgentPerformanceSvg";
-import Cookies from "universal-cookie";
-import AutomateSvg from "../../assets/SVGs/globalSvgs/AutomateSvg";
-import TraineeSVG from "./../../assets/SVGs/TraineeSVG";
-import BuzzWordSvg from "../../assets/SVGs/BuzzWordSvg";
-import ProcessSvg from "../../assets/SVGs/ProcessSvg";
+import AgentGuiSvg from "@assets/SVGs/AgentGuiSvg";
+import PayrollSvg from "@assets/SVGs/PayrollSvg";
+import AgentLearningSvg from "@assets/SVGs/agentScreen/AgentLearningSvg";
+import AutomateSvg from "@assets/SVGs/globalSvgs/AutomateSvg";
+import TraineeSVG from "@assets/SVGs/TraineeSVG";
+import BuzzWordSvg from "@assets/SVGs/BuzzWordSvg";
+import ProcessSvg from "@assets/SVGs/ProcessSvg";
 
-const AgentTraineeNavigation = () => {
+const OtherRolesAccessNavigation = () => {
   const navigate = useNavigate();
-  const cookies = new Cookies(null, null, { path: "/" });
   const [hoverStates, setHoverStates] = useState({
     first: false,
     second: false,
@@ -31,13 +27,6 @@ const AgentTraineeNavigation = () => {
     setHoverStates((prev) => ({ ...prev, [name]: false }));
   };
 
-  useEffect(() => {
-    const token = cookies.get("token");
-    // if (!token) {
-    //   navigate("/");
-    // }
-  }, []);
-
   return (
     <div className="w-full h-[calc(100vh+300px)]  flex items-center justify-center ">
       <div className="relative  rounded-full">
@@ -46,7 +35,7 @@ const AgentTraineeNavigation = () => {
           className={`relative flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-[336px] h-[336px] bg-white  z-[100] `}
         >
           <div
-            onClick={() => navigate("/agent-system-interface")}
+            onClick={() => navigate("/agent-trainee-navigation")}
             onMouseOver={(e) => handleMouseOver(e, "first")}
             onMouseLeave={(e) => handleMouseOut(e, "first")}
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-10px)] h-[calc(100%-10px)]  ${
@@ -54,9 +43,13 @@ const AgentTraineeNavigation = () => {
             }`}
           >
             {hoverStates.first ? (
-              <p className="uppercase font-bold text-3xl">Work</p>
+              <p className="uppercase font-bold text-xl text-center">
+                Agent Trainee
+              </p>
             ) : (
-              <AgentGuiSvg />
+              <p className="uppercase font-bold text-base text-center">
+                Agent Trainee
+              </p>
             )}
           </div>
         </div>
@@ -65,10 +58,7 @@ const AgentTraineeNavigation = () => {
         <div
           onMouseOver={(e) => handleMouseOver(e, "second")}
           onMouseLeave={(e) => handleMouseOut(e, "second")}
-          onClick={() => {
-            // navigate("/coaching-report-accept")
-            navigate("learning");
-          }}
+          onClick={() => navigate("/agent-navigation")}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute left-2 -top-64 ${
             hoverStates.second ? "z-[6]" : "z-[3]"
           }`}
@@ -79,12 +69,9 @@ const AgentTraineeNavigation = () => {
             } `}
           >
             {hoverStates.second ? (
-              <p className="w-[9rem] text-center uppercase font-bold text-[28px]">
-                Learning
-              </p>
+              <p className="uppercase font-bold text-xl text-center">Agent</p>
             ) : (
-              // <img src="../../assets/react.svg" />
-              <AgentLearningSvg />
+              <p className="uppercase font-bold text-base text-center">Agent</p>
             )}
           </div>
         </div>
@@ -93,7 +80,7 @@ const AgentTraineeNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "third")}
           onMouseLeave={(e) => handleMouseOut(e, "third")}
           onClick={() => {
-            navigate("buzzword-trainee");
+            navigate("/team-lead-navigation");
           }}
           className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 "
         >
@@ -107,13 +94,13 @@ const AgentTraineeNavigation = () => {
             {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
             <div className="relative text-white">
               {hoverStates.third ? (
-                <p className="uppercase font-bold text-xl text-center"></p>
+                <p className="uppercase font-bold text-xl text-center">
+                  Team Lead
+                </p>
               ) : (
-                <div className="transform scale-75">
-                  {/* <AgentPerformanceSvg /> */}
-                  {/* <PayrollSvg /> */}
-                  <BuzzWordSvg />
-                </div>
+                <p className="uppercase font-bold text-base text-center">
+                  Team Lead
+                </p>
               )}
             </div>
 
@@ -128,7 +115,7 @@ const AgentTraineeNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "fourth")}
           onMouseLeave={(e) => handleMouseOut(e, "fourth")}
           onClick={() => {
-            navigate("/agent-trainee-navigation/hr");
+            navigate("/qc-and-supervisor-navigation");
             // window.location.href =
             //   "https://workspace.google.com/products/docs/";
           }}
@@ -142,13 +129,13 @@ const AgentTraineeNavigation = () => {
             }`}
           >
             {hoverStates.fourth ? (
-              <p className="uppercase font-bold text-3xl text-center">HR</p>
+              <p className="uppercase font-bold text-xl text-center">
+                QA and QC Supervisor
+              </p>
             ) : (
-              <div className="transform scale-150">
-                {/* <CeritficationsSvg /> */}
-                <ProcessSvg />
-              </div>
-              // <OmnichannelCommunicationSvg />
+              <p className="uppercase font-bold text-base text-center">
+                QA and QC Supervisor
+              </p>
             )}
           </div>
         </div>
@@ -157,7 +144,7 @@ const AgentTraineeNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "fifth")}
           onMouseLeave={(e) => handleMouseOut(e, "fifth")}
           onClick={() => {
-            navigate("/support");
+            navigate("/sales-manager-navigation");
           }}
           className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute right-20 -bottom-52 "
         >
@@ -167,12 +154,13 @@ const AgentTraineeNavigation = () => {
             }`}
           >
             {hoverStates.fifth ? (
-              <p className="uppercase font-bold text-3xl text-center">
-                Support
+              <p className="uppercase font-bold text-xl text-center">
+                Sales Manager
               </p>
             ) : (
-              <AutomateSvg />
-              // <OmnichannelCommunicationSvg />
+              <p className="uppercase font-bold text-base text-center">
+                Sales Manager
+              </p>
             )}
             {/* Dashed lines extending outward */}
             <div className="absolute w-[1px] h-14 transform rotate-[-75deg] top-[75px] -left-[32px] border-[1px] border-dashed border-[#D9D9D9]" />
@@ -186,8 +174,7 @@ const AgentTraineeNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "sixth")}
           onMouseLeave={(e) => handleMouseOut(e, "sixth")}
           onClick={() => {
-            window.location.href =
-              "https://workspace.google.com/products/docs/";
+            navigate("/program-manager-navigation");
           }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
             hoverStates.sixth ? "z-[6]" : "z-[3]"
@@ -203,11 +190,13 @@ const AgentTraineeNavigation = () => {
             {" "}
             <div className="relative text-white">
               {hoverStates.sixth ? (
-                <p className="uppercase font-bold text-xl text-center"></p>
+                <p className="uppercase font-bold text-xl text-center">
+                  Program Manager
+                </p>
               ) : (
-                <div>
-                  <PayrollSvg />
-                </div>
+                <p className="uppercase font-bold text-base text-center">
+                  Program Manager
+                </p>
               )}
             </div>
           </div>
@@ -217,9 +206,7 @@ const AgentTraineeNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "seventh")}
           onMouseLeave={(e) => handleMouseOut(e, "seventh")}
           onClick={() => {
-            navigate(
-              "/agent-trainee-navigation/trainee-interaction-guide-fasttrack"
-            );
+            navigate("/data-manager-navigation");
           }}
           className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  "
         >
@@ -231,13 +218,12 @@ const AgentTraineeNavigation = () => {
             <div className="relative text-white">
               {hoverStates.seventh ? (
                 <p className="uppercase font-bold text-xl text-center">
-                  interaction guide
+                  Data Manager
                 </p>
               ) : (
-                <div className="transform scale-150">
-                  <TraineeSVG />
-                </div>
-                // <OmnichannelCommunicationSvg />
+                <p className="uppercase font-bold text-base text-center">
+                  Data Manager
+                </p>
               )}
             </div>
             {/* Dashed lines extending outward */}
@@ -251,4 +237,4 @@ const AgentTraineeNavigation = () => {
   );
 };
 
-export default AgentTraineeNavigation;
+export default OtherRolesAccessNavigation;
