@@ -85,8 +85,7 @@ const AdminNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "third")}
           onMouseLeave={(e) => handleMouseOut(e, "third")}
           onClick={() => {
-            window.location.href =
-              "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+            navigate("other-roles-access");
           }}
           className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 "
         >
@@ -104,7 +103,7 @@ const AdminNavigation = () => {
               ) : (
                 <div className="transform scale-75">
                   <p className="uppercase font-bold text-xl text-center">
-                    Agent Link
+                    Roles Access
                   </p>
                   {/* <AgentPerformanceSvg /> */}
                   {/* <PayrollSvg /> */}
@@ -201,7 +200,7 @@ const AdminNavigation = () => {
             <div className="absolute w-[1px] h-4 transform  -top-6 right-17 border-[1px] border-dashed border-[#D9D9D9]" />
           </div>
         </div>
-
+        {/* sixth */}
         <div
           onClick={() => navigate("create-template")}
           onMouseOver={(e) => handleMouseOver(e, "sixth")}
@@ -212,7 +211,9 @@ const AdminNavigation = () => {
         >
           <div
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] ${
-              hoverStates.sixth ? "bg-[#1E40AF] z-[6]" : "z-[3] bg-[#1E40AF30]"
+              hoverStates.sixth
+                ? " bg-[#228512] z-[6]"
+                : "z-[3]  bg-[#22851266]"
             }`}
           >
             {hoverStates.sixth ? (
@@ -250,6 +251,7 @@ const AdminNavigation = () => {
             )}
           </div>
         </div>
+        {/* seventh */}
         <div
           onClick={() => navigate("upload-data")}
           onMouseOver={(e) => handleMouseOver(e, "web")}

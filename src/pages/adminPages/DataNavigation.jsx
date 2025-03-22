@@ -187,12 +187,12 @@ const DataNavigation = () => {
 
         {/* sixth*/}
         <div
-          //   onMouseOver={(e) => handleMouseOver(e, "sixth")}
-          //   onMouseLeave={(e) => handleMouseOut(e, "sixth")}
-          //   onClick={() => {
-          //     window.location.href =
-          //       "https://workspace.google.com/products/docs/";
-          //   }}
+          onMouseOver={(e) => handleMouseOver(e, "sixth")}
+          onMouseLeave={(e) => handleMouseOut(e, "sixth")}
+          onClick={() => {
+            window.location.href =
+              "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+          }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
             hoverStates.sixth ? "z-[6]" : "z-[3]"
           }`}
@@ -207,11 +207,13 @@ const DataNavigation = () => {
             {" "}
             <div className="relative text-white">
               {hoverStates.sixth ? (
-                <p className="uppercase font-bold text-xl text-center"></p>
+                <p className="uppercase font-bold text-xl text-center">
+                  {/* Agent Link */}
+                </p>
               ) : (
-                <div>
-                  <PayrollSvg />
-                </div>
+                <p className="uppercase font-bold text-xl text-center">
+                  Agent Link
+                </p>
               )}
             </div>
           </div>
