@@ -65,7 +65,10 @@ const AgentTraineeNavigation = () => {
         <div
           onMouseOver={(e) => handleMouseOver(e, "second")}
           onMouseLeave={(e) => handleMouseOut(e, "second")}
-          onClick={() => navigate("/coaching-report-accept")}
+          onClick={() => {
+            // navigate("/coaching-report-accept")
+            navigate("learning");
+          }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute left-2 -top-64 ${
             hoverStates.second ? "z-[6]" : "z-[3]"
           }`}
