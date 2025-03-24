@@ -4,6 +4,7 @@ import AgentGuiSvg from "../../assets/SVGs/AgentGuiSvg";
 import AddUserSvg from "../../assets/SVGs/programManagerScreen/AddUserSvg";
 import AutomateSvg from "../../assets/SVGs/globalSvgs/AutomateSvg";
 import BuzzWordSvg from "../../assets/SVGs/BuzzWordSvg";
+import PeopleSvg from "./../../assets/SVGs/dataManagerScreen/PeopleSvg";
 
 const AdminNavigation = () => {
   const navigate = useNavigate();
@@ -70,13 +71,12 @@ const AdminNavigation = () => {
           >
             {hoverStates.second ? (
               <p className="w-[9rem] text-center uppercase font-bold text-[28px]">
-                Rooster
+                People
               </p>
             ) : (
-              // <EmailSvg />
-              <p className="w-[9rem] text-center uppercase font-bold text-[28px]">
-                <AgentGuiSvg />
-              </p>
+              <>
+                <PeopleSvg />
+              </>
             )}
           </div>
         </div>
@@ -122,7 +122,7 @@ const AdminNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "fourth")}
           onMouseLeave={(e) => handleMouseOut(e, "fourth")}
           onClick={() => {
-            navigate("data");
+            navigate("create-template");
             // window.location.href =
             //   "https://vici-lp1.itsbuzzmarketing/vicidial/admin_listloader_fourth_gen.php";
           }}
@@ -139,7 +139,9 @@ const AdminNavigation = () => {
           >
             {/* <BpoSvg /> */}
             {hoverStates.fourth ? (
-              <p className="uppercase font-bold text-3xl text-center">Data</p>
+              <p className="uppercase font-bold text-3xl text-center">
+                Create Template
+              </p>
             ) : (
               <svg
                 width={98}
@@ -202,7 +204,9 @@ const AdminNavigation = () => {
         </div>
         {/* sixth */}
         <div
-          onClick={() => navigate("create-template")}
+          onClick={() => {
+            navigate("data");
+          }}
           onMouseOver={(e) => handleMouseOver(e, "sixth")}
           onMouseLeave={(e) => handleMouseOut(e, "sixth")}
           className={`flex items-center justify-center rounded-full border-2 border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
@@ -218,7 +222,8 @@ const AdminNavigation = () => {
           >
             {hoverStates.sixth ? (
               <p className="uppercase font-bold text-3xl text-center">
-                Create Template
+                {/* Create Template */}
+                Data
               </p>
             ) : (
               <svg
