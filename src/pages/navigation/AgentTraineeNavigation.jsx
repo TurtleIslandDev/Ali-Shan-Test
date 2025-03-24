@@ -93,7 +93,8 @@ const AgentTraineeNavigation = () => {
           onMouseOver={(e) => handleMouseOver(e, "third")}
           onMouseLeave={(e) => handleMouseOut(e, "third")}
           onClick={() => {
-            navigate("buzzword-trainee");
+            window.location.href =
+              "https://workspace.google.com/products/docs/";
           }}
           className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 "
         >
@@ -112,7 +113,7 @@ const AgentTraineeNavigation = () => {
                 <div className="transform scale-75">
                   {/* <AgentPerformanceSvg /> */}
                   {/* <PayrollSvg /> */}
-                  <BuzzWordSvg />
+                  {/* <BuzzWordSvg /> */}
                 </div>
               )}
             </div>
