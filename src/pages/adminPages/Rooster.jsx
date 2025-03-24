@@ -15,6 +15,7 @@ import useFetch from "../../features/hooks/useFetch";
 import { EditUser } from "../../components/modals/EditUser";
 import { data } from "autoprefixer";
 import { ResetPassword } from "../../components/modals/ResetPassword";
+import { useNavigate } from "react-router-dom";
 
 const TABLE_HEAD = ["Username", "Role", "Actions"];
 
@@ -48,7 +49,9 @@ const TABLE_ROWS = [
 const Rooster = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [open, setOpen] = useState(false);
+
   const [resetPasswordOpen, setResetPasswordOpen] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { fetchData, loading } = useFetch();
   useEffect(() => {
@@ -71,6 +74,14 @@ const Rooster = () => {
             className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
             placeholder="username"
           />
+          <button
+            className="bg-[#1E40AF] text-white h-full p-4 rounded-lg"
+            onClick={() => {
+              navigate("/admin-navigation/add-user");
+            }}
+          >
+            Add User
+          </button>
         </label>
       </div>
       {loading ? (
