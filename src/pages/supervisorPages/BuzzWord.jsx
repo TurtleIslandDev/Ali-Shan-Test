@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Button from "../../components/Buttons/Button";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import TiSolutionsLogoSvg from "../../assets/SVGs/logos/TiSolutionsLogoSvg";
 import ItsBuzzMarketingLogo from "../../assets/SVGs/logos/ItsBuzzMarketingLogo";
 
@@ -12,6 +13,9 @@ const BuzzWord = () => {
   } = useForm();
 
   const [readOnly, setReadOnly] = useState(false);
+  const {token} = useSelector((state) => state.user);
+  const URL = "https://endpoint.itsbuzzmarketing.com";
+  // const URL = "http://localhost:3173";
 
   const gridItems = Array.from({ length: 25 }, (_, index) => {
     const names = [
@@ -44,7 +48,19 @@ const BuzzWord = () => {
     return { id: index + 1, name: names[index] };
   });
   const onSubmit = async (data) => {
-    console.log(data);
+
+    
+
+    const response = await fetch(`${URL}/buzzword/create_new_buzzword`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization : `Bearer ${token}`
+      },
+      body: JSON.stringify(data),
+    });
+    const resJson = await response.json();         
+    console.log(resJson);
     //this to be saved in talent database
   };
 

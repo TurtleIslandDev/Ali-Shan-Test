@@ -59,6 +59,7 @@ export default function CreateTemplatePage() {
         const fields = data.data
 
 
+
         const displayFields: { id: string; name: string; key: string; description: string; dataType: string;   }[] = []
 
         // add id, name, label, dataType to fields
@@ -76,6 +77,7 @@ export default function CreateTemplatePage() {
         }) 
       
         setPredefinedFields(displayFields)
+
         
         return
       }

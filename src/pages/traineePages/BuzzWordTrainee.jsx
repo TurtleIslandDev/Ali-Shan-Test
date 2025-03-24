@@ -1,40 +1,54 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Button from "../../components/Buttons/Button";
 import { useForm } from "react-hook-form";
 import TiSolutionsLogoSvg from "../../assets/SVGs/logos/TiSolutionsLogoSvg";
 import ItsBuzzMarketingLogo from "../../assets/SVGs/logos/ItsBuzzMarketingLogo";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const BuzzWordTrainee = () => {
   // Grid items with id and name
-  const gridItems = Array.from({ length: 25 }, (_, index) => {
-    const names = [
-      "first",
-      "second",
-      "third",
-      "fourth",
-      "fifth",
-      "sixth",
-      "seventh",
-      "eighth",
-      "ninth",
-      "tenth",
-      "eleventh",
-      "twelfth",
-      "thirteenth",
-      "fourteenth",
-      "fifteenth",
-      "sixteenth",
-      "seventeenth",
-      "eighteenth",
-      "nineteenth",
-      "twentieth",
-      "twenty-first",
-      "twenty-second",
-      "twenty-third",
-      "twenty-fourth",
-      "twenty-fifth",
-    ];
-    return { id: index + 1, name: names[index] };
-  });
+
+
+
+  const [gridData, setGridData] = useState({});
+
+  // const gridItems = Array.from({ length: 25 }, (_, index) => {
+      
+  //   const names = [
+  //     "first",
+  //     "second",
+  //     "third",
+  //     "fourth",
+  //     "fifth",
+  //     "sixth",
+  //     "seventh",
+  //     "eighth",
+  //     "ninth",
+  //     "tenth",
+  //     "eleventh",
+  //     "twelfth",
+  //     "thirteenth",
+  //     "fourteenth",
+  //     "fifteenth",
+  //     "sixteenth",
+  //     "seventeenth",
+  //     "eighteenth",
+  //     "nineteenth",
+  //     "twentieth",
+  //     "twenty-first",
+  //     "twenty-second",
+  //     "twenty-third",
+  //     "twenty-fourth",
+  //     "twenty-fifth",
+  //   ];
+    
+  //   return { id: index + 1, name: names[index] };
+  // });
+
+
+  // const URL = "https://endpoint.itsbuzzmarketing.com";
+  const URL = "https://endpoint.itsbuzzmarketing.com";
   const {
     register,
     handleSubmit,
@@ -48,9 +62,23 @@ const BuzzWordTrainee = () => {
       return prevActiveStep + 1;
     });
   };
-  const submitButtonClick = useCallback(() => {
-    console.log(clickedData, "clicked");
+  const submitButtonClick = useCallback(async () => {
+    const response = await fetch(`${URL}/buzzword/submit_buzzword`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization : `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        buzzword_id: gridData.buzz_id,
+        submission: clickedData,
+      }),
+    });
+
+    const resJson = await response.json();
+
   }, [clickedData]);
+
   // Handler function for clicking a grid item
   const handleItemClick = (item) => {
     const timestamp = new Date().toLocaleString();
@@ -80,6 +108,90 @@ const BuzzWordTrainee = () => {
     const item = clickedData.find((data) => data.id === id);
     return item?.clicked ? "bg-[#93959880] text-white" : "bg-white";
   };
+
+  const {token} = useSelector((state) => state.user);
+  const buzz_id = useParams().id;      
+
+
+  useEffect(() => {
+
+  
+    const fetchGridItems = async () => {
+
+      
+      const response = await fetch(`${URL}/buzzword/get_buzzword/${buzz_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization : `Bearer ${token}`
+        },
+      });
+      const resJson = await response.json();
+
+
+      if (response.status == 200){
+
+        const data = resJson.data;
+
+        const names = [
+          "first",
+          "second",
+          "third",
+          "fourth",
+          "fifth",
+          "sixth",
+          "seventh",
+          "eighth",
+          "ninth",
+          "tenth",
+          "eleventh",
+          "twelfth",
+          "thirteenth",
+          "fourteenth",
+          "fifteenth",
+          "sixteenth",
+          "seventeenth",
+          "eighteenth",
+          "nineteenth",
+          "twentieth",
+          "twenty-first",
+          "twenty-second",
+          "twenty-third",
+          "twenty-fourth",
+          "twenty-fifth",
+        ];
+
+        const grid_items = [];
+        let count_id = 1;
+
+
+        for (let field_name of names){
+          if (data[field_name] != null){
+            const index = count_id;
+            const item = data[field_name];
+            grid_items.push({id: index, name: item});
+            count_id++;          
+          }
+
+        }
+
+        setGridData({
+          gridItems: grid_items,
+          created_by: data.created_by,
+          created_at: data.created_at,
+          buzz_id: data._id          
+        });
+        
+      }
+
+
+
+    };
+
+    fetchGridItems();
+    
+  }
+  , []);
 
   return (
     <div className="flex flex-col justify-center items-center gap-7 h-screen bg-gray-100">
@@ -117,7 +229,7 @@ const BuzzWordTrainee = () => {
       ) : activeStep === 1 ? (
         <>
           <div className="grid grid-cols-5 grid-rows-5 border-collapse">
-            {gridItems.map((item) => (
+            {gridData?.gridItems?.map((item) => (
               <div
                 key={item.id}
                 onClick={() => handleItemClick(item)}

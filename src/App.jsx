@@ -238,7 +238,7 @@ function App() {
               element={<UploadIdentification />}
             />
             <Route
-              path="/agent-trainee-navigation/learning/buzzword-trainee"
+              path="/agent-trainee-navigation/learning/buzzword-trainee/:id"
               element={<BuzzWordTrainee />}
             />
             <Route
