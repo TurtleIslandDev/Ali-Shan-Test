@@ -35,6 +35,8 @@ import OtherRolesAccessNavigation from "./pages/adminPages/OtherRolesAccessNavig
 import PerformanceManagerNavigation from "./pages/navigation/PerformanceManagerNavigation";
 import AgentLearningNavigation from "./pages/agentPages/Learning/AgentLearningNavigation";
 import TraineeLearningNavigation from "./pages/traineePages/Learning/TraineeLearningNavigation";
+import AgentCompensationNavigation from "./pages/agentPages/Compensation/AgentCompensationNavigation";
+import AgentCertificationNavigation from "./pages/agentPages/Certification/AgentCertificationNavigation";
 const BuzzWordTrainee = lazy(() =>
   import("./pages/traineePages/BuzzWordTrainee")
 );
@@ -100,6 +102,7 @@ const CreateTemplatePage = lazy(() =>
 
 const Login = lazy(() => import("./pages/auth/Login"));
 const AddUser = lazy(() => import("./pages/auth/AddUser"));
+import AgentPerformanceNavigation from "./pages/agentPages/Performance/AgentPerformanceNavigation";
 function App() {
   const height = useWindowHeight();
   return (
@@ -124,7 +127,7 @@ function App() {
               path="/admin-navigation/export-data"
               element={<ExportDataPage />}
             />
-            <Route 
+            <Route
               path="/admin-navigation/create-template"
               element={<CreateTemplatePage />}
             />
@@ -147,6 +150,7 @@ function App() {
               path="/performance-manager-navigation"
               element={<PerformanceManagerNavigation />}
             />
+
             <Route
               path="/admin-navigation/other-roles-access"
               element={<OtherRolesAccessNavigation />}
@@ -202,8 +206,24 @@ function App() {
             />
             <Route path="/agent-navigation" element={<AgentNavigation />} />
             <Route
+              path="/agent-navigation/compensation"
+              element={<AgentCompensationNavigation />}
+            />
+            <Route
+              path="/agent-navigation/performance"
+              element={<AgentPerformanceNavigation />}
+            />
+            <Route
+              path="/agent-navigation/certification"
+              element={<AgentCertificationNavigation />}
+            />
+            <Route
               path="/agent-navigation/learning"
               element={<AgentLearningNavigation />}
+            />
+            <Route
+              path="/agent-navigation/learning/coaching-report-accept"
+              element={<CoachingReportAccept />}
             />
             <Route
               path="/agent-trainee-navigation"

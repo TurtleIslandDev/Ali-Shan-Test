@@ -14,13 +14,14 @@ const AgentNavigation = () => {
   const navigate = useNavigate();
   const cookies = new Cookies(null, null, { path: "/" });
   const [hoverStates, setHoverStates] = useState({
-    payroll: false,
+    sixth: false,
     agentGUI: false,
     certification: false,
     learning: false,
-    performanceManagement: false,
+    fourth: false,
     agentReport: false,
     fifth: false,
+    seventh: false,
   });
 
   const handleMouseOver = (e, name) => {
@@ -64,7 +65,7 @@ const AgentNavigation = () => {
         <div
           onMouseOver={(e) => handleMouseOver(e, "agentReport")}
           onMouseLeave={(e) => handleMouseOut(e, "agentReport")}
-          onClick={() => navigate("/coaching-report-accept")}
+          onClick={() => navigate("learning")}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute left-2 -top-64 ${
             hoverStates.agentReport ? "z-[6]" : "z-[3]"
           }`}
@@ -126,12 +127,31 @@ const AgentNavigation = () => {
         </div>
         {/* Performance*/}
         <div
+          onMouseOver={(e) => handleMouseOver(e, "fourth")}
+          onMouseLeave={(e) => handleMouseOut(e, "fourth")}
+          onClick={() => navigate("performance")}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -right-56 -bottom-40  ${
-            hoverStates.performanceManagement ? "z-[6]" : "z-[3]"
+            hoverStates.fourth ? "z-[6]" : "z-[3]"
           }`}
         >
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] bg-[#22851266]  z-3 hover:z-5">
-            <AgentPerformanceSvg />
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)]   z-3 hover:z-5 ${
+              hoverStates.fourth ? "bg-[#228512] z-[6]" : "z-[3] bg-[#22851266]"
+            }`}
+          >
+            <div className="relative text-white">
+              {hoverStates.fourth ? (
+                <p className="uppercase font-bold text-2xl text-center">
+                  Performance
+                </p>
+              ) : (
+                <div className="transform scale-75">
+                  <AgentPerformanceSvg />
+                  {/* <AgentPerformanceSvg /> */}
+                  {/* <PayrollSvg /> */}
+                </div>
+              )}
+            </div>
           </div>
         </div>
         {/* fifth */}
@@ -164,32 +184,57 @@ const AgentNavigation = () => {
           </div>
         </div>
 
-        {/* payroll*/}
+        {/* sixth*/}
         <div
+          onMouseOver={(e) => handleMouseOver(e, "sixth")}
+          onMouseLeave={(e) => handleMouseOut(e, "sixth")}
+          onClick={() => {
+            navigate("certification");
+          }}
           className={`flex items-center justify-center rounded-full border-2  border-[#D9D9D930] w-[318px] h-[318px] absolute -left-56 -bottom-40 ${
-            hoverStates.payroll ? "z-[6]" : "z-[3]"
+            hoverStates.sixth ? "z-[6]" : "z-[3]"
           }`}
         >
           <div
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-39px)] h-[calc(100%-39px)] ${
-              hoverStates.payroll ? "bg-[#1E40AF] z-[6]" : "z-[3] bg-[#D5DEFA]"
+              hoverStates.sixth ? "bg-[#1E40AF] z-[6]" : "z-[3] bg-[#D5DEFA]"
             } `}
           >
-            <PayrollSvg />
+            {hoverStates.sixth ? (
+              <p className="uppercase font-bold text-3xl text-center">
+                Certifications
+              </p>
+            ) : (
+              <CeritficationsSvg />
+            )}
           </div>
         </div>
         {/* Compensations */}
-        <div className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  ">
-          <div className="relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#22851266]">
-            {/* Dashed circle border */}
-            {/* <div className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-black" /> */}
-            {/* Star ribbon icon (replace with an actual SVG icon if available) */}
-            <div className="relative text-black">
-              {/* Placeholder for the icon; you might want to replace this with an SVG or FontAwesome icon */}
-
-              <CeritficationsSvg />
+        <div
+          onMouseOver={(e) => handleMouseOver(e, "seventh")}
+          onMouseLeave={(e) => handleMouseOut(e, "seventh")}
+          onClick={() => {
+            navigate("compensation");
+          }}
+          className=" flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -left-[185px] -top-10  "
+        >
+          <div
+            className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-12px)] h-[calc(100%-12px)] bg-[#22851266] ${
+              hoverStates.seventh
+                ? "bg-[#228512] z-[6]"
+                : "z-[3] bg-[#22851266]"
+            }`}
+          >
+            <div className="relative text-white text-base">
+              {hoverStates.seventh ? (
+                <p className="uppercase font-bold text-xl text-center">
+                  Compensation
+                </p>
+              ) : (
+                <PayrollSvg />
+              )}
             </div>
-            {/* Dashed lines extending outward */}
+
             <div className="absolute w-[1px] h-14 transform rotate-[50deg] -top-10 right-0 border-[1px] border-dashed border-[#D9D9D9]" />
             <div className="absolute w-[1px] h-14 transform  rotate-[10deg] -bottom-14 left-6 border-[1px] border-dashed border-[#D9D9D9]" />
             <div className="absolute w-[1px] h-4 transform  rotate-[125deg] bottom-10 -right-4 border-[1px] border-dashed border-[#D9D9D9]" />
