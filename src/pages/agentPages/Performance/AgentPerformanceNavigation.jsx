@@ -6,7 +6,7 @@ import ReportSvg from "@assets/SVGs/salesManagerScreen/ReportSvg";
 import RevenueSvg from "@assets/SVGs/dataManagerScreen/RevenueSvg";
 import ResultsSvg from "../../../assets/SVGs/globalSvgs/ResultsSvg";
 
-const AgentLearningNavigation = () => {
+const AgentPerformanceNavigation = () => {
   const navigate = useNavigate();
   const [hoverStates, setHoverStates] = useState({
     first: false,
@@ -38,7 +38,7 @@ const AgentLearningNavigation = () => {
           >
             {hoverStates.first ? (
               <p className="uppercase font-bold text-3xl text-center">
-                Scheduled Meetings
+                Profitability Report
               </p>
             ) : (
               <RevenueSvg />
@@ -59,7 +59,9 @@ const AgentLearningNavigation = () => {
             }`}
           >
             {hoverStates.second ? (
-              <p className="uppercase font-bold text-3xl">Knowledge</p>
+              <p className="uppercase font-bold text-3xl text-center">
+                Performance Historical Report
+              </p>
             ) : (
               <ReportSvg />
             )}
@@ -73,7 +75,7 @@ const AgentLearningNavigation = () => {
           onMouseLeave={(e) => handleMouseOut(e, "third")}
           onClick={() => {
             // navigate("/agent-trainee-navigation/hr/documentation/form-1099");
-            navigate("coaching-report-accept");
+            navigate("/agent-navigation/learning/coaching-report-accept");
           }}
           className={`relative flex items-center justify-center rounded-full border border-1 border-[#D9D9D930] w-[312px] h-[312px] bg-white  z-[100] -left-80 -bottom-28`}
         >
@@ -85,7 +87,7 @@ const AgentLearningNavigation = () => {
             {" "}
             {hoverStates.third ? (
               <p className="uppercase font-bold text-3xl text-center">
-                Coaching Report
+                Access Coaching Report
               </p>
             ) : (
               <div className="transform scale-150">
@@ -99,4 +101,4 @@ const AgentLearningNavigation = () => {
     </div>
   );
 };
-export default AgentLearningNavigation;
+export default AgentPerformanceNavigation;
