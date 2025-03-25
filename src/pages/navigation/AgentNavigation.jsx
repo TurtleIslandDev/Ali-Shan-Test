@@ -46,7 +46,10 @@ const AgentNavigation = () => {
           className={`relative flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-[336px] h-[336px] bg-white  z-[100] `}
         >
           <div
-            onClick={() => navigate("/agent-system-interface")}
+            onClick={() => {
+              window.location.href =
+                "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+            }}
             onMouseOver={(e) => handleMouseOver(e, "agentGUI")}
             onMouseLeave={(e) => handleMouseOut(e, "agentGUI")}
             className={`relative flex items-center justify-center text-2xl font-semibold text-white rounded-full cursor-pointer w-[calc(100%-10px)] h-[calc(100%-10px)]  ${
@@ -91,12 +94,12 @@ const AgentNavigation = () => {
 
         {/* third */}
         <div
-          onMouseOver={(e) => handleMouseOver(e, "third")}
-          onMouseLeave={(e) => handleMouseOut(e, "third")}
-          onClick={() => {
-            window.location.href =
-              "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
-          }}
+          // onMouseOver={(e) => handleMouseOver(e, "third")}
+          // onMouseLeave={(e) => handleMouseOut(e, "third")}
+          // onClick={() => {
+          //   window.location.href =
+          //     "https://vici-lp1.itsbuzzmarketing.com/agc/vicidial.php";
+          // }}
           className="flex items-center justify-center rounded-full border-2 border-dashed border-[#D9D9D9] w-44 h-44 absolute -right-[185px] -top-10 "
         >
           <div
@@ -111,7 +114,7 @@ const AgentNavigation = () => {
               ) : (
                 <div className="transform scale-75">
                   <p className="uppercase font-bold text-xl text-center">
-                    Agent Link
+                    {/* Agent Link */}
                   </p>
                   {/* <AgentPerformanceSvg /> */}
                   {/* <PayrollSvg /> */}
