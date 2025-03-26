@@ -141,7 +141,7 @@ function App() {
               element={<BuzzWord />}
             />
             <Route
-              path="/agent-navigation/buzzword-trainee"
+              path="agent-navigation/buzzword-trainee/:id"
               element={<BuzzWordTrainee />}
             />
             <Route path="/three-circles" element={<ThreeCircleLayout />} />

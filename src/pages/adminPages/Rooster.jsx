@@ -17,7 +17,14 @@ import { data } from "autoprefixer";
 import { ResetPassword } from "../../components/modals/ResetPassword";
 import { useNavigate } from "react-router-dom";
 
-const TABLE_HEAD = ["Username", "Role", "Actions"];
+const TABLE_HEAD = [
+  "Username",
+  "First Name",
+  "Last Name",
+  "Company",
+  "Role",
+  "Actions",
+];
 
 const TABLE_ROWS = [
   {
@@ -61,7 +68,7 @@ const Rooster = () => {
     });
   }, []);
   return (
-    <div className="px-20">
+    <div className="px-6">
       <EditUser open={open} setOpen={setOpen} />
       <ResetPassword open={resetPasswordOpen} setOpen={setResetPasswordOpen} />
 
@@ -123,6 +130,33 @@ const Rooster = () => {
                         className="font-normal"
                       >
                         {user.username}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {user?.newFields?.firstName}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {user?.newFields?.lastName}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {user?.newFields?.userCompany}
                       </Typography>
                     </td>
                     <td className={classes}>

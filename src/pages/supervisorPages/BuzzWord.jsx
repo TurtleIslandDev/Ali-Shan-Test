@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import TiSolutionsLogoSvg from "../../assets/SVGs/logos/TiSolutionsLogoSvg";
 import ItsBuzzMarketingLogo from "../../assets/SVGs/logos/ItsBuzzMarketingLogo";
+import { BuzzwordIdModel } from "../../components/modals/BuzzwordIdModel";
 
 const BuzzWord = () => {
   const {
@@ -13,10 +14,11 @@ const BuzzWord = () => {
   } = useForm();
 
   const [readOnly, setReadOnly] = useState(false);
-  const {token} = useSelector((state) => state.user);
+  const { token } = useSelector((state) => state.user);
   const URL = "https://endpoint.itsbuzzmarketing.com";
   // const URL = "http://localhost:3173";
-
+  const [open, setOpen] = useState(false);
+  const [buzzRes, setBuzzRes] = useState(null);
   const gridItems = Array.from({ length: 25 }, (_, index) => {
     const names = [
       "first",
@@ -48,20 +50,27 @@ const BuzzWord = () => {
     return { id: index + 1, name: names[index] };
   });
   const onSubmit = async (data) => {
-
-    
-
     const response = await fetch(`${URL}/buzzword/create_new_buzzword`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization : `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     });
-    const resJson = await response.json();         
-    console.log(resJson);
+    const resJson = await response.json();
+    console.log(resJson[0]?.data);
     //this to be saved in talent database
+    if (resJson[0]?.status === "success") {
+      setOpen(true);
+      setBuzzRes(resJson[0]?.data);
+    }
+    //   {
+    //     "buzzword_id": "67e35376ec813e0336409f4b",
+    //     "created_at": "Wed, 26 Mar 2025 01:08:06 GMT",
+    //     "created_by": "admin@gmail.com",
+    //     "status": "active"
+    // }
   };
 
   // Memoized functions to prevent unnecessary re-renders
@@ -70,6 +79,13 @@ const BuzzWord = () => {
 
   return (
     <div className="flex justify-center items-center flex-col h-screen bg-gray-100 gap-7">
+      {open && (
+        <BuzzwordIdModel
+          open={open}
+          setOpen={setOpen}
+          buzzword_id={buzzRes?.buzzword_id}
+        />
+      )}
       <ItsBuzzMarketingLogo size={"small"} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-5 grid-rows-5 border-collapse">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useFetch from "./../../features/hooks/useFetch";
 import { useSelector } from "react-redux";
+import { userPermissions } from "../../data/constants";
 const AddUser = () => {
   const { token } = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
@@ -12,6 +13,7 @@ const AddUser = () => {
     handleSubmit,
     resetField,
     watch,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -32,10 +34,18 @@ const AddUser = () => {
       dataOwnershipDuration: "",
       authorizedPrograms: [],
       authorizations: "",
+      userPermissions: "",
+      userCompany: "",
     },
   });
   const checkRole = watch("subRole");
   const role = watch("role");
+  useEffect(() => {
+    if (role) {
+      const newPermissions = userPermissions[role] || [];
+      setValue("userPermissions", newPermissions || []);
+    }
+  }, [role]);
   const onSubmit = async (data) => {
     const excludedKeys = ["role", "username", "password"];
     let newFields = {};
@@ -173,6 +183,7 @@ const AddUser = () => {
               </span>
             )}
           </div>
+
           {role === "dataVendor" && (checkRole === "partner" || "supplier") && (
             <div className="w-full mb-8">
               <p className="text-2xl text-[#222] mb-2">Select Sub Role</p>
@@ -207,6 +218,55 @@ const AddUser = () => {
               />
             </label>
             {errors.username && (
+              <span className="text-right text-red-500 text-xs">
+                *This field is required
+              </span>
+            )}
+          </div>
+          <div className="w-full mb-5">
+            <p className="text-2xl text-[#222] mb-2">First Name</p>
+            <label className="input input-bordered flex items-center gap-2 ">
+              <input
+                {...register("firstName", { required: true })}
+                type="text"
+                className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                placeholder="First Name"
+              />
+            </label>
+            {errors.firstName && (
+              <span className="text-right text-red-500 text-xs">
+                *This field is required
+              </span>
+            )}
+          </div>
+
+          <div className="w-full mb-5">
+            <p className="text-2xl text-[#222] mb-2">Last Name</p>
+            <label className="input input-bordered flex items-center gap-2 ">
+              <input
+                {...register("lastName", { required: true })}
+                type="text"
+                className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                placeholder="Last Name"
+              />
+            </label>
+            {errors.lastName && (
+              <span className="text-right text-red-500 text-xs">
+                *This field is required
+              </span>
+            )}
+          </div>
+          <div className="w-full mb-5">
+            <p className="text-2xl text-[#222] mb-2">Email</p>
+            <label className="input input-bordered flex items-center gap-2 ">
+              <input
+                {...register("email", { required: true })}
+                type="text"
+                className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                placeholder="email"
+              />
+            </label>
+            {errors.email && (
               <span className="text-right text-red-500 text-xs">
                 *This field is required
               </span>
@@ -386,55 +446,7 @@ const AddUser = () => {
                   </span>
                 )}
               </div>
-              <div className="w-full mb-5">
-                <p className="text-2xl text-[#222] mb-2">First Name</p>
-                <label className="input input-bordered flex items-center gap-2 ">
-                  <input
-                    {...register("firstName", { required: true })}
-                    type="text"
-                    className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
-                    placeholder="First Name"
-                  />
-                </label>
-                {errors.firstName && (
-                  <span className="text-right text-red-500 text-xs">
-                    *This field is required
-                  </span>
-                )}
-              </div>
 
-              <div className="w-full mb-5">
-                <p className="text-2xl text-[#222] mb-2">Last Name</p>
-                <label className="input input-bordered flex items-center gap-2 ">
-                  <input
-                    {...register("lastName", { required: true })}
-                    type="text"
-                    className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
-                    placeholder="Last Name"
-                  />
-                </label>
-                {errors.lastName && (
-                  <span className="text-right text-red-500 text-xs">
-                    *This field is required
-                  </span>
-                )}
-              </div>
-              <div className="w-full mb-5">
-                <p className="text-2xl text-[#222] mb-2">Email</p>
-                <label className="input input-bordered flex items-center gap-2 ">
-                  <input
-                    {...register("email", { required: true })}
-                    type="text"
-                    className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
-                    placeholder="email"
-                  />
-                </label>
-                {errors.email && (
-                  <span className="text-right text-red-500 text-xs">
-                    *This field is required
-                  </span>
-                )}
-              </div>
               <div className="w-full mb-5">
                 <p className="text-2xl text-[#222] mb-2">Authorizations</p>
                 <label className="input input-bordered flex items-center gap-2 ">

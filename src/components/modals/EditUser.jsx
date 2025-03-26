@@ -5,52 +5,62 @@ import {
   Dialog,
   DialogHeader,
   DialogBody,
-  DialogFooter,
-  Tooltip,
 } from "@material-tailwind/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import useFetch from "../../features/hooks/useFetch";
+import { userPermissions } from "../../data/constants";
+import { setTobeEdited } from "../../features/slice/userSlice";
 export function EditUser({ open, setOpen }) {
+  const dispatch = useDispatch();
   const { toBeEdited } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
+  const [permissions, setPermissions] = useState([]);
   const { postData, loading } = useFetch();
   const handleBack = () => {
     setOpen(!open);
   };
-
-  let userPermissions = ["Add User", "Update User", "Upload Data"];
   const {
     register,
     handleSubmit,
     resetField,
     watch,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
       password: "",
-      role: "",
-      company: "",
-      address: "",
-      phone: "",
-      contact: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      revenueShareSplit: "",
-      perRecordCost: "",
-      payoutSchedule: "",
-      dataTypesAvailable: "",
-      dataOwnershipDuration: "",
+      role: toBeEdited.role,
+      company: toBeEdited?.newFields?.company,
+      address: toBeEdited?.newFields?.address,
+      phone: toBeEdited?.newFields?.phone,
+      contact: toBeEdited?.newFields?.contact,
+      firstName: toBeEdited?.newFields?.firstName,
+      lastName: toBeEdited?.newFields?.lastName,
+      email: toBeEdited?.newFields?.email,
+      revenueShareSplit: toBeEdited?.newFields?.revenueShareSplit,
+      perRecordCost: toBeEdited?.newFields?.perRecordCost,
+      payoutSchedule: toBeEdited?.newFields?.payoutSchedule,
+      dataTypesAvailable: toBeEdited?.newFields?.dataTypesAvailable,
+      dataOwnershipDuration: toBeEdited?.newFields?.dataOwnershipDuration,
       authorizedPrograms: [],
-      authorizations: "",
-      userPermissions: userPermissions,
+      authorizations: toBeEdited?.newFields?.authorizations,
+      userPermissions: toBeEdited?.newFields?.userPermissions,
     },
   });
+  var role = watch("role");
+
+  useEffect(() => {
+    if (role) {
+      const newPermissions = userPermissions[role] || [];
+      setPermissions(newPermissions);
+      setValue("userPermissions", newPermissions || []);
+    }
+  }, [role]);
+
   const checkRole = watch("subRole");
-  const role = watch("role");
   const onSubmit = async (data) => {
     const excludedKeys = ["role"];
     let newFields = {};
@@ -123,10 +133,14 @@ export function EditUser({ open, setOpen }) {
       return () => clearTimeout(timer);
     }
   }, [responseMessage]);
-
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(setTobeEdited({ data: {} }));
+  //   };
+  // }, []);
   return (
     <>
-      <Dialog open={open}>
+      <Dialog open={open} handler={setOpen} dismiss={{ outside: true }}>
         <DialogHeader>Edit User</DialogHeader>
         <DialogBody
           className=""
@@ -208,7 +222,55 @@ export function EditUser({ open, setOpen }) {
                   )}
                 </div>
               )}
+            <div className="w-full mb-5">
+              <p className="text-2xl text-[#222] mb-2">First Name</p>
+              <label className="input input-bordered flex items-center gap-2 ">
+                <input
+                  {...register("firstName", { required: true })}
+                  type="text"
+                  className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                  placeholder="First Name"
+                />
+              </label>
+              {errors.firstName && (
+                <span className="text-right text-red-500 text-xs">
+                  *This field is required
+                </span>
+              )}
+            </div>
 
+            <div className="w-full mb-5">
+              <p className="text-2xl text-[#222] mb-2">Last Name</p>
+              <label className="input input-bordered flex items-center gap-2 ">
+                <input
+                  {...register("lastName", { required: true })}
+                  type="text"
+                  className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                  placeholder="Last Name"
+                />
+              </label>
+              {errors.lastName && (
+                <span className="text-right text-red-500 text-xs">
+                  *This field is required
+                </span>
+              )}
+            </div>
+            <div className="w-full mb-5">
+              <p className="text-2xl text-[#222] mb-2">Email</p>
+              <label className="input input-bordered flex items-center gap-2 ">
+                <input
+                  {...register("email", { required: true })}
+                  type="text"
+                  className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
+                  placeholder="email"
+                />
+              </label>
+              {errors.email && (
+                <span className="text-right text-red-500 text-xs">
+                  *This field is required
+                </span>
+              )}
+            </div>
             {role === "agent" && (
               <>
                 <div className="w-full mb-5">
@@ -350,55 +412,7 @@ export function EditUser({ open, setOpen }) {
                     </span>
                   )}
                 </div>
-                <div className="w-full mb-5">
-                  <p className="text-2xl text-[#222] mb-2">First Name</p>
-                  <label className="input input-bordered flex items-center gap-2 ">
-                    <input
-                      {...register("firstName", { required: true })}
-                      type="text"
-                      className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
-                      placeholder="First Name"
-                    />
-                  </label>
-                  {errors.firstName && (
-                    <span className="text-right text-red-500 text-xs">
-                      *This field is required
-                    </span>
-                  )}
-                </div>
 
-                <div className="w-full mb-5">
-                  <p className="text-2xl text-[#222] mb-2">Last Name</p>
-                  <label className="input input-bordered flex items-center gap-2 ">
-                    <input
-                      {...register("lastName", { required: true })}
-                      type="text"
-                      className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
-                      placeholder="Last Name"
-                    />
-                  </label>
-                  {errors.lastName && (
-                    <span className="text-right text-red-500 text-xs">
-                      *This field is required
-                    </span>
-                  )}
-                </div>
-                <div className="w-full mb-5">
-                  <p className="text-2xl text-[#222] mb-2">Email</p>
-                  <label className="input input-bordered flex items-center gap-2 ">
-                    <input
-                      {...register("email", { required: true })}
-                      type="text"
-                      className="grow h-16 border border-[#cccccc] rounded pl-5 focus:outline-none"
-                      placeholder="email"
-                    />
-                  </label>
-                  {errors.email && (
-                    <span className="text-right text-red-500 text-xs">
-                      *This field is required
-                    </span>
-                  )}
-                </div>
                 <div className="w-full mb-5">
                   <p className="text-2xl text-[#222] mb-2">Authorizations</p>
                   <label className="input input-bordered flex items-center gap-2 ">
@@ -833,7 +847,7 @@ export function EditUser({ open, setOpen }) {
             <div className="w-full mb-8">
               <p className="text-2xl text-[#222] mb-2">User Permissions</p>
               <div className="input input-bordered flex bg-transparent gap-2 relative flex-col items-start">
-                {userPermissions.map((permission, index) => {
+                {permissions?.map((permission, index) => {
                   return (
                     <label key={index}>
                       <input
